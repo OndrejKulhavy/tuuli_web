@@ -603,6 +603,21 @@ footer::before {
     transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* Slideshow Styles */
+.project-image.slideshow img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 1;
+}
+
+.project-image.slideshow img.active {
+    opacity: 1;
+    z-index: 2;
+}
+
 .project:hover .project-image img {
     transform: scale(1.05);
 }
