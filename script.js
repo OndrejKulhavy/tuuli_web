@@ -10,8 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
             [projects[i], projects[j]] = [projects[j], projects[i]];
         }
         
-        // Re-append shuffled projects
-        projects.forEach(project => projectsList.appendChild(project));
+        // Re-append shuffled projects and update numbers
+        projects.forEach((project, index) => {
+            projectsList.appendChild(project);
+            const numberElement = project.querySelector('.project-number');
+            if (numberElement) {
+                numberElement.textContent = String(index + 1).padStart(2, '0');
+            }
+        });
     }
 
     // Gallery Logic (from weby.html)
