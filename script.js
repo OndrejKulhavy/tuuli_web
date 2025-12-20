@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Shuffle projects on projects.html
+    const projectsList = document.querySelector('.projects-list');
+    if (projectsList) {
+        const projects = Array.from(projectsList.children);
+        
+        // Shuffle array using Fisher-Yates algorithm
+        for (let i = projects.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [projects[i], projects[j]] = [projects[j], projects[i]];
+        }
+        
+        // Re-append shuffled projects
+        projects.forEach(project => projectsList.appendChild(project));
+    }
+
     // Gallery Logic (from weby.html)
     const portfolioItems = document.querySelectorAll('.portfolio-item');
     if (portfolioItems.length > 0) {
