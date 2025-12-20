@@ -486,9 +486,10 @@ footer::before {
 
     .hero-content {
         min-height: 100vh;
+        min-height: 100dvh;
         display: flex;
         flex-direction: column;
-        padding: 3rem 1.5rem 7rem;
+        padding: 3rem 1.5rem 12rem;
     }
 
     .logo {
@@ -554,6 +555,10 @@ footer::before {
         flex-direction: column;
         gap: 1.5rem;
         text-align: center;
+    }
+
+    .scroll-indicator {
+        bottom: 5rem;
     }
 }
 
