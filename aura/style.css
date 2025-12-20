@@ -25,6 +25,22 @@ body {
     flex-direction: column;
 }
 
+.disclaimer-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    z-index: 1001;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 /* Navigation */
 nav {
     padding: 1.5rem 2rem;
@@ -34,7 +50,7 @@ nav {
     background: transparent;
     position: fixed;
     width: 100%;
-    top: 0;
+    top: 35px; /* Space for disclaimer bar */
     z-index: 100;
     backdrop-filter: blur(5px);
 }
