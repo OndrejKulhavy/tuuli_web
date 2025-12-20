@@ -29,23 +29,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Automatic Slideshow Logic (for projects.html)
     const slideshows = document.querySelectorAll('.project-image.slideshow');
-    slideshows.forEach(slideshow => {
-        const images = slideshow.querySelectorAll('img');
-        if (images.length <= 1) return;
-
-        let currentIndex = 0;
-        // Randomize interval between 3s and 5s to make it feel more organic
-        const intervalTime = 3000 + Math.random() * 2000;
-
+    const intervalTime = 4000; // Fixed interval for all slideshows
+    
+    // Synchronized slideshow switching
+    if (slideshows.length > 0) {
+        const slideshowStates = [];
+        
+        // Initialize all slideshows
+        slideshows.forEach(slideshow => {
+            const images = slideshow.querySelectorAll('img');
+            if (images.length <= 1) return;
+            
+            slideshowStates.push({
+                images,
+                currentIndex: 0
+            });
+        });
+        
+        // Switch all slideshows at the same time
         setInterval(() => {
-            // Remove active class from current
-            images[currentIndex].classList.remove('active');
-            
-            // Calculate next index
-            currentIndex = (currentIndex + 1) % images.length;
-            
-            // Add active class to next
-            images[currentIndex].classList.add('active');
+            slideshowStates.forEach(state => {
+                // Remove active class from current
+                state.images[state.currentIndex].classList.remove('active');
+                
+                // Calculate next index
+                state.currentIndex = (state.currentIndex + 1) % state.images.length;
+                
+                // Add active class to next
+                state.images[state.currentIndex].classList.add('active');
+            });
         }, intervalTime);
-    });
+    }
 });
