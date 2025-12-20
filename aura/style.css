@@ -291,6 +291,18 @@ footer {
 }
 
 @media (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+
+    .header-logo {
+        width: calc(100% + 2rem);
+        max-width: none;
+        margin-left: -1rem;
+        margin-right: -1rem;
+        margin-bottom: 1.5rem;
+    }
+
     .product-content {
         grid-template-columns: 1fr;
         gap: 2rem;
