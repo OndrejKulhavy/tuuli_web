@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tvorba webů | Tuuli Co.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            background: #0a0a0a;
+            color: #fff;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        nav a.logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        nav a.back {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a.back:hover {
+            color: #fff;
+            transform: translateX(-3px);
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 10rem 2rem 6rem;
+            animation: fadeUp 0.8s ease-out;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 1.5rem;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+        }
+
+        header h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        header p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.125rem;
+            font-weight: 300;
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .portfolio-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .portfolio-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .portfolio-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .portfolio-gallery {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-container {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .portfolio-item:hover .gallery-slide img {
+            transform: scale(1.02);
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            opacity: 0;
+            z-index: 10;
+        }
+
+        .portfolio-item:hover .gallery-nav {
+            opacity: 1;
+        }
+
+        .gallery-nav:hover {
+            background: rgba(0, 0, 0, 0.8);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .gallery-nav.prev {
+            left: 1.5rem;
+        }
+
+        .gallery-nav.next {
+            right: 1.5rem;
+        }
+
+        .gallery-dots {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .gallery-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .gallery-dot.active {
+            background: #fff;
+            transform: scale(1.2);
+        }
+
+        .gallery-dot:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .portfolio-content {
+            padding: 2rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .portfolio-info h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            color: #fff;
+        }
+
+        .portfolio-info p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .portfolio-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            padding: 0.875rem 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 100px;
+            transition: all 0.3s;
+        }
+
+        .portfolio-link:hover {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .portfolio-link svg {
+            transition: transform 0.3s;
+        }
+
+        .portfolio-link:hover svg {
+            transform: translateX(3px);
+        }
+
+        @media (max-width: 600px) {
+            main {
+                padding: 8rem 1.5rem 4rem;
+            }
+
+            .portfolio-grid {
+                gap: 2.5rem;
+            }
+
+            .portfolio-content {
+                padding: 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.25rem;
+            }
+
+            .portfolio-info h2 {
+                font-size: 1.375rem;
+            }
+
+            .gallery-nav {
+                width: 40px;
+                height: 40px;
+            }
+
+            .gallery-nav.prev {
+                left: 1rem;
+            }
+
+            .gallery-nav.next {
+                right: 1rem;
+            }
+
+            nav {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Tuuli Co.</a>
+        <a href="projects.html" class="back">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Zpět na projekty
+        </a>
+    </nav>
+
+    <main>
+        <header>
+            <span class="label">Webové stránky</span>
+            <h1>Tvorba webů</h1>
+            <p>Moderní a responzivní webové stránky, které pomáhají našim klientům růst.</p>
+        </header>
+
+        <div class="portfolio-grid">
+            <article class="portfolio-item" data-gallery="letajici">
+                <div class="portfolio-gallery">
+                    <div class="gallery-container">
+                        <div class="gallery-slide">
+                            <img src="images/projects/web/letajicifotograf-1.png" alt="Létající Fotograf - náhled 1">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="images/projects/web/letajicifotograf-2.png" alt="Létající Fotograf - náhled 2">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="images/projects/web/letajicifotograf-3.png" alt="Létající Fotograf - náhled 3">
+                        </div>
+                    </div>
+                    <button class="gallery-nav prev" aria-label="Předchozí">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+                    <button class="gallery-nav next" aria-label="Další">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                    <div class="gallery-dots">
+                        <span class="gallery-dot active"></span>
+                        <span class="gallery-dot"></span>
+                        <span class="gallery-dot"></span>
+                    </div>
+                </div>
+                <div class="portfolio-content">
+                    <div class="portfolio-info">
+                        <h2>Létající Fotograf</h2>
+                        <p>Profesionální fotografie a videa nemovitostí pro realitní makléře.</p>
+                    </div>
+                    <a href="https://letajicifotograf.cz/" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+                        Navštívit web
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                    </a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <script>
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            const container = item.querySelector('.gallery-container');
+            const slides = item.querySelectorAll('.gallery-slide');
+            const dots = item.querySelectorAll('.gallery-dot');
+            const prevBtn = item.querySelector('.gallery-nav.prev');
+            const nextBtn = item.querySelector('.gallery-nav.next');
+            let currentSlide = 0;
+
+            function goToSlide(index) {
+                if (index < 0) index = slides.length - 1;
+                if (index >= slides.length) index = 0;
+                currentSlide = index;
+                container.style.transform = `translateX(-${currentSlide * 100}%)`;
+                dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+            }
+
+            prevBtn?.addEventListener('click', () => goToSlide(currentSlide - 1));
+            nextBtn?.addEventListener('click', () => goToSlide(currentSlide + 1));
+            dots.forEach((dot, i) => dot.addEventListener('click', () => goToSlide(i)));
+        });
+    </script>
+</body>
+</html>

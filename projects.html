@@ -183,6 +183,35 @@
             letter-spacing: 0.05em;
         }
 
+        a.project-link {
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+        }
+
+        a.project-link .arrow-icon {
+            position: absolute;
+            right: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        a.project-link:hover .arrow-icon {
+            opacity: 1;
+            transform: translateY(-50%) translateX(5px);
+        }
+
+        a.project-link .project-number {
+            transition: opacity 0.3s;
+        }
+
+        a.project-link:hover .project-number {
+            opacity: 0;
+        }
+
         @media (max-width: 600px) {
             main {
                 padding: 8rem 1.5rem 4rem;
@@ -251,11 +280,14 @@
                 <h2>BEERPONG</h2>
                 <p>Organizace beerpong turnajů a eventů</p>
             </article>
-            <article class="project">
+            <a href="weby.html" class="project project-link">
                 <span class="project-number">07</span>
                 <h2>TVORBA WEBŮ</h2>
                 <p>Návrh a vývoj moderních webových stránek</p>
-            </article>
+                <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
         </div>
     </main>
 </body>
