@@ -253,7 +253,7 @@ nav a.back:hover {
 main {
     max-width: 1800px;
     margin: 0 auto;
-    padding: 10rem 4rem 6rem;
+    padding: 10rem 2rem 6rem;
     animation: fadeUp 0.8s ease-out;
 }
 
@@ -565,8 +565,15 @@ footer::before {
 /* Project List Styles */
 .projects-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+/* Responsive grid breakpoints */
+@media (max-width: 768px) {
+    .projects-list {
+        grid-template-columns: 1fr;
+    }
 }
 
 .project {
