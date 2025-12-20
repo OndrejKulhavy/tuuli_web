@@ -179,7 +179,7 @@ header .author {
     width: 100%;
     aspect-ratio: 4/5;
     background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--tertiary-color);
+    border: 2px solid var(--secondary-color);
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -192,6 +192,7 @@ header .author {
     aspect-ratio: 4/5;
     overflow: hidden;
     border-radius: 4px;
+    border: 2px solid var(--secondary-color);
 }
 
 .product-image img {
