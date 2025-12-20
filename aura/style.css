@@ -303,6 +303,10 @@ footer {
         margin-bottom: 1.5rem;
     }
 
+    .scroll-indicator {
+        bottom: 5rem;
+    }
+
     .product-content {
         grid-template-columns: 1fr;
         gap: 2rem;
