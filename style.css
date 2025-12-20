@@ -480,11 +480,39 @@ footer::before {
 
 @media (max-width: 600px) {
     .hero {
-        padding: 1.5rem;
+        padding: 0;
+        align-items: stretch;
+    }
+
+    .hero-content {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding: 3rem 1.5rem 4rem;
+    }
+
+    .logo {
+        font-size: 3.5rem;
     }
 
     .description {
         font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+
+    .cta-group {
+        margin-top: auto;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero::before {
+        background-position: 50% 50%;
     }
 
     .footer-grid {
