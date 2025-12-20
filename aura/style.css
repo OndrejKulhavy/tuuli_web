@@ -104,8 +104,8 @@ header {
 
 header h1 {
     font-family: var(--font-heading);
-    font-size: clamp(2rem, 5vw, 4rem);
-    margin-bottom: 2rem;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: 1rem;
     color: var(--text-color);
     font-weight: 500;
     max-width: 800px;
@@ -217,7 +217,8 @@ header .author {
 }
 
 .product-btn {
-    display: inline-block;
+    display: none; /* Temporarily hidden */
+    /* display: inline-block; */
     padding: 1rem 2rem;
     border: 1px solid var(--text-color);
     color: var(--text-color);
@@ -299,3 +300,4 @@ footer {
         direction: ltr;
     }
 }
+.header-social { margin-top: 2rem; }
