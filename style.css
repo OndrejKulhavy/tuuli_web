@@ -104,8 +104,8 @@ nav a.back:hover {
     background: url('images/team.jpeg');
     background-size: cover;
     background-position: center;
-    /* More vibrant filter */
-    filter: brightness(0.3) saturate(1.1) contrast(1.1) blur(2px);
+    /* Clearer image to see faces */
+    filter: brightness(0.7) saturate(1.1) contrast(1.1);
     z-index: -2;
     transition: transform 0.5s ease-out;
 }
@@ -116,9 +116,9 @@ nav a.back:hover {
     inset: 0;
     background: linear-gradient(
         180deg,
-        rgba(5, 5, 5, 0.7) 0%,
-        rgba(5, 5, 5, 0.5) 50%,
-        rgba(5, 5, 5, 0.9) 100%
+        rgba(5, 5, 5, 0.6) 0%,
+        rgba(5, 5, 5, 0.4) 50%,
+        rgba(5, 5, 5, 0.8) 100%
     );
     z-index: -1;
 }
@@ -127,6 +127,7 @@ nav a.back:hover {
     max-width: 900px;
     animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1);
     z-index: 1;
+    padding: 2rem;
 }
 
 @keyframes fadeUp {
@@ -152,7 +153,7 @@ nav a.back:hover {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     /* Text Shadow for glow */
-    text-shadow: 0 0 40px rgba(56, 189, 248, 0.15);
+    filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.3));
 }
 
 .tagline {
@@ -172,7 +173,7 @@ nav a.back:hover {
     max-width: 600px;
     margin: 0 auto 3rem;
     font-weight: 500;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 /* Buttons */
