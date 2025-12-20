@@ -60,4 +60,27 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, intervalTime);
     }
+
+    // Mobile scroll-based hover effect for projects
+    const projects = document.querySelectorAll('.project');
+    
+    if (projects.length > 0 && 'IntersectionObserver' in window && window.innerWidth <= 768) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '-40% 0px -40% 0px', // Trigger when project is in middle 20% of viewport
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                } else {
+                    entry.target.classList.remove('in-view');
+                }
+            });
+        }, observerOptions);
+
+        projects.forEach(project => observer.observe(project));
+    }
 });

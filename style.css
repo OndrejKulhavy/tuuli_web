@@ -595,6 +595,15 @@ footer::before {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
+@media (max-width: 768px) {
+    .project.in-view {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.06);
+        border-color: var(--accent-color);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+}
+
 .project-image {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -627,6 +636,12 @@ footer::before {
 
 .project:hover .project-image img {
     transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .project.in-view .project-image img {
+        transform: scale(1.05);
+    }
 }
 
 .project-image-placeholder {
@@ -699,6 +714,17 @@ a.project-link {
 
 .project:hover .project-footer svg {
     transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+    .project.in-view .project-footer {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .project.in-view .project-footer svg {
+        transform: translateX(4px);
+    }
 }
 
 /* Portfolio / Gallery Styles */
