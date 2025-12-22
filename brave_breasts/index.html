@@ -127,9 +127,6 @@
             filter: grayscale(100%); 
             transition: filter 0.5s ease;
         }
-        .founders img:hover {
-            filter: grayscale(0%);
-        }
         .founders h2 { 
             order: 1;
             font-family: 'Times New Roman', serif; 
@@ -179,7 +176,6 @@
         .gallery img:hover { 
             transform: translateY(-5px); 
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            filter: grayscale(0%);
         }
         
         @media (max-width: 768px) {
@@ -265,8 +261,8 @@
             opacity: 0.15;
             pointer-events: none;
             z-index: 0;
-            mask-image: radial-gradient(circle 150px at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
-            -webkit-mask-image: radial-gradient(circle 150px at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
+            mask-image: radial-gradient(circle 250px at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle 250px at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
         }
         main, nav {
             position: relative;
