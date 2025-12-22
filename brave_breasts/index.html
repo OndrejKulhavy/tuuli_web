@@ -34,7 +34,7 @@
         main { padding-top: 120px; max-width: 1200px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem; }
         .project-header { text-align: center; margin-bottom: 4rem; }
         .project-logo {
-            max-width: 400px;
+            max-width: 350px;
             width: 100%;
             height: auto;
             margin-bottom: 1rem;
@@ -54,13 +54,77 @@
         .breadcrumbs .separator { color: #999; margin: 0 0.5rem; }
         .breadcrumbs .current { color: #000; font-weight: 500; }
 
-        .founders { text-align: center; margin-bottom: 4rem; }
-        .founders img { max-width: 500px; width: 100%; aspect-ratio: 1/1; object-fit: cover; object-position: center 20%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); margin-bottom: 1rem; filter: grayscale(100%); }
-        .founders h2 { font-family: 'Times New Roman', serif; font-size: 2.5rem; margin-bottom: 2rem; color: #000; }
+        .founders { 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 6rem; 
+            position: relative;
+        }
+        .founders img { 
+            order: 2;
+            max-width: 450px; 
+            width: 100%; 
+            aspect-ratio: 1/1; 
+            object-fit: cover; 
+            object-position: center 20%; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            filter: grayscale(100%); 
+            transition: filter 0.5s ease;
+        }
+        .founders img:hover {
+            filter: grayscale(0%);
+        }
+        .founders h2 { 
+            order: 1;
+            font-family: 'Times New Roman', serif; 
+            font-size: 3rem; 
+            margin-bottom: 2.5rem; 
+            color: #000;
+            position: relative;
+            display: inline-block;
+        }
+        .founders h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
 
-        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
-        .gallery img { width: 100%; height: auto; border-radius: 12px; transition: transform 0.3s ease; object-fit: cover; aspect-ratio: 4/3; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-        .gallery img:hover { transform: scale(1.02); }
+        .gallery { 
+            display: flex; 
+            justify-content: center; 
+            gap: 2rem; 
+            margin-bottom: 6rem; 
+            flex-wrap: wrap;
+        }
+        .gallery img { 
+            width: 100%; 
+            max-width: 500px;
+            height: auto; 
+            border-radius: 12px; 
+            transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease; 
+            object-fit: cover; 
+            aspect-ratio: 4/3; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
+            filter: grayscale(100%);
+        }
+        .gallery img:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            filter: grayscale(0%);
+        }
+        
+        @media (max-width: 768px) {
+            .project-header h1 { font-size: 2.5rem; }
+            .founders h2 { font-size: 2rem; }
+            .founders img { max-width: 100%; }
+        }
     </style>
 </head>
 <body>
@@ -89,7 +153,7 @@
 
         <div class="gallery">
             <img src="../images/projects/brave_breast/brave_breast-1.webp" alt="BRAVE BREASTS 1">
-            <img src="../images/projects/brave_breast/brave_breast-2.webp" alt="BRAVE BREASTS 2">
+
             <img src="../images/projects/brave_breast/brave_breast-3.jpeg" alt="BRAVE BREASTS 3">
         </div>
     </main>
