@@ -83,6 +83,10 @@ nav a.back:hover {
     transform: translateX(-3px);
 }
 
+nav a.logo + a.back {
+    margin-left: auto;
+}
+
 /* Hero Section */
 .hero {
     flex: 1;
