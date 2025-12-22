@@ -87,6 +87,36 @@ nav a.logo + a.back {
     margin-left: auto;
 }
 
+/* Breadcrumbs */
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 1.5rem;
+    justify-content: center;
+}
+
+.breadcrumbs a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumbs a:hover {
+    color: var(--accent-color);
+}
+
+.breadcrumbs .separator {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.breadcrumbs .current {
+    color: #fff;
+    font-weight: 500;
+}
+
 /* Hero Section */
 .hero {
     flex: 1;
