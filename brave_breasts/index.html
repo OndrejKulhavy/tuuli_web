@@ -54,6 +54,54 @@
         .breadcrumbs .separator { color: #999; margin: 0 0.5rem; }
         .breadcrumbs .current { color: #000; font-weight: 500; }
 
+        .content-section {
+            max-width: 800px;
+            margin: 0 auto 6rem auto;
+            text-align: center;
+        }
+        .content-section h2 {
+            font-family: 'Times New Roman', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #000;
+        }
+        .content-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 1.5rem;
+        }
+        .content-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            display: inline-block;
+            text-align: left;
+        }
+        .content-section li {
+            font-size: 1.1rem;
+            color: #444;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .content-section li::before {
+            content: '•';
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        .highlight-text {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: #000;
+            margin: 3rem 0;
+            display: block;
+        }
+
         .founders { 
             display: flex;
             flex-direction: column;
@@ -124,6 +172,46 @@
             .project-header h1 { font-size: 2.5rem; }
             .founders h2 { font-size: 2rem; }
             .founders img { max-width: 100%; }
+            .contact-grid { gap: 2rem; }
+        }
+
+        .contact-section {
+            text-align: center;
+            margin-top: 6rem;
+            margin-bottom: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        .contact-section h3 {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: #000;
+        }
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .contact-name {
+            font-weight: 500;
+            color: #000;
+            font-size: 1.1rem;
+        }
+        .contact-email {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+        .contact-email:hover {
+            color: #000;
         }
     </style>
 </head>
@@ -151,11 +239,30 @@
             <img src="images/founders.jpeg" alt="Zakladatelky Brave Breasts">
         </section>
 
+        <section class="content-section">
+            <span class="highlight-text">"Každá žena má právo cítit se krásná ve svém těle."</span>
+            <p>Rakovina prsu u žen pod 50 let roste až o 1,4 % ročně. Brave Breasts vznikl proto, abychom to změnili. Zvyšujeme povědomí, podporujeme sebevědomí a vytváříme komunitu, kde je každé prso nádherné a každá žena statečná.</p>
+        </section>
+
         <div class="gallery">
             <img src="../images/projects/brave_breast/brave_breast-1.webp" alt="BRAVE BREASTS 1">
 
             <img src="../images/projects/brave_breast/brave_breast-3.jpeg" alt="BRAVE BREASTS 3">
         </div>
+
+        <section class="contact-section">
+            <h3>Kontakt</h3>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <span class="contact-name">Marie Machytková</span>
+                    <a href="mailto:marie.machytkova@tuuli.cz" class="contact-email">marie.machytkova@tuuli.cz</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-name">Aneta Kmetíková</span>
+                    <a href="mailto:anetka.kmetikova@tuuli.cz" class="contact-email">anetka.kmetikova@tuuli.cz</a>
+                </div>
+            </div>
+        </section>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="../qr-code.js"></script>
