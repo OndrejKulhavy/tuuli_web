@@ -9,12 +9,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css">
     <style>
+        :root {
+            --bg-color: #f2f0eb;
+            --text-color: #1a1a1a;
+            --accent-color: #ffb6c1;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            background-image: none;
+        }
+        nav {
+            background: rgba(242, 240, 235, 0.8) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+        }
+        nav a.logo {
+            background: none !important;
+            -webkit-text-fill-color: initial !important;
+            color: #000 !important;
+        }
+        nav a {
+            color: var(--text-color) !important;
+        }
         main { padding-top: 120px; max-width: 1200px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem; }
         .project-header { text-align: center; margin-bottom: 4rem; }
-        .project-header h1 { font-size: 3rem; margin-bottom: 1rem; background: linear-gradient(to right, #fff, #ccc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .project-header p { font-size: 1.2rem; color: #888; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+        .project-logo {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+        .project-slogan {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: #1a1a1a;
+        }
+        .project-header p { font-size: 1.2rem; color: #444; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+        
+        .breadcrumbs { margin-bottom: 2rem; font-size: 0.9rem; color: #666; }
+        .breadcrumbs a { color: #666; text-decoration: none; transition: color 0.3s; }
+        .breadcrumbs a:hover { color: #000; }
+        .breadcrumbs .separator { color: #999; margin: 0 0.5rem; }
+        .breadcrumbs .current { color: #000; font-weight: 500; }
+
+        .founders { text-align: center; margin-bottom: 4rem; }
+        .founders img { max-width: 500px; width: 100%; aspect-ratio: 1/1; object-fit: cover; object-position: center 20%; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); margin-bottom: 1rem; filter: grayscale(100%); }
+        .founders h2 { font-family: 'Times New Roman', serif; font-size: 2.5rem; margin-bottom: 2rem; color: #000; }
+
         .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
-        .gallery img { width: 100%; height: auto; border-radius: 12px; transition: transform 0.3s ease; object-fit: cover; aspect-ratio: 4/3; }
+        .gallery img { width: 100%; height: auto; border-radius: 12px; transition: transform 0.3s ease; object-fit: cover; aspect-ratio: 4/3; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
         .gallery img:hover { transform: scale(1.02); }
     </style>
 </head>
@@ -32,14 +77,20 @@
                 <span class="separator">/</span>
                 <span class="current">Brave Breasts</span>
             </div>
-            <h1>BRAVE BREASTS</h1>
+            <img src="images/logo.png" alt="BRAVE BREASTS Logo" class="project-logo">
+            <p class="project-slogan">"brave enough to be bare"</p>
             <p>Zvyšování povědomí o rakovině prsu, podpora sebevědomí žen a sběr prostředků na výzkum a léčbu.</p>
         </header>
+
+        <section class="founders">
+            <h2>Zakladatelky</h2>
+            <img src="images/founders.jpeg" alt="Zakladatelky Brave Breasts">
+        </section>
 
         <div class="gallery">
             <img src="../images/projects/brave_breast/brave_breast-1.webp" alt="BRAVE BREASTS 1">
             <img src="../images/projects/brave_breast/brave_breast-2.webp" alt="BRAVE BREASTS 2">
-            <img src="../images/projects/brave_breast/brave_breast-2.jpg" alt="BRAVE BREASTS 3">
+            <img src="../images/projects/brave_breast/brave_breast-3.jpeg" alt="BRAVE BREASTS 3">
         </div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
