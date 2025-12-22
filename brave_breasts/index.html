@@ -248,30 +248,9 @@
         .qr-trigger-btn:hover {
             background-color: rgba(0,0,0,0.05) !important;
         }
-
-        .spotlight-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('images/breasts.png');
-            background-size: 600px;
-            background-repeat: repeat;
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 0;
-            mask-image: radial-gradient(circle 250px at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
-            -webkit-mask-image: radial-gradient(circle 250px at var(--x, 50%) var(--y, 50%), black 0%, transparent 100%);
-        }
-        main, nav {
-            position: relative;
-            z-index: 1;
-        }
     </style>
 </head>
 <body>
-    <div class="spotlight-bg"></div>
     <nav>
         <a href="../index.html" class="logo">Tuuli Co.</a>
     </nav>
@@ -323,14 +302,5 @@
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="../qr-code.js"></script>
-    <script>
-        document.addEventListener('mousemove', (e) => {
-            const bg = document.querySelector('.spotlight-bg');
-            if (bg) {
-                bg.style.setProperty('--x', e.clientX + 'px');
-                bg.style.setProperty('--y', e.clientY + 'px');
-            }
-        });
-    </script>
 </body>
 </html>
