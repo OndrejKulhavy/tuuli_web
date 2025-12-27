@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="windGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#60a5fa"/>
+    </linearGradient>
+  </defs>
+  <path d="M15 35 Q35 35 45 25 Q55 15 70 20 Q85 25 80 40 Q75 55 55 50" 
+        stroke="url(#windGrad)" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <path d="M10 55 Q40 55 55 50 Q70 45 85 55" 
+        stroke="url(#windGrad)" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <path d="M20 75 Q40 75 50 70 Q60 65 75 70 Q90 75 85 60" 
+        stroke="url(#windGrad)" stroke-width="8" stroke-linecap="round" fill="none"/>
+</svg>
