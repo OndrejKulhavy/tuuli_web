@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <!-- Homepage -->
     <url>
-        <loc>https://tuulico.cz/</loc>
+        <loc>https://tuuli.cz/</loc>
         <lastmod>2025-12-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
@@ -10,7 +10,7 @@
     
     <!-- Projects page -->
     <url>
-        <loc>https://tuulico.cz/projects.html</loc>
+        <loc>https://tuuli.cz/projects.html</loc>
         <lastmod>2025-12-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
@@ -18,7 +18,7 @@
     
     <!-- Web creation page -->
     <url>
-        <loc>https://tuulico.cz/weby.html</loc>
+        <loc>https://tuuli.cz/weby.html</loc>
         <lastmod>2025-12-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -26,7 +26,7 @@
     
     <!-- AURA project -->
     <url>
-        <loc>https://tuulico.cz/aura/</loc>
+        <loc>https://tuuli.cz/aura/</loc>
         <lastmod>2025-12-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -34,7 +34,7 @@
     
     <!-- Brave Breasts project -->
     <url>
-        <loc>https://tuulico.cz/brave_breasts/</loc>
+        <loc>https://tuuli.cz/brave_breasts/</loc>
         <lastmod>2025-12-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -42,7 +42,7 @@
     
     <!-- Snackbar project -->
     <url>
-        <loc>https://tuulico.cz/snackbar/</loc>
+        <loc>https://tuuli.cz/snackbar/</loc>
         <lastmod>2025-12-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
@@ -50,7 +50,7 @@
     
     <!-- Snackup project -->
     <url>
-        <loc>https://tuulico.cz/snackup/</loc>
+        <loc>https://tuuli.cz/snackup/</loc>
         <lastmod>2025-12-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
@@ -58,7 +58,7 @@
     
     <!-- Beerpong project -->
     <url>
-        <loc>https://tuulico.cz/beerpong/</loc>
+        <loc>https://tuuli.cz/beerpong/</loc>
         <lastmod>2025-12-27</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
