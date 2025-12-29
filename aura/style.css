@@ -637,13 +637,21 @@ footer::before {
     }
     
     header {
-        padding: var(--space-xl) var(--space-md);
+        padding: var(--space-xl) 0;
+        padding-bottom: var(--space-lg);
     }
     
     .header-logo {
         max-width: 100%;
         width: 100%;
         margin-bottom: var(--space-md);
+        margin-top: 0;
+    }
+    
+    header h1,
+    header .author,
+    .header-social {
+        padding: 0 var(--space-md);
     }
     
     header h1 {
