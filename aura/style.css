@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #3d5919;
+    --primary-color: #3F5A1A;
     --secondary-color: #f0e3c9;
     --tertiary-color: #80956d;
     --bg-color: var(--primary-color); /* Swapped to Primary as background */
@@ -217,20 +217,25 @@ header .author {
 }
 
 .product-btn {
-    display: none; /* Temporarily hidden */
-    /* display: inline-block; */
+    display: inline-block;
     padding: 1rem 2rem;
-    border: 1px solid var(--text-color);
+    border: 2px solid var(--text-color);
+    background: transparent;
     color: var(--text-color);
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .product-btn:hover {
     background-color: var(--text-color);
     color: var(--bg-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(240, 227, 201, 0.3);
 }
 
 /* Footer */
@@ -317,3 +322,205 @@ footer {
     }
 }
 .header-social { margin-top: 2rem; }
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: relative;
+    background-color: var(--bg-color);
+    border: 2px solid var(--secondary-color);
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    max-width: 650px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    z-index: 2001;
+    animation: slideUp 0.3s ease;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 2rem;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    line-height: 1;
+    padding: 0;
+    opacity: 0.8;
+}
+
+.modal-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.modal-content h2 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    padding-right: 2rem;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.modal-intro {
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    font-weight: 400;
+    opacity: 0.85;
+    line-height: 1.6;
+}
+
+.ingredients-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ingredients-list li {
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0;
+    background-color: rgba(240, 227, 201, 0.08);
+    border-left: 4px solid var(--secondary-color);
+    border-radius: 8px;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.ingredients-list li:hover {
+    background-color: rgba(240, 227, 201, 0.12);
+    transform: translateX(4px);
+}
+
+.ingredients-list li strong {
+    color: var(--secondary-color);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.ingredients-list li em {
+    color: var(--text-color);
+    font-style: italic;
+    opacity: 0.7;
+    display: block;
+    text-align: center;
+    padding: 0.5rem 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Scrollbar styling for modal */
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: rgba(240, 227, 201, 0.1);
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: var(--tertiary-color);
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: var(--text-color);
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 2rem 1.5rem;
+        width: 95%;
+        max-height: 90vh;
+        border-radius: 16px;
+    }
+    
+    .modal-content h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .modal-intro {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .ingredients-list {
+        gap: 0.75rem;
+    }
+    
+    .ingredients-list li {
+        padding: 1rem 1.25rem;
+        font-size: 0.9rem;
+    }
+    
+    .ingredients-list li strong {
+        font-size: 1rem;
+        margin-bottom: 0.4rem;
+    }
+}

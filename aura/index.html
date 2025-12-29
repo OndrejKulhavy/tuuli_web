@@ -76,8 +76,8 @@
                 </div>
                 <div class="product-info">
                     <h2>Lesk na rty</h2>
-                    <p>Přirozený lesk a hydratace v jednom. Podtrhněte svou přirozenou krásu jemným dotekem přírody.</p>
-                    <a href="#" class="product-btn">Detail produktu</a>
+                    <p>Přirozený lesk s hydratací. Jemný třpyt a ochranný filtr v jednom produktu. Pouze 6 přírodních ingrediencí.</p>
+                    <button class="product-btn" data-product="lesk">Více informací</button>
                 </div>
             </div>
         </section>
@@ -89,8 +89,8 @@
                 </div>
                 <div class="product-info">
                     <h2>Tělové máslo</h2>
-                    <p>Hloubková péče pro vaši pleť. Bohaté složení, které vyživuje, regeneruje a chrání.</p>
-                    <a href="#" class="product-btn">Detail produktu</a>
+                    <p>Jednoduchá péče pro vaši pokožku. Pouze 5 přírodních ingrediencí, které vyživují a chrání. Ideální pro suchou a citlivou pokožku.</p>
+                    <button class="product-btn" data-product="krem">Více informací</button>
                 </div>
             </div>
         </section>
@@ -102,8 +102,8 @@
                 </div>
                 <div class="product-info">
                     <h2>Balzám na rty</h2>
-                    <p>Intenzivní výživa a ochrana pro vaše rty. Vyrobeno z nejčistších přírodních ingrediencí pro každodenní péči.</p>
-                    <a href="#" class="product-btn">Detail produktu</a>
+                    <p>Výživa a ochrana pro každodenní péči. Pouze 3 přírodní ingredience. Chrání před větrem a chladem.</p>
+                    <button class="product-btn" data-product="balzam">Více informací</button>
                 </div>
             </div>
         </section>
@@ -129,6 +129,88 @@
             <p class="copyright">&copy; 2025 Aura by Laura Šimůnková. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Product Detail Modals -->
+    <div class="modal" id="modal-lesk">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Zavřít">&times;</button>
+            <h2>Lesk na rty</h2>
+            <p class="modal-intro">Pouze 6 ingrediencí:</p>
+            <ul class="ingredients-list">
+                <li>
+                    <strong>Hovězí lůj</strong> – hydratuje a zjemňuje rty, napodobuje přirozený kožní maz, takže rty nejsou vysušené a vytváří ochranný filtr proti extrémnímu počasí
+                </li>
+                <li>
+                    <strong>Ricinový olej</strong> – je velmi hydratační, zvyšuje elasticitu pokožky, podporuje hojení drobných prasklinek a suchých míst
+                </li>
+                <li>
+                    <strong>Včelí vosk</strong> – zpevňuje strukturu lesku a tvoří ochrannou vrstvu
+                </li>
+                <li>
+                    <strong>Mica prášek</strong> – je to minerální pigment, který dodává produktu jemný třpyt a barvu
+                </li>
+                <li>
+                    <strong>Esenciální olej</strong> – dodává příjemnou vůni a navíc některé oleje mají i antibakteriální, uklidňující nebo stimulující účinky
+                </li>
+                <li>
+                    <strong>Vitamin E</strong> – je to antioxidant prodlužující životnost přípravků obsahujících oleje
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-krem">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Zavřít">&times;</button>
+            <h2>Tělové máslo</h2>
+            <p class="modal-intro">Pouze 5 ingrediencí:</p>
+            <ul class="ingredients-list">
+                <li>
+                    <strong>Bambucké máslo</strong> – intenzivně vyživuje pokožku a regeneruje kožní buňky, změkčuje a zklidňuje suchou či podrážděnou pokožku a je vhodné pro citlivou pokožku a ekzémy
+                </li>
+                <li>
+                    <strong>Ricinový olej</strong> – je velmi hydratační, zvyšuje elasticitu pokožky, podporuje hojení drobných prasklinek a suchých míst
+                </li>
+                <li>
+                    <strong>Kokosový olej</strong> – hydratuje a vyživuje pokožku, obsahuje antioxidanty, chrání pokožku před poškozením a má antibakteriální účinky
+                </li>
+                <li>
+                    <strong>Kukuřičný škrob</strong> – absorbuje přebytečnou mastnotu a zjemňuje texturu
+                </li>
+                <li>
+                    <strong>Včelí vosk</strong> – zpevňuje strukturu
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-balzam">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Zavřít">&times;</button>
+            <h2>Balzám na rty</h2>
+            <p class="modal-intro">Pouze 3 ingredience:</p>
+            <ul class="ingredients-list">
+                <li>
+                    <strong>Olivový olej</strong> – zvláčňuje, vyživuje a chrání pokožku a je vhodný na citlivou pokožku i ekzémy
+                </li>
+                <li>
+                    <strong>Včelí vosk</strong> – díky němu balzám drží na rtech, déle vydrží a chrání před větrem a chladem
+                </li>
+                <li>
+                    <strong>Listy máty</strong> – máta osvěžuje, dodává jemný chladivý pocit, mírně stimuluje prokrvení a má antiseptické účinky
+                </li>
+                <li>
+                    <em>nebo alternativně</em>
+                </li>
+                <li>
+                    <strong>Květy levandule</strong> – levandule zklidňuje podráždění, působí antibakteriálně a protizánětlivě, podporuje regeneraci popraskaných rtů
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
