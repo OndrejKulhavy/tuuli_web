@@ -24,4 +24,51 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
         observer.observe(el);
     });
+
+    // Modal functionality
+    const productButtons = document.querySelectorAll('.product-btn');
+    const modals = document.querySelectorAll('.modal');
+    const modalCloses = document.querySelectorAll('.modal-close');
+    const modalOverlays = document.querySelectorAll('.modal-overlay');
+
+    // Open modal when product button is clicked
+    productButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const productType = button.getAttribute('data-product');
+            const modal = document.getElementById(`modal-${productType}`);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+        });
+    });
+
+    // Close modal when close button is clicked
+    modalCloses.forEach(closeBtn => {
+        closeBtn.addEventListener('click', () => {
+            closeBtn.closest('.modal').classList.remove('active');
+            document.body.style.overflow = ''; // Re-enable scrolling
+        });
+    });
+
+    // Close modal when overlay is clicked
+    modalOverlays.forEach(overlay => {
+        overlay.addEventListener('click', () => {
+            overlay.closest('.modal').classList.remove('active');
+            document.body.style.overflow = ''; // Re-enable scrolling
+        });
+    });
+
+    // Close modal when Escape key is pressed
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            modals.forEach(modal => {
+                if (modal.classList.contains('active')) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = ''; // Re-enable scrolling
+                }
+            });
+        }
+    });
 });
