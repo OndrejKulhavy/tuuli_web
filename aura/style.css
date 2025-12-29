@@ -701,15 +701,51 @@ footer::before {
         padding: var(--space-lg) var(--space-md);
     }
     
+    /* Modal as Bottom Drawer on Mobile */
+    .modal.active {
+        align-items: flex-end;
+    }
+    
     .modal-content {
         padding: var(--space-md);
-        border-radius: 20px;
-        width: 94%;
-        max-height: 90vh;
+        padding-top: var(--space-sm);
+        padding-bottom: calc(var(--space-lg) + env(safe-area-inset-bottom));
+        border-radius: 24px 24px 0 0;
+        width: 100%;
+        max-width: 100%;
+        max-height: 85vh;
+        animation: drawerSlideUp var(--duration-normal) var(--ease-out);
+    }
+    
+    .modal-content::before {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 4px;
+        background: var(--text-subtle);
+        border-radius: 2px;
+        margin: 0 auto var(--space-sm);
+    }
+    
+    @keyframes drawerSlideUp {
+        from {
+            opacity: 0;
+            transform: translateY(100%);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .modal-close {
+        top: var(--space-sm);
+        right: var(--space-sm);
     }
     
     .modal-content h2 {
-        font-size: 2rem;
+        font-size: 1.75rem;
+        margin-top: var(--space-xs);
     }
     
     .ingredients-list li {
