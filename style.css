@@ -301,6 +301,13 @@ main {
     animation: fadeUp 0.8s ease-out;
 }
 
+/* Reset main styling when it only contains hero (index page) */
+main:has(> .hero:only-child) {
+    max-width: none;
+    padding: 0;
+    margin: 0;
+}
+
 header {
     margin-bottom: 5rem;
     text-align: center;
