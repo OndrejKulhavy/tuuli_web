@@ -25,6 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
+    // Helper functions for scroll management
+    const disableBodyScroll = () => {
+        document.body.style.overflow = 'hidden';
+    };
+
+    const enableBodyScroll = () => {
+        document.body.style.overflow = '';
+    };
+
     // Modal functionality
     const productButtons = document.querySelectorAll('.product-btn');
     const modals = document.querySelectorAll('.modal');
@@ -39,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const modal = document.getElementById(`modal-${productType}`);
             if (modal) {
                 modal.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                disableBodyScroll();
             }
         });
     });
@@ -48,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modalCloses.forEach(closeBtn => {
         closeBtn.addEventListener('click', () => {
             closeBtn.closest('.modal').classList.remove('active');
-            document.body.style.overflow = ''; // Re-enable scrolling
+            enableBodyScroll();
         });
     });
 
@@ -56,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modalOverlays.forEach(overlay => {
         overlay.addEventListener('click', () => {
             overlay.closest('.modal').classList.remove('active');
-            document.body.style.overflow = ''; // Re-enable scrolling
+            enableBodyScroll();
         });
     });
 
@@ -66,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modals.forEach(modal => {
                 if (modal.classList.contains('active')) {
                     modal.classList.remove('active');
-                    document.body.style.overflow = ''; // Re-enable scrolling
+                    enableBodyScroll();
                 }
             });
         }
