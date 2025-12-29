@@ -156,6 +156,7 @@ header {
     align-items: center;
     text-align: center;
     padding: var(--space-xl) var(--space-lg);
+    padding-top: calc(var(--space-xl) + 2rem);
     position: relative;
     overflow: hidden;
 }
@@ -163,6 +164,7 @@ header {
 .header-logo {
     max-width: 600px;
     width: 100%;
+    margin-top: -10vh;
     height: auto;
     margin-bottom: var(--space-lg);
     border-radius: 0;
