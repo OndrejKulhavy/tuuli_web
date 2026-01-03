@@ -6,7 +6,11 @@ if (!process.env.RESEND_API_KEY) {
 
 export const resend = new Resend(process.env.RESEND_API_KEY)
 
-// Helper function to add delay between requests
+/**
+ * Adds a delay to respect API rate limits
+ * @param ms - Milliseconds to wait
+ * @returns Promise that resolves after the specified delay
+ */
 function delay(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
@@ -35,6 +39,8 @@ export async function sendEmail({
 
     // Add delay to respect Resend rate limits (2 requests/sec = 500ms minimum)
     // Using 600ms to be safe and account for any network latency
+    // Note: Delay is applied after every send (including the last) to ensure
+    // any subsequent email operations also respect the rate limit
     await delay(600)
 
     return { success: true, data }
