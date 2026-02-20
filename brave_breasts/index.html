@@ -6,17 +6,16 @@
     <title>BRAVE BREASTS | Tuuli Co.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎀</text></svg>">
-    <link rel="stylesheet" href="../style.css">
-    
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Brave Breasts - Zvyšování povědomí o rakovině prsu, podpora sebevědomí žen a sběr prostředků na výzkum a léčbu. Projekt Tuuli Co.">
     <meta name="keywords" content="rakovina prsu, prevence, Brave Breasts, podpora žen, zdraví, Tuuli Co., charitativní projekt">
     <meta name="author" content="Tuuli Co.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://tuuli.cz/brave_breasts/">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tuuli.cz/brave_breasts/">
@@ -25,7 +24,7 @@
     <meta property="og:image" content="https://tuuli.cz/brave_breasts/images/logo.png">
     <meta property="og:locale" content="cs_CZ">
     <meta property="og:site_name" content="Tuuli Co.">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="BRAVE BREASTS | Tuuli Co.">
@@ -33,397 +32,179 @@
     <meta name="twitter:image" content="https://tuuli.cz/brave_breasts/images/logo.png">
 
     <style>
+        /* ═══════════════════════════════════════════
+           DESIGN TOKENS
+           ═══════════════════════════════════════════ */
         :root {
             --bg-color: #f2f0eb;
             --text-color: #1a1a1a;
+            --text-muted: #666;
+            --text-light: #888;
             --accent-color: #ffb6c1;
+            --accent-dark: #e8909c;
+            --white: #ffffff;
+            --section-gap: 8rem;
+            --content-width: 1100px;
+            --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
+
+        /* ═══════════════════════════════════════════
+           RESET & BASE
+           ═══════════════════════════════════════════ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
         body {
+            font-family: var(--font-body);
             background-color: var(--bg-color);
             color: var(--text-color);
-            background-image: 
-                radial-gradient(circle at top left, rgba(255, 182, 193, 0.15), transparent 50%),
-                radial-gradient(circle at bottom right, rgba(255, 182, 193, 0.15), transparent 50%);
+            line-height: 1.6;
+            background-image:
+                radial-gradient(circle at 20% 0%, rgba(255, 182, 193, 0.15), transparent 50%),
+                radial-gradient(circle at 80% 100%, rgba(255, 182, 193, 0.12), transparent 50%);
             background-attachment: fixed;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23ffb6c1' stroke='%23e8909c' stroke-width='2'/%3E%3C/svg%3E") 12 12, auto;
         }
-        nav {
-            background: rgba(242, 240, 235, 0.8) !important;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+
+        a, button, .thumb, .btn-primary, .btn-secondary {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Ccircle cx='14' cy='14' r='12' fill='%23ff8fa0' stroke='%23e8909c' stroke-width='2'/%3E%3C/svg%3E") 14 14, pointer;
         }
-        nav a.logo {
-            background: none !important;
-            -webkit-text-fill-color: initial !important;
-            color: #000 !important;
+
+        img {
+            display: block;
+            max-width: 100%;
         }
-        nav a {
-            color: var(--text-color) !important;
+
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1.1;
         }
-        main { padding-top: 120px; max-width: 1200px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem; }
-        .project-header { text-align: center; margin-bottom: 4rem; }
-        .project-logo {
-            max-width: 350px;
-            width: 100%;
-            height: auto;
-            margin-bottom: 1rem;
-            box-shadow: 0 0 30px 30px var(--bg-color);
-            background-color: var(--bg-color);
-            border-radius: 20px;
+
+        /* ═══════════════════════════════════════════
+           SCROLL ANIMATIONS
+           ═══════════════════════════════════════════ */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .project-slogan {
-            font-family: 'Times New Roman', serif;
-            font-style: italic;
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            color: #1a1a1a;
-        }
-        .project-header p { font-size: 1.2rem; color: #444; max-width: 600px; margin: 0 auto; line-height: 1.6; }
-        .hero-cta {
-            display: inline-block;
-            margin-top: 2rem;
-            padding: 0.85rem 2.2rem;
-            background: #000;
-            color: #fff;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            letter-spacing: 0.03em;
-            border-radius: 50px;
-            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-        }
-        .hero-cta:hover {
-            background: #222;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-        }
-        .hero-cta:active {
+
+        .fade-in.visible {
+            opacity: 1;
             transform: translateY(0);
         }
-        
-        .breadcrumbs { margin-bottom: 2rem; font-size: 0.9rem; color: #666; }
-        .breadcrumbs a { color: #666; text-decoration: none; transition: color 0.3s; }
-        .breadcrumbs a:hover { color: #000; }
-        .breadcrumbs .separator { color: #999; margin: 0 0.5rem; }
-        .breadcrumbs .current { color: #000; font-weight: 500; }
 
-        .content-section {
-            max-width: 800px;
-            margin: 0 auto 6rem auto;
-            text-align: center;
-        }
-        .content-section h2 {
-            font-family: 'Times New Roman', serif;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: #000;
-        }
-        .content-section p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #444;
-            margin-bottom: 1.5rem;
-        }
-        .content-section ul {
-            list-style: none;
-            padding: 0;
-            margin: 2rem 0;
-            display: inline-block;
-            text-align: left;
-        }
-        .content-section li {
-            font-size: 1.1rem;
-            color: #444;
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-        .content-section li::before {
-            content: '•';
-            color: var(--accent-color);
-            font-size: 1.5rem;
-            position: absolute;
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .fade-in-delay-2 { transition-delay: 0.2s; }
+        .fade-in-delay-3 { transition-delay: 0.3s; }
+
+        /* ═══════════════════════════════════════════
+           NAVIGATION
+           ═══════════════════════════════════════════ */
+        nav {
+            position: fixed;
+            top: 0;
             left: 0;
-            top: -5px;
-        }
-        .highlight-text {
-            font-family: 'Times New Roman', serif;
-            font-size: 1.8rem;
-            font-style: italic;
-            color: #000;
-            margin: 3rem 0;
-            display: block;
-        }
-
-        .founders { 
+            right: 0;
+            z-index: 1000;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            margin-bottom: 6rem; 
-            position: relative;
-        }
-        .founders img { 
-            order: 2;
-            max-width: 450px; 
-            width: 100%; 
-            aspect-ratio: 1/1; 
-            object-fit: cover; 
-            object-position: center 20%; 
-            border-radius: 12px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
-            filter: grayscale(100%); 
-            transition: filter 0.5s ease;
-        }
-        .founders h2 { 
-            order: 1;
-            font-family: 'Times New Roman', serif; 
-            font-size: 3rem; 
-            margin-bottom: 2.5rem; 
-            color: #000;
-            position: relative;
-            display: inline-block;
-        }
-        .founders h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background-color: var(--accent-color);
-        }
-        .founders-names {
-            order: 3;
-            margin-top: 1rem;
-            font-family: 'Times New Roman', serif;
-            font-size: 1.1rem;
-            color: #666;
-            font-style: italic;
+            padding: 0 2rem;
+            height: 64px;
+            background: rgba(242, 240, 235, 0.85);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
-        .gallery { 
-            display: flex; 
-            justify-content: center; 
-            gap: 2rem; 
-            margin-bottom: 6rem; 
-            flex-wrap: wrap;
-        }
-        .gallery img { 
-            width: 100%; 
-            max-width: 500px;
-            height: auto; 
-            border-radius: 12px; 
-            transition: transform 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease; 
-            object-fit: cover; 
-            aspect-ratio: 4/3; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
-            filter: grayscale(100%);
-        }
-        .gallery img:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-        
-        @media (max-width: 768px) {
-            .project-header h1 { font-size: 2.5rem; }
-            .founders h2 { font-size: 2rem; }
-            .founders img { max-width: 100%; }
-            .contact-grid { gap: 2rem; }
-            
-            /* Mobile Improvements */
-            .project-logo { max-width: 250px; }
-            .breadcrumbs { 
-                font-size: 0.8rem; 
-                flex-wrap: wrap; 
-                justify-content: center;
-                line-height: 1.5;
-            }
-            main { 
-                padding-left: 1.5rem; 
-                padding-right: 1.5rem; 
-            }
-            .project-header { margin-bottom: 6rem; }
-            .content-section { margin-bottom: 8rem; }
-            .founders { margin-bottom: 8rem; }
-            .gallery { margin-bottom: 8rem; }
-        }
-
-        .contact-section {
-            text-align: center;
-            margin-top: 6rem;
-            margin-bottom: 4rem;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(0,0,0,0.05);
-        }
-        .contact-section h3 {
-            font-family: 'Times New Roman', serif;
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            color: #000;
-        }
-        .contact-grid {
+        .nav-logo {
             display: flex;
-            justify-content: center;
-            gap: 4rem;
-            flex-wrap: wrap;
-        }
-        .contact-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        .contact-name {
-            font-weight: 500;
-            color: #000;
-            font-size: 1.1rem;
-        }
-        .contact-email {
-            color: #666;
+            align-items: center;
             text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-        }
-        .contact-email:hover {
-            color: #000;
-        }
-        
-        /* QR Code Button Override */
-        .qr-trigger-btn {
-            color: #000 !important;
-        }
-        .qr-trigger-btn:hover {
-            background-color: rgba(0,0,0,0.05) !important;
         }
 
-        /* Product Section */
-        .product-section {
-            max-width: 900px;
-            margin: 0 auto 6rem auto;
+        .nav-logo-img {
+            height: 32px;
+            width: auto;
         }
-        .product-section h2 {
-            font-family: 'Times New Roman', serif;
-            font-size: 2.5rem;
-            margin-bottom: 2.5rem;
-            color: #000;
-            text-align: center;
-        }
-        .product-layout {
+
+        .nav-links {
             display: flex;
-            gap: 3.5rem;
+            gap: 2rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-color);
+        }
+
+        .nav-ig {
+            display: flex;
             align-items: center;
         }
-        .product-images {
-            flex: 1.1;
-            min-width: 0;
+
+        .nav-ig svg {
+            width: 18px;
+            height: 18px;
         }
-        .product-image-wrapper {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1/1;
-            border-radius: 16px;
-            overflow: hidden;
-            background: #fff;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.05);
-        }
-        .product-img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            padding: 2rem;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        .product-img.active {
-            opacity: 1;
-        }
-        .product-thumbs {
-            display: flex;
-            gap: 0.6rem;
-            margin-top: 0.75rem;
-        }
-        .thumb {
-            width: 56px;
-            height: 56px;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 2px solid transparent;
-            background: #fff;
-            cursor: pointer;
-            padding: 4px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-        }
-        .thumb.active {
-            border-color: #000;
-        }
-        .thumb:hover {
-            border-color: #999;
-        }
-        .thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-        .product-details {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-        }
-        .product-badge {
-            display: inline-block;
-            align-self: flex-start;
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #000;
-            background: var(--accent-color);
-            padding: 0.35rem 1rem;
-            border-radius: 4px;
-            margin-bottom: 1.25rem;
-        }
-        .product-name {
-            font-family: 'Times New Roman', serif;
-            font-size: 1.6rem;
-            color: #000;
-            margin-bottom: 1rem;
-        }
-        .product-description {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: #555;
-            margin-bottom: 2rem;
-        }
-        .product-buy {
-            display: flex;
-        }
-        .buy-btn {
+
+        /* ═══════════════════════════════════════════
+           BUTTONS
+           ═══════════════════════════════════════════ */
+        .btn-primary {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.85rem 2rem;
-            background: #000;
-            color: #fff;
+            padding: 0.85rem 2.2rem;
+            background: var(--text-color);
+            color: var(--white);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
             font-weight: 500;
             letter-spacing: 0.03em;
             border-radius: 50px;
-            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+            border: none;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
         }
-        .buy-btn:hover {
-            background: #222;
+
+        .btn-primary:hover {
+            background: #333;
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
         }
-        .buy-btn:active {
+
+        .btn-primary:active {
             transform: translateY(0);
         }
-        .buy-btn svg {
-            width: 16px;
-            height: 16px;
+
+        .btn-primary svg {
+            width: 14px;
+            height: 14px;
             fill: none;
             stroke: currentColor;
             stroke-width: 2;
@@ -431,67 +212,861 @@
             stroke-linejoin: round;
         }
 
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            color: var(--text-color);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            border-radius: 50px;
+            border: 1.5px solid var(--text-color);
+            transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-color);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .btn-secondary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary svg {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ═══════════════════════════════════════════
+           SECTION UTILITIES
+           ═══════════════════════════════════════════ */
+        .section-heading {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2.5px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .section-heading-wrapper {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        /* ═══════════════════════════════════════════
+           HERO
+           ═══════════════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 2rem 4rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            margin: 0;
+            padding: 0;
+            line-height: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-logo {
+            max-width: 380px;
+            width: 80%;
+            height: auto;
+            margin: 0 auto 1.5rem;
+        }
+
+        .hero-slogan {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            font-weight: 400;
+        }
+
+        .hero-desc {
+            font-size: 1rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            max-width: 400px;
+            margin-bottom: 2rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, transparent, var(--text-light));
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* ═══════════════════════════════════════════
+           MISSION + IMPACT STATS
+           ═══════════════════════════════════════════ */
+        .mission {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem var(--section-gap);
+            text-align: center;
+        }
+
+        .mission-quote {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+            border: none;
+            quotes: none;
+        }
+
+        .mission-text {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            position: relative;
+        }
+
+        .stat:not(:first-child)::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 60%;
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-value {
+            display: flex;
+            align-items: baseline;
+            gap: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-prefix {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text-color);
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            line-height: 1;
+        }
+
+        .stat-suffix {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .stat-label {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--text-light);
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        /* ═══════════════════════════════════════════
+           STORY
+           ═══════════════════════════════════════════ */
+        .story {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .story p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* ═══════════════════════════════════════════
+           GALLERY
+           ═══════════════════════════════════════════ */
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 0 2rem;
+            margin-bottom: var(--section-gap);
+            max-width: var(--content-width);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .gallery img {
+            flex: 1;
+            min-width: 0;
+            max-width: 50%;
+            height: 360px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            filter: grayscale(100%);
+            transition: filter 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .gallery img:hover {
+            filter: grayscale(0%);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ═══════════════════════════════════════════
+           PRODUCT
+           ═══════════════════════════════════════════ */
+        .product-section {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 0 2rem var(--section-gap);
+        }
+
+        .product-layout {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .product-images {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--white);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .product-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .product-img.active {
+            opacity: 1;
+        }
+
+        .product-thumbs {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .thumb {
+            width: 52px;
+            height: 52px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            background: var(--white);
+            padding: 3px;
+            transition: border-color 0.3s ease;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        .thumb.active {
+            border-color: var(--text-color);
+        }
+
+        .thumb:hover {
+            border-color: #999;
+        }
+
+        .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .product-details {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-badge {
+            display: inline-block;
+            align-self: flex-start;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-color);
+            background: var(--accent-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-name {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.75rem;
+        }
+
+        .product-description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        .product-trust {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .product-trust svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--accent-color);
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════════════════════════
+           BELLIS PARTNERSHIP
+           ═══════════════════════════════════════════ */
+        .bellis-section {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 2rem var(--section-gap);
+            text-align: center;
+        }
+
+        .bellis-section p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        /* ═══════════════════════════════════════════
+           TEAM
+           ═══════════════════════════════════════════ */
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem var(--section-gap);
+        }
+
+        .team-photo {
+            max-width: 380px;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            object-position: center 20%;
+            border-radius: 12px;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+            filter: grayscale(100%);
+            transition: filter 0.5s ease;
+        }
+
+        .team-photo:hover {
+            filter: grayscale(0%);
+        }
+
+        .team-names {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-top: 0.75rem;
+        }
+
+        .team-context {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+            max-width: 360px;
+            line-height: 1.6;
+        }
+
+        .team-context a {
+            color: var(--text-muted);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        .team-context a:hover {
+            color: var(--text-color);
+        }
+
+        /* ═══════════════════════════════════════════
+           CONTACT / FOOTER
+           ═══════════════════════════════════════════ */
+        .contact-section {
+            text-align: center;
+            padding: 3rem 2rem 4rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            max-width: var(--content-width);
+            margin: 0 auto;
+        }
+
+        .contact-section h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .contact-name {
+            font-weight: 500;
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .contact-email {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .contact-email:hover {
+            color: var(--text-color);
+        }
+
+        .footer-credit {
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-top: 2.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .footer-credit a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-credit a:hover {
+            color: var(--text-color);
+        }
+
+        /* ═══════════════════════════════════════════
+           ACCESSIBILITY
+           ═══════════════════════════════════════════ */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .fade-in {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+
+            .scroll-indicator span {
+                animation: none;
+            }
+
+            .gallery img,
+            .team-photo,
+            .btn-primary,
+            .btn-secondary {
+                transition: none;
+            }
+        }
+
+        /* ═══════════════════════════════════════════
+           RESPONSIVE: TABLET
+           ═══════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .hero-logo {
+                max-width: 320px;
+            }
+
+            .stat-number {
+                font-size: 2.8rem;
+            }
+
+            .gallery img {
+                height: 300px;
+            }
+        }
+
+        /* ═══════════════════════════════════════════
+           RESPONSIVE: MOBILE
+           ═══════════════════════════════════════════ */
         @media (max-width: 768px) {
+            :root {
+                --section-gap: 5rem;
+            }
+
+            nav {
+                padding: 0 1.25rem;
+                height: 56px;
+            }
+
+            .nav-logo-img {
+                height: 26px;
+            }
+
+            .nav-links {
+                gap: 1.25rem;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+
+            .hero {
+                padding: 70px 1.25rem 3rem;
+                min-height: 100svh;
+            }
+
+            .hero-logo {
+                max-width: 260px;
+                width: 70%;
+            }
+
+            .hero-slogan {
+                font-size: 1.2rem;
+            }
+
+            .hero-desc {
+                font-size: 0.9rem;
+            }
+
+            .mission {
+                padding: 0 1.25rem var(--section-gap);
+            }
+
+            .mission-quote {
+                font-size: 1.4rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+                margin-top: 3rem;
+            }
+
+            .stat {
+                padding: 1.5rem 1rem;
+            }
+
+            .stat:not(:first-child)::before {
+                left: 50%;
+                top: 0;
+                transform: translateX(-50%);
+                width: 60%;
+                height: 1px;
+            }
+
+            .stat-number {
+                font-size: 3rem;
+            }
+
+            .section-heading {
+                font-size: 2rem;
+            }
+
+            .story {
+                padding: 0 1.25rem;
+            }
+
+            .gallery {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                padding: 0 1.25rem;
+            }
+
+            .gallery img {
+                max-width: 100%;
+                height: 240px;
+            }
+
+            .product-section {
+                padding: 0 1.25rem var(--section-gap);
+            }
+
             .product-layout {
                 flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .product-image-wrapper {
+                aspect-ratio: 4 / 3;
+            }
+
+            .product-img {
+                padding: 1rem;
+            }
+
+            .product-thumbs {
+                justify-content: flex-start;
+            }
+
+            .thumb {
+                width: 44px;
+                height: 44px;
+            }
+
+            .product-buy {
+                width: 100%;
+            }
+
+            .product-buy .btn-primary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .bellis-section {
+                padding: 0 1.25rem var(--section-gap);
+            }
+
+            .team {
+                padding: 0 1.25rem var(--section-gap);
+            }
+
+            .team-photo {
+                max-width: 100%;
+            }
+
+            .contact-section {
+                padding: 2.5rem 1.25rem 3rem;
+            }
+
+            .contact-grid {
                 gap: 2rem;
             }
-            .product-details {
-                align-items: center;
-                text-align: center;
+        }
+
+        /* ═══════════════════════════════════════════
+           RESPONSIVE: SMALL PHONES
+           ═══════════════════════════════════════════ */
+        @media (max-width: 380px) {
+            .hero-logo {
+                max-width: 220px;
             }
-            .product-badge {
-                align-self: center;
+
+            .nav-links {
+                gap: 0.8rem;
             }
-            .product-buy {
-                justify-content: center;
+
+            .nav-links a {
+                font-size: 0.75rem;
             }
-            .product-thumbs {
-                justify-content: center;
-            }
-            .product-section { margin-bottom: 8rem; }
         }
     </style>
 </head>
 <body>
+
+    <!-- ── Navigation ── -->
     <nav>
-        <a href="../index.html" class="logo">Tuuli Co.</a>
+        <a href="#" class="nav-logo">
+            <img src="images/logo.png" alt="Brave Breasts" class="nav-logo-img">
+        </a>
+        <div class="nav-links">
+            <a href="#about">O projektu</a>
+            <a href="#shop">Produkty</a>
+            <a href="#contact">Kontakt</a>
+            <a href="https://www.instagram.com/brave_breasts" target="_blank" rel="noopener noreferrer" class="nav-ig" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                </svg>
+            </a>
+        </div>
     </nav>
 
+    <!-- ── Hero ── -->
+    <header class="hero">
+        <h1>
+            <img src="images/logo.png" alt="Brave Breasts" class="hero-logo">
+        </h1>
+        <p class="hero-slogan">"brave enough to be bare"</p>
+        <p class="hero-desc">Zvyšování povědomí o rakovině prsu.<br>100 % výdělku putuje Nadaci Bellis.</p>
+        <a href="#shop" class="btn-primary">Podpořit projekt</a>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </header>
+
     <main>
-        <header class="project-header">
-            <div class="breadcrumbs">
-                <a href="../index.html">Domů</a>
-                <span class="separator">/</span>
-                <a href="../projects.html">Projekty</a>
-                <span class="separator">/</span>
-                <span class="current">Brave Breasts</span>
+
+        <!-- ── Mission + Impact Stats ── -->
+        <section class="mission fade-in" id="about">
+            <blockquote class="mission-quote">
+                "Každá žena má právo cítit se krásná ve svém těle."
+            </blockquote>
+            <p class="mission-text">
+                Rakovina prsu u žen pod 50 let roste až o 1,4 % ročně.
+                Zvyšujeme povědomí, podporujeme sebevědomí a vytváříme
+                komunitu, kde je každé prso nádherné a každá žena statečná.
+            </p>
+            <div class="stats-grid">
+                <div class="stat fade-in fade-in-delay-1">
+                    <div class="stat-value">
+                        <span class="stat-prefix">1 z&nbsp;</span>
+                        <span class="stat-number" data-target="8" data-type="int">0</span>
+                    </div>
+                    <span class="stat-label">žen bude diagnostikována<br>s rakovinou prsu</span>
+                </div>
+                <div class="stat fade-in fade-in-delay-2">
+                    <div class="stat-value">
+                        <span class="stat-number" data-target="100" data-type="int">0</span>
+                        <span class="stat-suffix">&thinsp;%</span>
+                    </div>
+                    <span class="stat-label">výdělku putuje<br>na Nadaci Bellis</span>
+                </div>
+                <div class="stat fade-in fade-in-delay-3">
+                    <div class="stat-value">
+                        <span class="stat-number" data-target="1.4" data-type="float">0</span>
+                        <span class="stat-suffix">&thinsp;%</span>
+                    </div>
+                    <span class="stat-label">roční nárůst rakoviny<br>prsu u žen pod 50</span>
+                </div>
             </div>
-            <img src="images/logo.png" alt="BRAVE BREASTS Logo" class="project-logo">
-            <p class="project-slogan">"brave enough to be bare"</p>
-            <p>Zvyšování povědomí o rakovině prsu, podpora sebevědomí žen a sběr prostředků na výzkum a léčbu.</p>
-            <a href="#shop" class="hero-cta">Podpořit projekt</a>
-        </header>
-
-        <section class="founders">
-            <h2>Zakladatelky</h2>
-            <img src="images/founders.jpeg" alt="Zakladatelky Brave Breasts">
-            <p class="founders-names">Aneta & Marie</p>
         </section>
 
-        <section class="content-section">
-            <span class="highlight-text">"Každá žena má právo cítit se krásná ve svém těle."</span>
-            <p>Rakovina prsu u žen pod 50 let roste až o 1,4 % ročně. Zvyšujeme povědomí, podporujeme sebevědomí a vytváříme komunitu, kde je každé prso nádherné a každá žena statečná.</p>
+        <!-- ── Story ── -->
+        <section class="story fade-in">
+            <div class="section-heading-wrapper">
+                <h2 class="section-heading">Náš příběh</h2>
+            </div>
+            <p>
+                Statečné kolegyně souhlasily s focením svých prsou.
+                Z těchto uměleckých fotografií vznikají originální
+                trička, jejichž veškerý výtěžek putuje Nadaci Bellis
+                na podporu mladých žen s rakovinou prsu.
+            </p>
         </section>
 
-        <div class="gallery">
-            <img src="../images/projects/brave_breast/brave_breast-1.webp" alt="BRAVE BREASTS 1" loading="lazy">
-
-            <img src="../images/projects/brave_breast/brave_breast-3.jpeg" alt="BRAVE BREASTS 3" loading="lazy">
+        <!-- ── Gallery ── -->
+        <div class="gallery fade-in">
+            <img src="../images/projects/brave_breast/brave_breast-1.webp"
+                 alt="Brave Breasts - skupinová fotografie" loading="lazy">
+            <img src="../images/projects/brave_breast/brave_breast-3.jpeg"
+                 alt="Brave Breasts - umělecká koláž" loading="lazy">
         </div>
 
-        <section class="product-section" id="shop">
-            <h2>Produkty</h2>
+        <!-- ── Product ── -->
+        <section class="product-section fade-in" id="shop">
+            <div class="section-heading-wrapper">
+                <h2 class="section-heading">Produkty</h2>
+            </div>
             <div class="product-layout">
                 <div class="product-images">
                     <div class="product-image-wrapper">
@@ -510,9 +1085,17 @@
                 <div class="product-details">
                     <span class="product-badge">Předprodej</span>
                     <h3 class="product-name">Brave Breast T-Shirt</h3>
-                    <p class="product-description">Podpořte povědomí o rakovině prsu a vyjádřete svou odvahu. Část výtěžku putuje na výzkum a podporu žen.</p>
+                    <p class="product-description">
+                        Podpořte povědomí o rakovině prsu a vyjádřete
+                        svou odvahu. Veškerý výtěžek putuje na výzkum
+                        a podporu žen.
+                    </p>
+                    <div class="product-trust">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        <span>100 % výdělku &rarr; Nadace Bellis</span>
+                    </div>
                     <div class="product-buy">
-                        <a href="https://buy.stripe.com/fZu3cudMu4LMaBjfKv3AY03" target="_blank" rel="noopener noreferrer" class="buy-btn">
+                        <a href="https://buy.stripe.com/fZu3cudMu4LMaBjfKv3AY03" target="_blank" rel="noopener noreferrer" class="btn-primary">
                             Objednat v předprodeji
                             <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                         </a>
@@ -521,7 +1104,41 @@
             </div>
         </section>
 
-        <section class="contact-section">
+        <!-- ── Bellis Partnership ── -->
+        <section class="bellis-section fade-in">
+            <div class="section-heading-wrapper">
+                <h2 class="section-heading">Kam putují peníze?</h2>
+            </div>
+            <p>
+                Veškerý výtěžek z prodeje putuje Nadaci Bellis &mdash;
+                projektu Aliance žen s rakovinou prsu. Bellis se
+                zaměřuje na pomoc a podporu mladých pacientek,
+                které procházejí léčbou spojenou s nádorovým
+                onemocněním prsu.
+            </p>
+            <a href="https://www.bellisky.cz/" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+                Více o Nadaci Bellis
+                <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+        </section>
+
+        <!-- ── Team ── -->
+        <section class="team fade-in">
+            <div class="section-heading-wrapper">
+                <h2 class="section-heading">Kdo za tím stojí</h2>
+            </div>
+            <img src="images/founders.jpeg" alt="Aneta a Marie, zakladatelky Brave Breasts" class="team-photo">
+            <p class="team-names">Aneta & Marie</p>
+            <p class="team-context">
+                Studentský projekt v rámci studia na
+                <a href="https://ip.pef.czu.cz/" target="_blank" rel="noopener noreferrer">Tiimiakatemia Prague</a>
+                &mdash; inovativním vzdělávacím programu na ČZU Praha,
+                tým <a href="https://tuuli.cz" target="_blank" rel="noopener noreferrer">Tuuli</a>.
+            </p>
+        </section>
+
+        <!-- ── Contact ── -->
+        <footer class="contact-section" id="contact">
             <h3>Kontakt</h3>
             <div class="contact-grid">
                 <div class="contact-item">
@@ -533,17 +1150,87 @@
                     <a href="mailto:aneta.kmetikova@tuuli.cz" class="contact-email">aneta.kmetikova@tuuli.cz</a>
                 </div>
             </div>
-        </section>
+            <p class="footer-credit">
+                Projekt týmu <a href="https://tuuli.cz" target="_blank" rel="noopener noreferrer">Tuuli</a> |
+                <a href="https://ip.pef.czu.cz/" target="_blank" rel="noopener noreferrer">Tiimiakatemia Prague</a>, ČZU
+            </p>
+        </footer>
+
     </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="../qr-code.js"></script>
     <script>
+        /* ── Product Image Switcher ── */
         function showImage(side) {
-            document.querySelectorAll('.product-img').forEach(img => img.classList.remove('active'));
-            document.querySelectorAll('.thumb').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.product-img').forEach(function(img) {
+                img.classList.remove('active');
+            });
+            document.querySelectorAll('.thumb').forEach(function(btn) {
+                btn.classList.remove('active');
+            });
             document.getElementById('img-' + side).classList.add('active');
             document.querySelector('.thumb[onclick*="' + side + '"]').classList.add('active');
+        }
+
+        /* ── Scroll-triggered Fade-in Animations ── */
+        (function() {
+            var fadeObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+
+                        /* Trigger stat counters if this element contains them */
+                        var counters = entry.target.querySelectorAll('.stat-number[data-target]');
+                        counters.forEach(function(counter) {
+                            if (!counter.dataset.animated) {
+                                counter.dataset.animated = 'true';
+                                animateCounter(counter);
+                            }
+                        });
+
+                        fadeObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            document.querySelectorAll('.fade-in').forEach(function(el) {
+                fadeObserver.observe(el);
+            });
+        })();
+
+        /* ── Stat Counter Animation ── */
+        function animateCounter(el) {
+            var target = parseFloat(el.dataset.target);
+            var isFloat = el.dataset.type === 'float';
+            var duration = 1800;
+            var startTime = null;
+
+            function update(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var elapsed = timestamp - startTime;
+                var progress = Math.min(elapsed / duration, 1);
+
+                /* Ease-out cubic */
+                var eased = 1 - Math.pow(1 - progress, 3);
+                var current = eased * target;
+
+                if (isFloat) {
+                    el.textContent = current.toFixed(1);
+                } else {
+                    el.textContent = Math.round(current);
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    /* Ensure final value is exact */
+                    el.textContent = isFloat ? target.toFixed(1) : target;
+                }
+            }
+
+            requestAnimationFrame(update);
         }
     </script>
 </body>
