@@ -1174,6 +1174,19 @@
     </main>
 
     <script>
+        /* ── Fix Instagram/Facebook UTM params polluting hash ── */
+        (function() {
+            var hash = window.location.hash;
+            if (hash && hash.indexOf('?') !== -1) {
+                var cleanHash = hash.split('?')[0];
+                history.replaceState(null, '', window.location.pathname + window.location.search + cleanHash);
+                var target = document.querySelector(cleanHash);
+                if (target) {
+                    target.scrollIntoView();
+                }
+            }
+        })();
+
         /* ── Product Image Switcher ── */
         function showImage(side) {
             document.querySelectorAll('.product-img').forEach(function(img) {
