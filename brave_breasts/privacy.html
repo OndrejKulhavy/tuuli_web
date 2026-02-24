@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ochrana osobních údajů | Brave Breasts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎀</text></svg>">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <style>
+        /* ═══════════════════════════════════════════
+           DESIGN TOKENS
+           ═══════════════════════════════════════════ */
+        :root {
+            --bg-color: #f2f0eb;
+            --text-color: #1a1a1a;
+            --text-muted: #666;
+            --text-light: #888;
+            --accent-color: #ffb6c1;
+            --accent-dark: #e8909c;
+            --white: #ffffff;
+            --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image:
+                radial-gradient(circle at 20% 0%, rgba(255, 182, 193, 0.15), transparent 50%),
+                radial-gradient(circle at 80% 100%, rgba(255, 182, 193, 0.12), transparent 50%);
+            background-attachment: fixed;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='32' viewBox='0 0 24 32'%3E%3Cpath d='M2 2 L2 24 L8 18 L14 28 L18 26 L12 16 L20 16 Z' fill='%23ffb6c1' stroke='%23e8909c' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, auto;
+        }
+
+        a, button {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='32' viewBox='0 0 24 32'%3E%3Cpath d='M2 2 L2 24 L8 18 L14 28 L18 26 L12 16 L20 16 Z' fill='%23ff8fa0' stroke='%23e8909c' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, pointer;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        /* ═══════════════════════════════════════════
+           NAVIGATION
+           ═══════════════════════════════════════════ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 64px;
+            background: rgba(242, 240, 235, 0.85);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .nav-logo-img {
+            height: 32px;
+            width: auto;
+        }
+
+        .nav-back {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .nav-back:hover {
+            color: var(--text-color);
+        }
+
+        /* ═══════════════════════════════════════════
+           PAGE LAYOUT
+           ═══════════════════════════════════════════ */
+        .page-wrapper {
+            padding-top: 64px;
+            min-height: 100vh;
+        }
+
+        .content {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 3.5rem 2rem 5rem;
+        }
+
+        /* ═══════════════════════════════════════════
+           TYPOGRAPHY
+           ═══════════════════════════════════════════ */
+        .page-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+        }
+
+        .policy-section {
+            margin-bottom: 2.25rem;
+        }
+
+        .policy-section h2 {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.6rem;
+        }
+
+        .policy-section p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 0.6rem;
+        }
+
+        .policy-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .policy-section ul {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            padding-left: 1.25rem;
+        }
+
+        .policy-section ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        .policy-section a {
+            color: var(--text-color);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        .policy-section a:hover {
+            color: var(--accent-dark);
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid rgba(0, 0, 0, 0.07);
+            margin: 2.5rem 0;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .back-link:hover {
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 1.25rem;
+                height: 56px;
+            }
+
+            .nav-logo-img {
+                height: 26px;
+            }
+
+            .page-wrapper {
+                padding-top: 56px;
+            }
+
+            .content {
+                padding: 2.5rem 1.25rem 4rem;
+            }
+
+            .page-title {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">
+            <img src="images/logo.png" alt="Brave Breasts" class="nav-logo-img">
+        </a>
+        <a href="order.html" class="nav-back">
+            ← Zpět na objednávku
+        </a>
+    </nav>
+
+    <div class="page-wrapper">
+        <main class="content">
+
+            <h1 class="page-title">Ochrana osobních údajů</h1>
+            <p class="page-subtitle">Platné od 1. ledna 2025 &middot; Projekt Brave Breasts, tým Tuuli</p>
+
+            <div class="policy-section">
+                <h2>Správce osobních údajů</h2>
+                <p>
+                    Správcem osobních údajů jsou Marie Machytková a Aneta Kmetíková, studentský projekt
+                    v&nbsp;rámci programu Tiimiakatemia Prague na ČZU Praha, tým Tuuli.
+                </p>
+                <p>
+                    Kontaktní e-mail: <a href="mailto:marie.machytkova@tuuli.cz">marie.machytkova@tuuli.cz</a>
+                    nebo <a href="mailto:aneta.kmetikova@tuuli.cz">aneta.kmetikova@tuuli.cz</a>
+                </p>
+            </div>
+
+            <div class="policy-section">
+                <h2>Jaké údaje zpracováváme</h2>
+                <p>V&nbsp;rámci objednávky tričku sbíráme tyto osobní údaje:</p>
+                <ul>
+                    <li>Jméno a příjmení</li>
+                    <li>E-mailová adresa</li>
+                    <li>Telefonní číslo</li>
+                    <li>Doručovací adresa (ulice, město, PSČ)</li>
+                    <li>Informace o objednávce (velikost, počet kusů, cena)</li>
+                </ul>
+            </div>
+
+            <div class="policy-section">
+                <h2>Proč údaje zpracováváme</h2>
+                <p>
+                    Vaše osobní údaje zpracováváme výhradně za účelem:
+                </p>
+                <ul>
+                    <li>Vyřízení vaší objednávky a doručení zboží</li>
+                    <li>Vystavení faktury prostřednictvím fakturačního systému Fakturoid</li>
+                    <li>Komunikace ohledně stavu objednávky</li>
+                </ul>
+                <p>
+                    Právním základem zpracování je váš souhlas udělený při odeslání objednávky
+                    (čl. 6 odst. 1 písm. a) GDPR) a plnění smlouvy (čl. 6 odst. 1 písm. b) GDPR).
+                </p>
+            </div>
+
+            <div class="policy-section">
+                <h2>Komu údaje předáváme</h2>
+                <p>
+                    Vaše údaje předáváme pouze nezbytným zpracovatelům:
+                </p>
+                <ul>
+                    <li><strong>Fakturoid</strong> &mdash; fakturační systém pro vystavení a zaslání faktury</li>
+                    <li><strong>Make.com</strong> &mdash; automatizační platforma pro zpracování objednávky</li>
+                    <li><strong>Google</strong> &mdash; pro evidenci objednávek v&nbsp;tabulce (Google Sheets)</li>
+                </ul>
+                <p>
+                    Údaje neprodáváme ani nepředáváme třetím stranám za marketingovými účely.
+                </p>
+            </div>
+
+            <div class="policy-section">
+                <h2>Jak dlouho údaje uchováváme</h2>
+                <p>
+                    Osobní údaje uchováváme po dobu nezbytnou k&nbsp;vyřízení objednávky a&nbsp;následně
+                    po dobu stanovenou právními předpisy. Daňové doklady (faktury) jsou ze zákona
+                    archivovány po dobu 10 let.
+                </p>
+            </div>
+
+            <div class="policy-section">
+                <h2>Vaše práva</h2>
+                <p>V&nbsp;souladu s&nbsp;GDPR máte tato práva:</p>
+                <ul>
+                    <li><strong>Právo na přístup</strong> &mdash; můžete požádat o&nbsp;kopii svých údajů</li>
+                    <li><strong>Právo na opravu</strong> &mdash; můžete požádat o&nbsp;opravu nepřesných údajů</li>
+                    <li><strong>Právo na výmaz</strong> &mdash; můžete požádat o&nbsp;smazání údajů (pokud to není v&nbsp;rozporu se zákonnou povinností)</li>
+                    <li><strong>Právo odvolat souhlas</strong> &mdash; souhlas se zpracováním lze kdykoli odvolat bez dopadu na již provedené zpracování</li>
+                    <li><strong>Právo podat stížnost</strong> &mdash; u&nbsp;dozorového úřadu, kterým je
+                        <a href="https://www.uoou.cz/" target="_blank" rel="noopener noreferrer">Úřad pro ochranu osobních údajů (ÚOOÚ)</a>
+                    </li>
+                </ul>
+                <p>
+                    Pro uplatnění svých práv nás kontaktujte na
+                    <a href="mailto:marie.machytkova@tuuli.cz">marie.machytkova@tuuli.cz</a> nebo
+                    <a href="mailto:aneta.kmetikova@tuuli.cz">aneta.kmetikova@tuuli.cz</a>.
+                </p>
+            </div>
+
+            <hr class="divider">
+
+            <a href="order.html" class="back-link">← Zpět na objednávku</a>
+
+        </main>
+    </div>
+
+    <script src="../cookie-consent.js"></script>
+</body>
+</html>

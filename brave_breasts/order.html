@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objednat | Brave Breasts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎀</text></svg>">
+
+    <!-- SEO: transactional page, do not index -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <style>
+        /* ═══════════════════════════════════════════
+           DESIGN TOKENS
+           ═══════════════════════════════════════════ */
+        :root {
+            --bg-color: #f2f0eb;
+            --text-color: #1a1a1a;
+            --text-muted: #666;
+            --text-light: #888;
+            --accent-color: #ffb6c1;
+            --accent-dark: #e8909c;
+            --white: #ffffff;
+            --section-gap: 8rem;
+            --content-width: 1100px;
+            --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        /* ═══════════════════════════════════════════
+           RESET & BASE
+           ═══════════════════════════════════════════ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image:
+                radial-gradient(circle at 20% 0%, rgba(255, 182, 193, 0.15), transparent 50%),
+                radial-gradient(circle at 80% 100%, rgba(255, 182, 193, 0.12), transparent 50%);
+            background-attachment: fixed;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='32' viewBox='0 0 24 32'%3E%3Cpath d='M2 2 L2 24 L8 18 L14 28 L18 26 L12 16 L20 16 Z' fill='%23ffb6c1' stroke='%23e8909c' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, auto;
+        }
+
+        a, button, .btn-primary, .btn-secondary {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='32' viewBox='0 0 24 32'%3E%3Cpath d='M2 2 L2 24 L8 18 L14 28 L18 26 L12 16 L20 16 Z' fill='%23ff8fa0' stroke='%23e8909c' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, pointer;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        /* ═══════════════════════════════════════════
+           NAVIGATION
+           ═══════════════════════════════════════════ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            height: 64px;
+            background: rgba(242, 240, 235, 0.85);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .nav-logo-img {
+            height: 32px;
+            width: auto;
+        }
+
+        .nav-back {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .nav-back:hover {
+            color: var(--text-color);
+        }
+
+        /* ═══════════════════════════════════════════
+           BUTTONS
+           ═══════════════════════════════════════════ */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 2.2rem;
+            background: var(--text-color);
+            color: var(--white);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            border-radius: 50px;
+            border: none;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            color: var(--text-color);
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            border-radius: 50px;
+            border: 1.5px solid var(--text-color);
+            transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-color);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .btn-secondary:active {
+            transform: translateY(0);
+        }
+
+        /* ═══════════════════════════════════════════
+           PAGE WRAPPER
+           ═══════════════════════════════════════════ */
+        .page-wrapper {
+            min-height: 100vh;
+            padding: 96px 1.5rem 4rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .order-container {
+            width: 100%;
+            max-width: 640px;
+        }
+
+        /* ═══════════════════════════════════════════
+           PAGE HEADER
+           ═══════════════════════════════════════════ */
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.4rem;
+        }
+
+        .page-header p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* ═══════════════════════════════════════════
+           ORDER SUMMARY CARD
+           ═══════════════════════════════════════════ */
+        .summary-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .summary-card-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 1.25rem;
+        }
+
+        .summary-product-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .summary-product-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 10px;
+            background: var(--bg-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.4rem;
+        }
+
+        .summary-product-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .summary-product-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-color);
+            margin-bottom: 0.15rem;
+        }
+
+        .summary-product-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ── Size / Qty controls inside summary ── */
+        .summary-controls {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .summary-control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .summary-control-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* Size buttons (reused from index.html) */
+        .size-selector {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .size-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 36px;
+            border-radius: 50px;
+            border: 1.5px solid var(--text-color);
+            background: transparent;
+            color: var(--text-color);
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .size-btn:hover {
+            background: rgba(26, 26, 26, 0.08);
+        }
+
+        .size-btn.selected {
+            background: var(--text-color);
+            color: var(--white);
+        }
+
+        .size-btn:disabled {
+            border-color: #ccc;
+            color: #ccc;
+            text-decoration: line-through;
+            cursor: not-allowed;
+            background: transparent;
+        }
+
+        .size-btn:disabled:hover {
+            background: transparent;
+        }
+
+        /* Qty stepper (reused from index.html) */
+        .qty-stepper {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .qty-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1.5px solid var(--text-color);
+            background: transparent;
+            color: var(--text-color);
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .qty-btn:hover:not(:disabled) {
+            background: var(--text-color);
+            color: var(--white);
+        }
+
+        .qty-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .qty-value {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            min-width: 20px;
+            text-align: center;
+        }
+
+        /* ── Price total row ── */
+        .summary-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.25rem;
+            margin-top: 1.25rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .summary-price-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .summary-price-breakdown {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.15rem;
+        }
+
+        .summary-price-total {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .summary-price-currency {
+            font-size: 0.9rem;
+            font-family: var(--font-body);
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-left: 0.2rem;
+        }
+
+        /* ═══════════════════════════════════════════
+           ORDER FORM
+           ═══════════════════════════════════════════ */
+        .order-form-section {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.75rem;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-section-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 1.25rem;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 1.1rem;
+        }
+
+        .form-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-field label {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.01em;
+        }
+
+        .form-field input {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--text-color);
+            background: var(--bg-color);
+            border: 1.5px solid transparent;
+            border-radius: 10px;
+            padding: 0.7rem 0.9rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            outline: none;
+            width: 100%;
+        }
+
+        .form-field input:focus {
+            border-color: var(--accent-color);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(255, 182, 193, 0.2);
+        }
+
+        .form-field input.invalid {
+            border-color: #e05252;
+            box-shadow: 0 0 0 3px rgba(224, 82, 82, 0.1);
+        }
+
+        .label-optional {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .field-error {
+            font-size: 0.78rem;
+            color: #c0392b;
+            min-height: 1.1em;
+            display: none;
+        }
+
+        .field-error.visible {
+            display: block;
+        }
+
+        /* ═══════════════════════════════════════════
+           SUBMIT AREA
+           ═══════════════════════════════════════════ */
+        .gdpr-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .gdpr-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='32' viewBox='0 0 24 32'%3E%3Cpath d='M2 2 L2 24 L8 18 L14 28 L18 26 L12 16 L20 16 Z' fill='%23ff8fa0' stroke='%23e8909c' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, pointer;
+        }
+
+        .gdpr-label input[type="checkbox"] {
+            margin-top: 0.15em;
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+            accent-color: var(--text-color);
+            cursor: inherit;
+        }
+
+        .gdpr-label a {
+            color: var(--text-color);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-color: var(--accent-color);
+        }
+
+        .gdpr-label a:hover {
+            color: var(--accent-dark);
+        }
+
+        .submit-area {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .submit-btn-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        #submitBtn {
+            width: 100%;
+            justify-content: center;
+            font-size: 1rem;
+            padding: 1rem 2.2rem;
+        }
+
+        .submit-error {
+            font-size: 0.85rem;
+            color: #c0392b;
+            padding: 0.75rem 1rem;
+            background: rgba(192, 57, 43, 0.06);
+            border-radius: 8px;
+            border-left: 3px solid #e05252;
+            display: none;
+        }
+
+        .submit-error.visible {
+            display: block;
+        }
+
+        .submit-notice {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .submit-notice svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            fill: none;
+            stroke: var(--text-light);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ═══════════════════════════════════════════
+           SUCCESS SCREEN
+           ═══════════════════════════════════════════ */
+        .success-screen {
+            display: none;
+            text-align: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .success-screen.visible {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .success-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(255, 182, 193, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-icon svg {
+            width: 36px;
+            height: 36px;
+            fill: none;
+            stroke: var(--accent-dark);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .success-heading {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .success-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 440px;
+        }
+
+        .success-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .success-back:hover {
+            color: var(--text-color);
+        }
+
+        /* ═══════════════════════════════════════════
+           COOKIE CONSENT BANNER — Brave Breasts Theme
+           ═══════════════════════════════════════════ */
+        #cookie-consent-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            padding: 1.25rem 2rem;
+            background: rgba(242, 240, 235, 0.94);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.04);
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='32' viewBox='0 0 24 32'%3E%3Cpath d='M2 2 L2 24 L8 18 L14 28 L18 26 L12 16 L20 16 Z' fill='%23ffb6c1' stroke='%23e8909c' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, auto;
+        }
+
+        #cookie-consent-banner.cookie-consent-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cookie-consent-inner {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .cookie-consent-text {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .cookie-consent-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .cookie-btn {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='32' viewBox='0 0 24 32'%3E%3Cpath d='M2 2 L2 24 L8 18 L14 28 L18 26 L12 16 L20 16 Z' fill='%23ff8fa0' stroke='%23e8909c' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            letter-spacing: 0.03em;
+        }
+
+        .cookie-btn-accept {
+            background: var(--text-color);
+            color: var(--white);
+        }
+
+        .cookie-btn-accept:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .cookie-btn-decline {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1.5px solid var(--text-color);
+        }
+
+        .cookie-btn-decline:hover {
+            background: var(--text-color);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        /* ═══════════════════════════════════════════
+           ACCESSIBILITY
+           ═══════════════════════════════════════════ */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .btn-primary,
+            .btn-secondary { transition: none; }
+        }
+
+        /* ═══════════════════════════════════════════
+           RESPONSIVE: MOBILE
+           ═══════════════════════════════════════════ */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 1.25rem;
+                height: 56px;
+            }
+
+            .nav-logo-img {
+                height: 26px;
+            }
+
+            .page-wrapper {
+                padding: 80px 1rem 3rem;
+            }
+
+            .page-header h1 {
+                font-size: 1.6rem;
+            }
+
+            .form-row-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-controls {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            #submitBtn {
+                padding: 0.9rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #cookie-consent-banner {
+                padding: 1rem 1.25rem;
+            }
+
+            .cookie-consent-inner {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .cookie-consent-text {
+                font-size: 0.8rem;
+            }
+
+            .cookie-consent-buttons {
+                width: 100%;
+            }
+
+            .cookie-btn {
+                flex: 1;
+                padding: 0.6rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Navigation ── -->
+    <nav>
+        <a href="index.html" class="nav-logo">
+            <img src="images/logo.png" alt="Brave Breasts" class="nav-logo-img">
+        </a>
+        <a href="index.html" class="nav-back">← Zpět na projekt</a>
+    </nav>
+
+    <!-- ── Main content ── -->
+    <div class="page-wrapper">
+        <div class="order-container">
+
+            <!-- ── Page header ── -->
+            <div class="page-header">
+                <h1>Dokončit objednávku</h1>
+                <p>Brave Breast T-Shirt &mdash; předprodej</p>
+            </div>
+
+            <!-- ── Order summary card ── -->
+            <div class="summary-card" id="summaryCard">
+                <p class="summary-card-title">Souhrn objednávky</p>
+
+                <div class="summary-product-row">
+                    <div class="summary-product-icon" aria-hidden="true">👕</div>
+                    <div class="summary-product-info">
+                        <p class="summary-product-name">Brave Breast T-Shirt</p>
+                        <p class="summary-product-meta">100&thinsp;% výdělku → Nadace Bellis</p>
+                    </div>
+                </div>
+
+                <!-- Size + Qty controls -->
+                <div class="summary-controls">
+                    <div class="summary-control-group">
+                        <span class="summary-control-label">Velikost</span>
+                        <div class="size-selector" id="sizeSelector" role="group" aria-label="Vyberte velikost">
+                            <button class="size-btn" data-size="S" type="button" disabled title="Vyprodáno">S</button>
+                            <button class="size-btn selected" data-size="M" type="button">M</button>
+                            <button class="size-btn" data-size="L" type="button">L</button>
+                            <button class="size-btn" data-size="XL" type="button">XL</button>
+                        </div>
+                    </div>
+
+                    <div class="summary-control-group">
+                        <span class="summary-control-label">Počet</span>
+                        <div class="qty-stepper">
+                            <button class="qty-btn" id="qtyMinus" type="button" aria-label="Snížit počet" disabled>−</button>
+                            <span class="qty-value" id="qtyValue" aria-live="polite">1</span>
+                            <button class="qty-btn" id="qtyPlus" type="button" aria-label="Zvýšit počet">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price summary -->
+                <div class="summary-price-row">
+                    <div>
+                        <p class="summary-price-label">Celková cena</p>
+                        <p class="summary-price-breakdown" id="priceBreakdown">1 × 790 Kč</p>
+                    </div>
+                    <div>
+                        <span class="summary-price-total" id="priceTotal">790</span><span class="summary-price-currency">Kč</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Order form ── -->
+            <form id="orderForm" novalidate>
+
+                <!-- Contact details -->
+                <div class="order-form-section">
+                    <p class="form-section-title">Kontaktní údaje</p>
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="fieldName">Jméno a příjmení</label>
+                            <input type="text" id="fieldName" name="name" autocomplete="name"
+                                   placeholder="Jana Nováková" required>
+                            <span class="field-error" id="errName">Zadejte prosím jméno a příjmení.</span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="fieldEmail">E-mail</label>
+                            <input type="email" id="fieldEmail" name="email" autocomplete="email"
+                                   placeholder="jana@example.cz" required>
+                            <span class="field-error" id="errEmail">Zadejte platnou e-mailovou adresu.</span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="fieldPhone">Telefon</label>
+                            <input type="tel" id="fieldPhone" name="phone" autocomplete="tel"
+                                   placeholder="+420 777 123 456" required>
+                            <span class="field-error" id="errPhone">Zadejte prosím telefonní číslo.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivery address -->
+                <div class="order-form-section">
+                    <p class="form-section-title">Doručovací adresa</p>
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="fieldStreet">Ulice a číslo popisné</label>
+                            <input type="text" id="fieldStreet" name="street" autocomplete="street-address"
+                                   placeholder="Václavské náměstí 1" required>
+                            <span class="field-error" id="errStreet">Zadejte prosím ulici a číslo popisné.</span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="fieldStreet2">Doplněk adresy <span class="label-optional">(nepovinné)</span></label>
+                            <input type="text" id="fieldStreet2" name="street2" autocomplete="address-line2"
+                                   placeholder="Byt 4, 2. patro, firma…">
+                        </div>
+
+                        <div class="form-row-2">
+                            <div class="form-field">
+                                <label for="fieldCity">Město</label>
+                                <input type="text" id="fieldCity" name="city" autocomplete="address-level2"
+                                       placeholder="Praha" required>
+                                <span class="field-error" id="errCity">Zadejte prosím město.</span>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="fieldZip">PSČ</label>
+                                <input type="text" id="fieldZip" name="zip" autocomplete="postal-code"
+                                       placeholder="110 00" maxlength="6" required>
+                                <span class="field-error" id="errZip">PSČ musí mít 5 číslic.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit area -->
+                <div class="submit-area">
+
+                    <!-- GDPR consent -->
+                    <div class="gdpr-row">
+                        <label class="gdpr-label">
+                            <input type="checkbox" id="gdprConsent" required>
+                            <span>Souhlasím se <a href="privacy.html" target="_blank" rel="noopener noreferrer">zpracováním osobních údajů</a> za účelem vyřízení objednávky.</span>
+                        </label>
+                        <span class="field-error" id="errGdpr">Pro odeslání objednávky je nutný souhlas se zpracováním osobních údajů.</span>
+                    </div>
+
+                    <div class="submit-btn-wrap">
+                        <button type="submit" class="btn-primary" id="submitBtn">
+                            Odeslat objednávku
+                        </button>
+                        <div class="submit-error" id="submitError">
+                            Něco se pokazilo. Zkuste to prosím znovu nebo nás kontaktujte na
+                             <a href="mailto:marie.machytkova@tuuli.cz">marie.machytkova@tuuli.cz</a> nebo <a href="mailto:aneta.kmetikova@tuuli.cz">aneta.kmetikova@tuuli.cz</a>
+                        </div>
+                    </div>
+
+                    <p class="submit-notice">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        Objednávky zpracováváme ručně. Po odeslání objednávky obdržíte fakturu s&nbsp;QR kódem pro platbu převodem.
+                    </p>
+                </div>
+
+            </form>
+
+            <!-- ── Success screen (hidden until submission succeeds) ── -->
+            <div class="success-screen" id="successScreen" role="status" aria-live="polite">
+                <div class="success-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </div>
+                <h2 class="success-heading">Objednávka přijata!</h2>
+                <p class="success-text" id="successText">
+                    Na e-mail vám zašleme fakturu s QR kódem pro platbu převodem.
+                </p>
+                <a href="index.html" class="success-back">← Zpět na projekt</a>
+            </div>
+
+        </div><!-- /.order-container -->
+    </div><!-- /.page-wrapper -->
+
+    <script>
+        /* ─────────────────────────────────────────────
+           CONFIGURATION — swap this URL when ready
+           ───────────────────────────────────────────── */
+        var WEBHOOK_URL = 'https://hook.eu1.make.com/xasecwlgdb71s1wfs5xp5n0skaaz6t8a';
+        var UNIT_PRICE  = 790;
+
+        /* ─────────────────────────────────────────────
+           STATE
+           ───────────────────────────────────────────── */
+        var qty          = 1;
+        var selectedSize = 'M';
+
+        /* ─────────────────────────────────────────────
+           READ localStorage (set by index.html)
+           ───────────────────────────────────────────── */
+        (function() {
+            try {
+                var raw = localStorage.getItem('braveBreastsOrder');
+                if (raw) {
+                    var saved = JSON.parse(raw);
+                    if (saved.qty && Number.isInteger(saved.qty) && saved.qty >= 1 && saved.qty <= 10) {
+                        qty = saved.qty;
+                    }
+                    if (saved.size && ['S', 'M', 'L', 'XL'].indexOf(saved.size) !== -1) {
+                        selectedSize = saved.size;
+                    }
+                }
+            } catch (e) {
+                /* ignore parse errors */
+            }
+
+            /* Apply initial state to DOM */
+            updateSizeUI();
+            updateQtyUI();
+        })();
+
+        /* ─────────────────────────────────────────────
+           SIZE SELECTOR
+           ───────────────────────────────────────────── */
+        function updateSizeUI() {
+            document.querySelectorAll('.size-btn').forEach(function(btn) {
+                btn.classList.toggle('selected', btn.dataset.size === selectedSize);
+                btn.setAttribute('aria-pressed', btn.dataset.size === selectedSize ? 'true' : 'false');
+            });
+        }
+
+        document.getElementById('sizeSelector').addEventListener('click', function(e) {
+            var btn = e.target.closest('.size-btn');
+            if (!btn || btn.disabled) return;
+            selectedSize = btn.dataset.size;
+            updateSizeUI();
+        });
+
+        /* ─────────────────────────────────────────────
+           QTY STEPPER
+           ───────────────────────────────────────────── */
+        function updateQtyUI() {
+            document.getElementById('qtyValue').textContent = qty;
+            document.getElementById('qtyMinus').disabled = (qty <= 1);
+            document.getElementById('qtyPlus').disabled  = (qty >= 10);
+
+            var total = qty * UNIT_PRICE;
+            document.getElementById('priceBreakdown').textContent = qty + ' × ' + UNIT_PRICE + ' Kč';
+            document.getElementById('priceTotal').textContent = total;
+        }
+
+        document.getElementById('qtyMinus').addEventListener('click', function() {
+            if (qty > 1) { qty--; updateQtyUI(); }
+        });
+
+        document.getElementById('qtyPlus').addEventListener('click', function() {
+            if (qty < 10) { qty++; updateQtyUI(); }
+        });
+
+        /* ─────────────────────────────────────────────
+           VALIDATION HELPERS
+           ───────────────────────────────────────────── */
+        function showFieldError(inputId, errId, show) {
+            var input = document.getElementById(inputId);
+            var err   = document.getElementById(errId);
+            if (show) {
+                input.classList.add('invalid');
+                err.classList.add('visible');
+            } else {
+                input.classList.remove('invalid');
+                err.classList.remove('visible');
+            }
+        }
+
+        /* Clear error on user input */
+        ['fieldName', 'fieldEmail', 'fieldPhone', 'fieldStreet', 'fieldCity', 'fieldZip'].forEach(function(id) {
+            var errMap = {
+                fieldName:   'errName',
+                fieldEmail:  'errEmail',
+                fieldPhone:  'errPhone',
+                fieldStreet: 'errStreet',
+                fieldCity:   'errCity',
+                fieldZip:    'errZip'
+            };
+            document.getElementById(id).addEventListener('input', function() {
+                showFieldError(id, errMap[id], false);
+            });
+        });
+
+        function isValidEmail(value) {
+            /* Simple RFC-ish check */
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+        }
+
+        function isValidZip(value) {
+            /* CZ PSČ: exactly 5 digits, optionally with a space after 3rd */
+            return /^\d{3}\s?\d{2}$/.test(value.trim());
+        }
+
+        function validateForm() {
+            var valid = true;
+            var name   = document.getElementById('fieldName').value.trim();
+            var email  = document.getElementById('fieldEmail').value.trim();
+            var street = document.getElementById('fieldStreet').value.trim();
+            var city   = document.getElementById('fieldCity').value.trim();
+            var zip    = document.getElementById('fieldZip').value.trim();
+
+            if (!name) {
+                showFieldError('fieldName', 'errName', true);
+                valid = false;
+            }
+            if (!email || !isValidEmail(email)) {
+                showFieldError('fieldEmail', 'errEmail', true);
+                valid = false;
+            }
+            var phone = document.getElementById('fieldPhone').value.trim();
+            if (!phone) {
+                showFieldError('fieldPhone', 'errPhone', true);
+                valid = false;
+            }
+            if (!street) {
+                showFieldError('fieldStreet', 'errStreet', true);
+                valid = false;
+            }
+            if (!city) {
+                showFieldError('fieldCity', 'errCity', true);
+                valid = false;
+            }
+            if (!isValidZip(zip)) {
+                showFieldError('fieldZip', 'errZip', true);
+                valid = false;
+            }
+            if (!document.getElementById('gdprConsent').checked) {
+                document.getElementById('errGdpr').classList.add('visible');
+                valid = false;
+            } else {
+                document.getElementById('errGdpr').classList.remove('visible');
+            }
+
+            return valid;
+        }
+
+        /* ─────────────────────────────────────────────
+           FORM SUBMISSION
+           ───────────────────────────────────────────── */
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            /* Hide previous submit error */
+            document.getElementById('submitError').classList.remove('visible');
+
+            if (!validateForm()) return;
+
+            var name    = document.getElementById('fieldName').value.trim();
+            var email   = document.getElementById('fieldEmail').value.trim();
+            var phone   = document.getElementById('fieldPhone').value.trim();
+            var street  = document.getElementById('fieldStreet').value.trim();
+            var street2 = document.getElementById('fieldStreet2').value.trim();
+            var city    = document.getElementById('fieldCity').value.trim();
+            var zip     = document.getElementById('fieldZip').value.trim();
+
+            var total  = qty * UNIT_PRICE;
+
+            var payload = {
+                name:       name,
+                email:      email,
+                phone:      phone,
+                street:     street,
+                street2:    street2,
+                city:       city,
+                zip:        zip,
+                size:       selectedSize,
+                qty:        qty,
+                unitPrice:  UNIT_PRICE,
+                totalPrice: total,
+                currency:   'CZK',
+                timestamp:  new Date().toISOString()
+            };
+
+            /* Loading state */
+            var btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.textContent = 'Odesílám...';
+
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(function(res) {
+                if (!res.ok) { throw new Error('HTTP ' + res.status); }
+                return res;
+            })
+            .then(function() {
+                /* Success */
+                document.getElementById('summaryCard').style.display = 'none';
+                document.getElementById('orderForm').style.display   = 'none';
+
+                var successText = document.getElementById('successText');
+                successText.innerHTML =
+                    'Na e-mail <strong>' + escapeHtml(email) + '</strong> vám přijde faktura ' +
+                    's QR kódem pro platbu převodem. Obvykle to trvá jen pár minut.';
+
+                document.getElementById('successScreen').classList.add('visible');
+
+                /* Clean up localStorage */
+                try { localStorage.removeItem('braveBreastsOrder'); } catch(e) {}
+            })
+            .catch(function() {
+                /* Error */
+                btn.disabled = false;
+                btn.textContent = 'Odeslat objednávku';
+                document.getElementById('submitError').classList.add('visible');
+            });
+        });
+
+        /* ─────────────────────────────────────────────
+           HELPERS
+           ───────────────────────────────────────────── */
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+    </script>
+    <script src="../cookie-consent.js"></script>
+</body>
+</html>
