@@ -249,12 +249,15 @@
             width: 52px;
             height: 52px;
             border-radius: 10px;
-            background: var(--bg-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow: hidden;
             flex-shrink: 0;
-            font-size: 1.4rem;
+        }
+
+        .summary-product-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
         }
 
         .summary-product-info {
@@ -848,7 +851,9 @@
                 <p class="summary-card-title">Souhrn objednávky</p>
 
                 <div class="summary-product-row">
-                    <div class="summary-product-icon" aria-hidden="true">👕</div>
+                    <div class="summary-product-icon">
+                        <img src="images/tshirt_back.png" alt="Brave Breast T-Shirt">
+                    </div>
                     <div class="summary-product-info">
                         <p class="summary-product-name">Brave Breast T-Shirt</p>
                         <p class="summary-product-meta">100&thinsp;% výdělku → Nadace Bellis</p>
