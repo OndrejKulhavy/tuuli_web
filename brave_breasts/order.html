@@ -893,11 +893,6 @@
             display: block;
         }
 
-        /* Hide address section when Packeta selected */
-        .address-section-hidden {
-            display: none !important;
-        }
-
         /* ═══════════════════════════════════════════
            ACCESSIBILITY
            ═══════════════════════════════════════════ */
@@ -1098,41 +1093,6 @@
                     </div>
                 </div>
 
-                <!-- Delivery address -->
-                <div class="order-form-section" id="addressSection">
-                    <p class="form-section-title">Doručovací adresa</p>
-                    <div class="form-grid">
-                        <div class="form-field">
-                            <label for="fieldStreet">Ulice a číslo popisné</label>
-                            <input type="text" id="fieldStreet" name="street" autocomplete="street-address"
-                                   placeholder="Václavské náměstí 1" required>
-                            <span class="field-error" id="errStreet">Zadejte prosím ulici a číslo popisné.</span>
-                        </div>
-
-                        <div class="form-field">
-                            <label for="fieldStreet2">Doplněk adresy <span class="label-optional">(nepovinné)</span></label>
-                            <input type="text" id="fieldStreet2" name="street2" autocomplete="address-line2"
-                                   placeholder="Byt 4, 2. patro, firma…">
-                        </div>
-
-                        <div class="form-row-2">
-                            <div class="form-field">
-                                <label for="fieldCity">Město</label>
-                                <input type="text" id="fieldCity" name="city" autocomplete="address-level2"
-                                       placeholder="Praha" required>
-                                <span class="field-error" id="errCity">Zadejte prosím město.</span>
-                            </div>
-
-                            <div class="form-field">
-                                <label for="fieldZip">PSČ</label>
-                                <input type="text" id="fieldZip" name="zip" autocomplete="postal-code"
-                                       placeholder="110 00" maxlength="6" required>
-                                <span class="field-error" id="errZip">PSČ musí mít 5 číslic.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Submit area -->
                 <div class="submit-area">
 
@@ -1221,7 +1181,6 @@
             var selectedDiv  = document.getElementById('packetaSelected');
             var nameEl       = document.getElementById('packetaPointName');
             var addressEl    = document.getElementById('packetaPointAddress');
-            var addressSec   = document.getElementById('addressSection');
 
             if (selectedPoint) {
                 nameEl.textContent    = selectedPoint.name || '';
@@ -1230,13 +1189,11 @@
                                         (selectedPoint.city || '');
                 selectedDiv.classList.add('visible');
                 pickBtn.style.display = 'none';
-                addressSec.classList.add('address-section-hidden');
                 /* Clear packeta error if shown */
                 document.getElementById('errPacketa').classList.remove('visible');
             } else {
                 selectedDiv.classList.remove('visible');
                 pickBtn.style.display = '';
-                addressSec.classList.remove('address-section-hidden');
             }
         }
 
@@ -1329,14 +1286,11 @@
         }
 
         /* Clear error on user input */
-        ['fieldName', 'fieldEmail', 'fieldPhone', 'fieldStreet', 'fieldCity', 'fieldZip'].forEach(function(id) {
+        ['fieldName', 'fieldEmail', 'fieldPhone'].forEach(function(id) {
             var errMap = {
-                fieldName:   'errName',
-                fieldEmail:  'errEmail',
-                fieldPhone:  'errPhone',
-                fieldStreet: 'errStreet',
-                fieldCity:   'errCity',
-                fieldZip:    'errZip'
+                fieldName:  'errName',
+                fieldEmail: 'errEmail',
+                fieldPhone: 'errPhone'
             };
             document.getElementById(id).addEventListener('input', function() {
                 showFieldError(id, errMap[id], false);
@@ -1348,18 +1302,10 @@
             return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
         }
 
-        function isValidZip(value) {
-            /* CZ PSČ: exactly 5 digits, optionally with a space after 3rd */
-            return /^\d{3}\s?\d{2}$/.test(value.trim());
-        }
-
         function validateForm() {
             var valid = true;
             var name   = document.getElementById('fieldName').value.trim();
             var email  = document.getElementById('fieldEmail').value.trim();
-            var street = document.getElementById('fieldStreet').value.trim();
-            var city   = document.getElementById('fieldCity').value.trim();
-            var zip    = document.getElementById('fieldZip').value.trim();
 
             if (!name) {
                 showFieldError('fieldName', 'errName', true);
@@ -1379,23 +1325,6 @@
             if (!selectedPoint) {
                 document.getElementById('errPacketa').classList.add('visible');
                 valid = false;
-            }
-
-            /* Address fields only validated when address section is visible */
-            var addressHidden = document.getElementById('addressSection').classList.contains('address-section-hidden');
-            if (!addressHidden) {
-                if (!street) {
-                    showFieldError('fieldStreet', 'errStreet', true);
-                    valid = false;
-                }
-                if (!city) {
-                    showFieldError('fieldCity', 'errCity', true);
-                    valid = false;
-                }
-                if (!isValidZip(zip)) {
-                    showFieldError('fieldZip', 'errZip', true);
-                    valid = false;
-                }
             }
 
             if (!document.getElementById('gdprConsent').checked) {
@@ -1422,10 +1351,6 @@
             var name    = document.getElementById('fieldName').value.trim();
             var email   = document.getElementById('fieldEmail').value.trim();
             var phone   = document.getElementById('fieldPhone').value.trim();
-            var street  = document.getElementById('fieldStreet').value.trim();
-            var street2 = document.getElementById('fieldStreet2').value.trim();
-            var city    = document.getElementById('fieldCity').value.trim();
-            var zip     = document.getElementById('fieldZip').value.trim();
 
             var total  = qty * UNIT_PRICE;
 
@@ -1433,10 +1358,6 @@
                 name:       name,
                 email:      email,
                 phone:      phone,
-                street:     street,
-                street2:    street2,
-                city:       city,
-                zip:        zip,
                 size:       selectedSize,
                 qty:        qty,
                 unitPrice:  UNIT_PRICE,
