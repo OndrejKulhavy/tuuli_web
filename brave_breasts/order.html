@@ -12,6 +12,9 @@
     <!-- SEO: transactional page, do not index -->
     <meta name="robots" content="noindex, nofollow">
 
+    <!-- Packeta widget -->
+    <script src="https://widget.packeta.com/v6/www/js/library.js"></script>
+
     <style>
         /* ═══════════════════════════════════════════
            DESIGN TOKENS
@@ -756,6 +759,146 @@
         }
 
         /* ═══════════════════════════════════════════
+           PACKETA DELIVERY SECTION
+           ═══════════════════════════════════════════ */
+        .packeta-section {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.75rem;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+            margin-bottom: 1.5rem;
+        }
+
+        .packeta-pick-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            color: var(--text-color);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            border: 1.5px solid var(--text-color);
+            border-radius: 50px;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='32' viewBox='0 0 24 32'%3E%3Cpath d='M2 2 L2 24 L8 18 L14 28 L18 26 L12 16 L20 16 Z' fill='%23ff8fa0' stroke='%23e8909c' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, pointer;
+        }
+
+        .packeta-pick-btn:hover {
+            background: var(--text-color);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+        }
+
+        .packeta-pick-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            flex-shrink: 0;
+        }
+
+        /* Selected point display */
+        .packeta-selected {
+            display: none;
+            align-items: flex-start;
+            gap: 0.85rem;
+            padding: 1rem 1.1rem;
+            background: rgba(255, 182, 193, 0.1);
+            border: 1.5px solid rgba(255, 182, 193, 0.5);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .packeta-selected.visible {
+            display: flex;
+        }
+
+        .packeta-selected-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(255, 182, 193, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .packeta-selected-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: var(--accent-dark);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .packeta-selected-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .packeta-selected-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 0.2rem;
+        }
+
+        .packeta-selected-address {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .packeta-change-btn {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            padding: 0;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-color: var(--accent-color);
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='32' viewBox='0 0 24 32'%3E%3Cpath d='M2 2 L2 24 L8 18 L14 28 L18 26 L12 16 L20 16 Z' fill='%23ff8fa0' stroke='%23e8909c' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, pointer;
+            align-self: flex-start;
+            margin-top: 0.1rem;
+            white-space: nowrap;
+            transition: color 0.2s ease;
+        }
+
+        .packeta-change-btn:hover {
+            color: var(--text-color);
+        }
+
+        .packeta-error {
+            font-size: 0.78rem;
+            color: #c0392b;
+            min-height: 1.1em;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .packeta-error.visible {
+            display: block;
+        }
+
+        /* Hide address section when Packeta selected */
+        .address-section-hidden {
+            display: none !important;
+        }
+
+        /* ═══════════════════════════════════════════
            ACCESSIBILITY
            ═══════════════════════════════════════════ */
         @media (prefers-reduced-motion: reduce) {
@@ -897,6 +1040,37 @@
             <!-- ── Order form ── -->
             <form id="orderForm" novalidate>
 
+                <!-- Packeta delivery -->
+                <div class="packeta-section">
+                    <p class="form-section-title">Způsob doručení</p>
+
+                    <!-- Selected point display (hidden until chosen) -->
+                    <div class="packeta-selected" id="packetaSelected">
+                        <div class="packeta-selected-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div class="packeta-selected-info">
+                            <p class="packeta-selected-name" id="packetaPointName"></p>
+                            <p class="packeta-selected-address" id="packetaPointAddress"></p>
+                        </div>
+                        <button type="button" class="packeta-change-btn" id="packetaChangeBtn">Změnit</button>
+                    </div>
+
+                    <!-- Pick button (shown when no point selected) -->
+                    <button type="button" class="packeta-pick-btn" id="packetaPickBtn">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Vybrat výdejní místo Zásilkovny
+                    </button>
+
+                    <span class="packeta-error" id="errPacketa">Vyberte prosím výdejní místo Zásilkovny.</span>
+                </div>
+
                 <!-- Contact details -->
                 <div class="order-form-section">
                     <p class="form-section-title">Kontaktní údaje</p>
@@ -925,7 +1099,7 @@
                 </div>
 
                 <!-- Delivery address -->
-                <div class="order-form-section">
+                <div class="order-form-section" id="addressSection">
                     <p class="form-section-title">Doručovací adresa</p>
                     <div class="form-grid">
                         <div class="form-field">
@@ -1016,6 +1190,60 @@
            ───────────────────────────────────────────── */
         var WEBHOOK_URL = 'https://hook.eu1.make.com/xasecwlgdb71s1wfs5xp5n0skaaz6t8a';
         var UNIT_PRICE  = 790;
+
+        /* ─────────────────────────────────────────────
+           PACKETA CONFIGURATION
+           Replace 'YOUR_PACKETA_API_KEY' with your real
+           API key from client.packeta.com → Settings → E-shop
+           ───────────────────────────────────────────── */
+        var PACKETA_API_KEY = 'febc70c1f57a6248';
+
+        /* ─────────────────────────────────────────────
+           PACKETA STATE
+           ───────────────────────────────────────────── */
+        var selectedPoint = null; // holds the point object returned by the widget
+
+        /* Open Packeta widget */
+        function openPacketaWidget() {
+            Packeta.Widget.pick(PACKETA_API_KEY, function(point) {
+                if (!point) return; // user cancelled
+                selectedPoint = point;
+                updatePacketaUI();
+            }, {
+                language: 'cs',
+                country: 'cz'
+            });
+        }
+
+        /* Update the Packeta section UI based on selectedPoint */
+        function updatePacketaUI() {
+            var pickBtn      = document.getElementById('packetaPickBtn');
+            var selectedDiv  = document.getElementById('packetaSelected');
+            var nameEl       = document.getElementById('packetaPointName');
+            var addressEl    = document.getElementById('packetaPointAddress');
+            var addressSec   = document.getElementById('addressSection');
+
+            if (selectedPoint) {
+                nameEl.textContent    = selectedPoint.name || '';
+                addressEl.textContent = (selectedPoint.street || '') + ', ' +
+                                        (selectedPoint.zip || '') + ' ' +
+                                        (selectedPoint.city || '');
+                selectedDiv.classList.add('visible');
+                pickBtn.style.display = 'none';
+                addressSec.classList.add('address-section-hidden');
+                /* Clear packeta error if shown */
+                document.getElementById('errPacketa').classList.remove('visible');
+            } else {
+                selectedDiv.classList.remove('visible');
+                pickBtn.style.display = '';
+                addressSec.classList.remove('address-section-hidden');
+            }
+        }
+
+        document.getElementById('packetaPickBtn').addEventListener('click', openPacketaWidget);
+        document.getElementById('packetaChangeBtn').addEventListener('click', function() {
+            openPacketaWidget();
+        });
 
         /* ─────────────────────────────────────────────
            STATE
@@ -1146,18 +1374,30 @@
                 showFieldError('fieldPhone', 'errPhone', true);
                 valid = false;
             }
-            if (!street) {
-                showFieldError('fieldStreet', 'errStreet', true);
+
+            /* Packeta point required */
+            if (!selectedPoint) {
+                document.getElementById('errPacketa').classList.add('visible');
                 valid = false;
             }
-            if (!city) {
-                showFieldError('fieldCity', 'errCity', true);
-                valid = false;
+
+            /* Address fields only validated when address section is visible */
+            var addressHidden = document.getElementById('addressSection').classList.contains('address-section-hidden');
+            if (!addressHidden) {
+                if (!street) {
+                    showFieldError('fieldStreet', 'errStreet', true);
+                    valid = false;
+                }
+                if (!city) {
+                    showFieldError('fieldCity', 'errCity', true);
+                    valid = false;
+                }
+                if (!isValidZip(zip)) {
+                    showFieldError('fieldZip', 'errZip', true);
+                    valid = false;
+                }
             }
-            if (!isValidZip(zip)) {
-                showFieldError('fieldZip', 'errZip', true);
-                valid = false;
-            }
+
             if (!document.getElementById('gdprConsent').checked) {
                 document.getElementById('errGdpr').classList.add('visible');
                 valid = false;
@@ -1202,7 +1442,16 @@
                 unitPrice:  UNIT_PRICE,
                 totalPrice: total,
                 currency:   'CZK',
-                timestamp:  new Date().toISOString()
+                timestamp:  new Date().toISOString(),
+                deliveryMethod: 'packeta_pickup',
+                packeta: selectedPoint ? {
+                    pointId:      String(selectedPoint.id || ''),
+                    pointName:    selectedPoint.name || '',
+                    pointCity:    selectedPoint.city || '',
+                    pointStreet:  selectedPoint.street || '',
+                    pointZip:     selectedPoint.zip || '',
+                    pointCountry: selectedPoint.country || 'cz'
+                } : null
             };
 
             /* Loading state */
