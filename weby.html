@@ -3,179 +3,1390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tvorba webů | Tuuli Co.</title>
+    <title>WeBe — Tvorba webů | Tuuli Co.</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Moderní a responzivní webové stránky od Tuuli Co. Pomáháme klientům růst prostřednictvím kvalitního webdesignu.">
-    <meta name="keywords" content="tvorba webů, webdesign, responzivní web, Tuuli Co., webové stránky Praha">
+    <meta name="description" content="WeBe — tvorba profesionálních webových stránek pro klienty, kteří chtějí růst. Portfolio projektů od Tuuli Co.">
+    <meta name="keywords" content="tvorba webů, webdesign, WeBe, responzivní web, Tuuli Co., webové stránky Praha">
     <meta name="author" content="Tuuli Co.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://tuuli.cz/weby.html">
     
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tuuli.cz/weby.html">
-    <meta property="og:title" content="Tvorba webů | Tuuli Co.">
-    <meta property="og:description" content="Moderní a responzivní webové stránky, které pomáhají klientům růst.">
+    <meta property="og:title" content="WeBe — Tvorba webů | Tuuli Co.">
+    <meta property="og:description" content="WeBe — tvorba profesionálních webových stránek pro klienty, kteří chtějí růst.">
     <meta property="og:image" content="https://tuuli.cz/images/og-weby.jpg">
     <meta property="og:locale" content="cs_CZ">
     <meta property="og:site_name" content="Tuuli Co.">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Tvorba webů | Tuuli Co.">
-    <meta name="twitter:description" content="Moderní a responzivní webové stránky od Tuuli Co.">
+    <meta name="twitter:title" content="WeBe — Tvorba webů | Tuuli Co.">
+    <meta name="twitter:description" content="WeBe — tvorba profesionálních webových stránek.">
     <meta name="twitter:image" content="https://tuuli.cz/images/og-weby.jpg">
     
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ─── TOKENS ─── */
+        :root {
+            --bg: #f7f6f3;
+            --surface: #ffffff;
+            --text: #111111;
+            --text-2: #555555;
+            --text-3: #999999;
+            --border: rgba(0,0,0,0.08);
+            --accent: #111111;
+            --radius-card: 20px;
+            --radius-img: 14px;
+            --transition: 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --max-w: 1100px;
+        }
+
+        /* ─── RESET ─── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        img { display: block; max-width: 100%; }
+        a { color: inherit; text-decoration: none; }
+
+        /* ─── REDUCED MOTION ─── */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition: none !important; animation: none !important; }
+        }
+
+        /* ─── NAV ─── */
+        .webe-nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 200;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            background: rgba(247, 246, 243, 0.88);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .webe-nav-home {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-2);
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            transition: color var(--transition);
+        }
+        .webe-nav-home:hover { color: var(--text); }
+        .webe-nav-home svg { flex-shrink: 0; }
+
+        .webe-nav-brand {
+            font-size: 1.15rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: var(--text);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .webe-nav-cta {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.55rem 1.2rem;
+            background: var(--text);
+            color: #fff;
+            border-radius: 100px;
+            letter-spacing: 0.01em;
+            transition: opacity var(--transition), transform var(--transition);
+        }
+        .webe-nav-cta:hover { opacity: 0.75; transform: translateY(-1px); }
+
+        /* ─── HERO ─── */
+        .webe-hero {
+            padding: 140px 2rem 80px;
+            max-width: var(--max-w);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .webe-hero-eyebrow {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-3);
+        }
+
+        .webe-hero h1 {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.0;
+            max-width: 14ch;
+        }
+
+        .webe-hero-sub {
+            font-size: 1.1rem;
+            color: var(--text-2);
+            max-width: 44ch;
+            line-height: 1.65;
+        }
+
+        .webe-hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            background: var(--text);
+            color: #fff;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+        }
+        .webe-hero-cta:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        .webe-hero-cta svg { width: 15px; height: 15px; }
+
+        /* ─── SECTION HEADER ─── */
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 0.75rem;
+        }
+
+        /* ─── PORTFOLIO ─── */
+        .webe-portfolio {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 0 2rem 8rem;
+        }
+
+        /* Featured: first item full-width */
+        .webe-featured {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            transition: box-shadow var(--transition), transform var(--transition);
+        }
+        .webe-featured:hover {
+            box-shadow: 0 16px 48px rgba(0,0,0,0.07);
+            transform: translateY(-3px);
+        }
+
+        .webe-featured-gallery {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: #f0eeeb;
+        }
+
+        .webe-featured-gallery .gallery-container {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+
+        .webe-featured-gallery .gallery-slide {
+            flex: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .webe-featured-gallery .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-controls {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+        }
+
+        .gallery-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255,255,255,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background var(--transition), transform var(--transition);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .gallery-btn:hover { background: #fff; transform: scale(1.08); }
+        .gallery-btn svg { width: 14px; height: 14px; stroke: #111; }
+
+        .gallery-dots {
+            display: flex;
+            gap: 5px;
+            padding: 0 0.25rem;
+        }
+        .gallery-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.25);
+            transition: background var(--transition), transform var(--transition);
+        }
+        .gallery-dot.active {
+            background: #111;
+            transform: scale(1.3);
+        }
+
+        .webe-featured-info {
+            padding: 3rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .webe-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-2);
+            background: rgba(0,0,0,0.05);
+            padding: 0.3rem 0.75rem;
+            border-radius: 100px;
+            align-self: flex-start;
+        }
+
+        .webe-featured-info h2 {
+            font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+        }
+
+        .webe-featured-info p {
+            font-size: 1rem;
+            color: var(--text-2);
+            line-height: 1.65;
+            max-width: 38ch;
+        }
+
+        .webe-featured-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .webe-tag {
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--text-2);
+            background: rgba(0,0,0,0.05);
+            padding: 0.28rem 0.75rem;
+            border-radius: 100px;
+        }
+
+        .webe-visit-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text);
+            align-self: flex-start;
+            border-bottom: 1.5px solid var(--text);
+            padding-bottom: 1px;
+            transition: opacity var(--transition);
+        }
+        .webe-visit-link:hover { opacity: 0.6; }
+        .webe-visit-link svg { width: 13px; height: 13px; }
+
+        /* Grid items (3-col) */
+        .webe-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .webe-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow var(--transition), transform var(--transition);
+        }
+        .webe-card:hover {
+            box-shadow: 0 12px 36px rgba(0,0,0,0.07);
+            transform: translateY(-3px);
+        }
+
+        .webe-card-img {
+            aspect-ratio: 16/10;
+            background: #ece9e4;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .webe-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .webe-card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            flex: 1;
+        }
+
+        .webe-card-body h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .webe-card-body p {
+            font-size: 0.88rem;
+            color: var(--text-2);
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .webe-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+
+        .webe-card-tags {
+            display: flex;
+            gap: 0.35rem;
+            flex-wrap: wrap;
+        }
+
+        .webe-card-link {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-2);
+            transition: color var(--transition);
+            white-space: nowrap;
+        }
+        .webe-card-link:hover { color: var(--text); }
+        .webe-card-link svg { width: 12px; height: 12px; }
+
+        /* ─── DIVIDER ─── */
+        .webe-divider {
+            max-width: var(--max-w);
+            margin: 0 auto 2rem;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .webe-divider-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        .webe-divider-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--text-3);
+        }
+
+        /* ─── PROCESS ─── */
+        .webe-process {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .webe-process-inner {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .webe-process-header {
+            margin-bottom: 4rem;
+        }
+
+        .webe-process-header h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            max-width: 20ch;
+            margin-top: 0.75rem;
+            line-height: 1.1;
+        }
+
+        .webe-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem 3rem;
+        }
+
+        .webe-step {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .webe-step-num {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--text-3);
+        }
+
+        .webe-step h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .webe-step p {
+            font-size: 0.88rem;
+            color: var(--text-2);
+            line-height: 1.65;
+        }
+
+        /* ─── EXTRAS (PostHog) ─── */
+        .webe-extras {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 6rem 2rem 0;
+        }
+
+        .webe-extras-header {
+            margin-bottom: 2rem;
+        }
+
+        .webe-extras-header h2 {
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin-top: 0.75rem;
+            line-height: 1.1;
+        }
+
+        .webe-extra-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            padding: 2rem 2.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+
+        .webe-extra-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .webe-extra-icon svg { width: 22px; height: 22px; }
+
+        .webe-extra-body h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .webe-extra-body p {
+            font-size: 0.88rem;
+            color: var(--text-2);
+            line-height: 1.65;
+            max-width: 56ch;
+        }
+
+        /* ─── TEAM ─── */
+        .webe-team {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 6rem 2rem 0;
+        }
+
+        .webe-team-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .webe-team-header h2 {
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin-top: 0.75rem;
+            line-height: 1.1;
+        }
+
+        .webe-team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .webe-person {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .webe-person-name {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .webe-person-email {
+            font-size: 0.83rem;
+            color: var(--text-2);
+            transition: color var(--transition);
+        }
+        .webe-person-email:hover { color: var(--text); }
+
+        .webe-person-linkedin {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-2);
+            margin-top: 0.5rem;
+            transition: color var(--transition);
+            align-self: flex-start;
+        }
+        .webe-person-linkedin:hover { color: var(--text); }
+        .webe-person-linkedin svg { width: 13px; height: 13px; fill: currentColor; }
+
+        .webe-person-linkedin.grayed {
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        /* ─── CONTACT ─── */
+        .webe-contact {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 7rem 2rem 8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .webe-contact h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            max-width: 18ch;
+            line-height: 1.05;
+        }
+
+        .webe-contact p {
+            font-size: 1rem;
+            color: var(--text-2);
+            max-width: 44ch;
+            line-height: 1.65;
+        }
+
+        .webe-contact-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2.2rem;
+            background: var(--text);
+            color: #fff;
+            border-radius: 100px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+        }
+        .webe-contact-cta:hover {
+            opacity: 0.75;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        .webe-contact-cta svg { width: 15px; height: 15px; }
+
+        /* ─── FOOTER ─── */
+        .webe-footer {
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .webe-footer-inner {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .webe-footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .webe-footer-brand strong {
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .webe-footer-brand p {
+            font-size: 0.85rem;
+            color: var(--text-2);
+            line-height: 1.6;
+            max-width: 32ch;
+        }
+
+        .webe-footer-brand p a {
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            transition: color var(--transition);
+        }
+        .webe-footer-brand p a:hover { color: var(--text-3); }
+
+        .webe-footer-section h4 {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-3);
+            margin-bottom: 1rem;
+        }
+
+        .webe-footer-section ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .webe-footer-section ul li {
+            font-size: 0.83rem;
+            color: var(--text-2);
+        }
+
+        .webe-footer-section ul li span.fl {
+            color: var(--text-3);
+            font-size: 0.75rem;
+            display: block;
+        }
+
+        .webe-footer-bottom {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .webe-footer-bottom span {
+            font-size: 0.78rem;
+            color: var(--text-3);
+        }
+
+        .webe-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .webe-social a {
+            display: flex;
+            color: var(--text-3);
+            transition: color var(--transition);
+        }
+        .webe-social a:hover { color: var(--text); }
+        .webe-social svg { width: 17px; height: 17px; fill: currentColor; }
+
+        /* ─── COOKIE CONSENT ─── */
+        #cookie-consent-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            padding: 1.25rem 2rem;
+            background: rgba(247, 246, 243, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
+            box-shadow: 0 -4px 24px rgba(0,0,0,0.05);
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        #cookie-consent-banner.cookie-consent-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cookie-consent-inner {
+            max-width: var(--max-w);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .cookie-consent-text {
+            font-size: 0.85rem;
+            color: var(--text-2);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .cookie-consent-buttons {
+            display: flex;
+            gap: 0.6rem;
+            flex-shrink: 0;
+        }
+
+        .cookie-btn {
+            font-family: var(--font);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.55rem 1.4rem;
+            border-radius: 100px;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            white-space: nowrap;
+            letter-spacing: 0.01em;
+        }
+
+        .cookie-btn-accept {
+            background: var(--text);
+            color: #fff;
+        }
+
+        .cookie-btn-accept:hover {
+            opacity: 0.75;
+            transform: translateY(-1px);
+        }
+
+        .cookie-btn-decline {
+            background: transparent;
+            color: var(--text-2);
+            border: 1.5px solid rgba(0,0,0,0.2);
+        }
+
+        .cookie-btn-decline:hover {
+            background: rgba(0,0,0,0.05);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 600px) {
+            #cookie-consent-banner { padding: 1rem 1.25rem; }
+            .cookie-consent-inner { flex-direction: column; gap: 1rem; text-align: center; }
+            .cookie-consent-buttons { width: 100%; }
+            .cookie-btn { flex: 1; }
+        }
+
+        /* ─── CARD GALLERY ─── */
+        .webe-card-gallery {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .webe-card-gallery .gallery-container {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+
+        .webe-card-gallery .gallery-slide {
+            flex: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .webe-card-gallery .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+        }
+        .webe-card:hover .webe-card-gallery .gallery-slide img { transform: scale(1.04); }
+
+        .webe-card-gallery .gallery-controls {
+            position: absolute;
+            bottom: 0.6rem;
+            left: 0.6rem;
+            display: flex;
+            gap: 0.35rem;
+            align-items: center;
+        }
+
+        .webe-card-gallery .gallery-btn {
+            width: 26px;
+            height: 26px;
+        }
+
+        .webe-card-gallery .gallery-dots {
+            gap: 4px;
+            padding: 0 0.15rem;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            .webe-featured {
+                grid-template-columns: 1fr;
+            }
+
+            .webe-featured-info {
+                padding: 2rem;
+            }
+
+            .webe-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .webe-team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .webe-footer-inner {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .webe-footer-brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .webe-nav-brand { display: none; }
+
+            .webe-hero {
+                padding-top: 100px;
+            }
+
+            .webe-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .webe-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .webe-extra-card {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .webe-team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .webe-footer-inner {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .webe-footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
 <body>
-    <nav>
-        <a href="index.html" class="logo">Tuuli Co.</a>
+
+    <!-- ── Navigation ── -->
+    <nav class="webe-nav">
+        <a href="index.html" class="webe-nav-home">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 5l-7 7 7 7"/>
+            </svg>
+            Tuuli Co.
+        </a>
+        <span class="webe-nav-brand">WeBe</span>
+        <a href="mailto:annabela.simkova@tuuli.cz" class="webe-nav-cta">Napsat nám</a>
     </nav>
 
     <main>
-        <header>
-            <div class="breadcrumbs">
-                <a href="index.html">Domů</a>
-                <span class="separator">/</span>
-                <a href="projects.html">Projekty</a>
-                <span class="separator">/</span>
-                <span class="current">Tvorba webů</span>
-            </div>
-            <span class="label">Webové stránky</span>
-            <h1>Tvorba webů</h1>
-            <p>Moderní a responzivní webové stránky, které pomáhají našim klientům růst.</p>
-        </header>
 
-        <div class="portfolio-grid">
-            <article class="portfolio-item" data-gallery="letajici">
-                <div class="portfolio-gallery">
+        <!-- ── Hero ── -->
+        <section class="webe-hero">
+            <p class="webe-hero-eyebrow">WeBe &mdash; Tvorba webů</p>
+            <h1>Weby, které pracují za vás.</h1>
+            <p class="webe-hero-sub">
+                Navrhujeme a vyvíjíme profesionální webové stránky pro firmy, 
+                freelancery i začínající projekty. Rychlé, responzivní a připravené 
+                k růstu.
+            </p>
+            <a href="#portfolio" class="webe-hero-cta">
+                Prohlédnout práce
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </section>
+
+        <!-- ── Portfolio ── -->
+        <section class="webe-portfolio" id="portfolio">
+            <p class="section-label">Portfolio</p>
+
+            <!-- Featured: Létající Fotograf -->
+            <article class="webe-featured" data-gallery="letajici">
+                <div class="webe-featured-gallery">
                     <div class="gallery-container">
                         <div class="gallery-slide">
-                            <img src="images/projects/web/letajicifotograf-1.png" alt="Létající Fotograf - náhled 1">
+                            <img src="images/projects/web/letajicifotograf-1.webp" alt="Létající Fotograf — náhled 1" loading="eager">
                         </div>
                         <div class="gallery-slide">
-                            <img src="images/projects/web/letajicifotograf-2.png" alt="Létající Fotograf - náhled 2">
+                            <img src="images/projects/web/letajicifotograf-2.webp" alt="Létající Fotograf — náhled 2" loading="lazy">
                         </div>
                         <div class="gallery-slide">
-                            <img src="images/projects/web/letajicifotograf-3.png" alt="Létající Fotograf - náhled 3">
+                            <img src="images/projects/web/letajicifotograf-3.webp" alt="Létající Fotograf — náhled 3" loading="lazy">
                         </div>
                     </div>
-                    <button class="gallery-nav prev" aria-label="Předchozí">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M15 18l-6-6 6-6"/>
-                        </svg>
-                    </button>
-                    <button class="gallery-nav next" aria-label="Další">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 18l6-6-6-6"/>
-                        </svg>
-                    </button>
-                    <div class="gallery-dots">
-                        <span class="gallery-dot active"></span>
-                        <span class="gallery-dot"></span>
-                        <span class="gallery-dot"></span>
+                    <div class="gallery-controls">
+                        <button class="gallery-btn prev" aria-label="Předchozí">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 18l-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <div class="gallery-dots">
+                            <span class="gallery-dot active"></span>
+                            <span class="gallery-dot"></span>
+                            <span class="gallery-dot"></span>
+                        </div>
+                        <button class="gallery-btn next" aria-label="Další">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
-                <div class="portfolio-content">
-                    <div class="portfolio-info">
-                        <h2>Létající Fotograf</h2>
-                        <p>Profesionální fotografie a videa nemovitostí pro realitní makléře.</p>
+                <div class="webe-featured-info">
+                    <span class="webe-badge">Vybraný projekt</span>
+                    <h2>Létající Fotograf</h2>
+                    <p>Profesionální web pro leteckou fotografii nemovitostí. Čistý design, rychlé načítání a jednoduché portfolio pro realitní makléře.</p>
+                    <div class="webe-featured-tags">
+                        <span class="webe-tag">Webdesign</span>
+                        <span class="webe-tag">Fotografie</span>
+                        <span class="webe-tag">Nemovitosti</span>
                     </div>
-                    <a href="https://letajicifotograf.cz/" target="_blank" rel="noopener noreferrer" class="portfolio-link">
-                        Navštívit web
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <a href="https://letajicifotograf.cz/" target="_blank" rel="noopener noreferrer" class="webe-visit-link">
+                        letajicifotograf.cz
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M7 17L17 7M17 7H7M17 7V17"/>
                         </svg>
                     </a>
                 </div>
             </article>
-        </div>
-    </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h2>Tuuli Co. Družstvo</h2>
-                    <p>
-                        Vznikli jsme v rámci studia na <a href="https://ip.pef.czu.cz/" target="_blank">Tiimiakatemia Prague</a> — 
-                        inovativním vzdělávacím programu zaměřeném na týmové podnikání a osobní rozvoj.
-                    </p>
+            <!-- Divider -->
+            <div class="webe-divider">
+                <div class="webe-divider-line"></div>
+                <span class="webe-divider-label">Další projekty</span>
+                <div class="webe-divider-line"></div>
+            </div>
+
+            <!-- 3-col grid -->
+            <div class="webe-grid">
+
+                <!-- Ondřej Košťál -->
+                <article class="webe-card" data-gallery="kostal">
+                    <div class="webe-card-img webe-card-gallery">
+                        <div class="gallery-container">
+                            <div class="gallery-slide"><img src="images/projects/web/kostal_1.png" alt="Ondřej Košťál — náhled 1" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/kostal_2.png" alt="Ondřej Košťál — náhled 2" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/kostal_3.png" alt="Ondřej Košťál — náhled 3" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/kostal_4.png" alt="Ondřej Košťál — náhled 4" loading="lazy"></div>
+                        </div>
+                        <div class="gallery-controls">
+                            <button class="gallery-btn prev" aria-label="Předchozí">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                            </button>
+                            <div class="gallery-dots">
+                                <span class="gallery-dot active"></span>
+                                <span class="gallery-dot"></span>
+                                <span class="gallery-dot"></span>
+                                <span class="gallery-dot"></span>
+                            </div>
+                            <button class="gallery-btn next" aria-label="Další">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="webe-card-body">
+                        <h3>Ondřej Košťál</h3>
+                        <p>Osobní web a portfolio pro fotografa. Minimalistický design soustředěný na prezentaci práce.</p>
+                        <div class="webe-card-footer">
+                            <div class="webe-card-tags">
+                                <span class="webe-tag">Portfolio</span>
+                                <span class="webe-tag">Fotografie</span>
+                            </div>
+                            <a href="https://ondrejkostal.cz/" target="_blank" rel="noopener noreferrer" class="webe-card-link">
+                                Web
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Brave Breasts -->
+                <article class="webe-card" data-gallery="bb">
+                    <div class="webe-card-img webe-card-gallery">
+                        <div class="gallery-container">
+                            <div class="gallery-slide"><img src="images/projects/web/bb_1.png" alt="Brave Breasts — náhled 1" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/bb_2.png" alt="Brave Breasts — náhled 2" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/bb_3.png" alt="Brave Breasts — náhled 3" loading="lazy"></div>
+                        </div>
+                        <div class="gallery-controls">
+                            <button class="gallery-btn prev" aria-label="Předchozí">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                            </button>
+                            <div class="gallery-dots">
+                                <span class="gallery-dot active"></span>
+                                <span class="gallery-dot"></span>
+                                <span class="gallery-dot"></span>
+                            </div>
+                            <button class="gallery-btn next" aria-label="Další">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="webe-card-body">
+                        <h3>Brave Breasts</h3>
+                        <p>Charitativní web pro projekt zvyšující povědomí o rakovině prsu. E-shop s přesměrováním výdělku na Nadaci Bellis.</p>
+                        <div class="webe-card-footer">
+                            <div class="webe-card-tags">
+                                <span class="webe-tag">Charita</span>
+                                <span class="webe-tag">E-shop</span>
+                            </div>
+                            <a href="brave_breasts/index.html" class="webe-card-link">
+                                Web
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- AURA -->
+                <article class="webe-card" data-gallery="aura">
+                    <div class="webe-card-img webe-card-gallery">
+                        <div class="gallery-container">
+                            <div class="gallery-slide"><img src="images/projects/web/aura_1.png" alt="AURA kosmetika — náhled 1" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/aura_2.png" alt="AURA kosmetika — náhled 2" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/aura_3.png" alt="AURA kosmetika — náhled 3" loading="lazy"></div>
+                        </div>
+                        <div class="gallery-controls">
+                            <button class="gallery-btn prev" aria-label="Předchozí">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                            </button>
+                            <div class="gallery-dots">
+                                <span class="gallery-dot active"></span>
+                                <span class="gallery-dot"></span>
+                                <span class="gallery-dot"></span>
+                            </div>
+                            <button class="gallery-btn next" aria-label="Další">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="webe-card-body">
+                        <h3>AURA Kosmetika</h3>
+                        <p>Produktový web pro značku 100% přírodní kosmetiky. Teplá estetika, prezentace produktů a napojení na sociální sítě.</p>
+                        <div class="webe-card-footer">
+                            <div class="webe-card-tags">
+                                <span class="webe-tag">Kosmetika</span>
+                                <span class="webe-tag">Produktový web</span>
+                            </div>
+                            <a href="aura/index.html" class="webe-card-link">
+                                Web
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- ── Process ── -->
+        <div class="webe-process">
+            <div class="webe-process-inner">
+                <div class="webe-process-header">
+                    <p class="section-label">Jak to funguje</p>
+                    <h2>Od prvního hovoru k&nbsp;živému webu.</h2>
                 </div>
-                <div class="footer-section">
-                    <h3>Právní údaje</h3>
-                    <ul>
-                        <li>
-                            <div class="label">IČO</div>
-                            <div class="value">24063045</div>
-                        </li>
-                        <li>
-                            <div class="label">Spisová značka</div>
-                            <div class="value">Dr 9245</div>
-                        </li>
-                        <li>
-                            <div class="label">Soud</div>
-                            <div class="value">Městský soud v Praze</div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Kontakt</h3>
-                    <ul>
-                        <li>
-                            <div class="label">Sídlo</div>
-                            <div class="value">Chomutovice 37</div>
-                        </li>
-                        <li>
-                            <div class="label">PSČ</div>
-                            <div class="value">251 01 Popovičky</div>
-                        </li>
-                        <li>
-                            <div class="label">Zapsáno</div>
-                            <div class="value">15. prosince 2025</div>
-                        </li>
-                    </ul>
+                <div class="webe-steps">
+                    <div class="webe-step">
+                        <span class="webe-step-num">01</span>
+                        <h3>Nezávazná schůzka — zdarma</h3>
+                        <p>Nejdřív se pobavíme. Bez závazků, bez formulářů. Chceme pochopit váš byznys, cíl webu a kdo na něj bude chodit.</p>
+                    </div>
+                    <div class="webe-step">
+                        <span class="webe-step-num">02</span>
+                        <h3>Nabídka</h3>
+                        <p>Připravíme konkrétní nabídku na míru — rozsah, časový plán a cena. Žádné překvapení na faktuře.</p>
+                    </div>
+                    <div class="webe-step">
+                        <span class="webe-step-num">03</span>
+                        <h3>Záloha & start sprintu</h3>
+                        <p>Jakmile kývnete, pošleme zálohovou fakturu a rozjedeme sprint. Pracujeme v krátkých cyklech podle principů design thinking.</p>
+                    </div>
+                    <div class="webe-step">
+                        <span class="webe-step-num">04</span>
+                        <h3>Uživatelský výzkum & persony</h3>
+                        <p>Definujeme, kdo bude web navštěvovat a co od něj čeká. Tvoříme persony a mapujeme cíle majitele — web musí plnit funkci, ne jen vypadat dobře.</p>
+                    </div>
+                    <div class="webe-step">
+                        <span class="webe-step-num">05</span>
+                        <h3>Design podle UX zákonů</h3>
+                        <p>Navrhujeme originální vizuál postavený na UX principech. Tento návrh vám ukážeme, zapracujeme vaši zpětnou vazbu — a to dvakrát, dokud nebude přesně takový, jak má být.</p>
+                    </div>
+                    <div class="webe-step">
+                        <span class="webe-step-num">06</span>
+                        <h3>Vývoj & spuštění</h3>
+                        <p>Píšeme čistý, rychlý kód bez zbytečných závislostí. Nastavíme hosting, doménu a předáme vám klíče.</p>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <span>© 2025 Tuuli Co. Družstvo</span>
-                <div class="social-links">
-                    <a href="https://www.instagram.com/tuuli_co/?hl=cs" target="_blank" aria-label="Instagram">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
+        </div>
+
+        <!-- ── Extras ── -->
+        <div class="webe-extras">
+            <div class="webe-extras-header">
+                <p class="section-label">Volitelné doplňky</p>
+                <h2>Víme, jak web měřit.</h2>
+            </div>
+            <div class="webe-extra-card">
+                <div class="webe-extra-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 3v18h18"/>
+                        <path d="M18 9l-5 5-2-2-5 5"/>
+                    </svg>
+                </div>
+                <div class="webe-extra-body">
+                    <h3>PostHog analytics</h3>
+                    <p>Nabízíme implementaci PostHog — open-source analytické platformy, která vám ukáže, jak se návštěvníci na webu chovají. Kde klikají, kde odcházejí a co funguje. GDPR-friendly, data ve vaší moci.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Team ── -->
+        <section class="webe-team" id="tym">
+            <div class="webe-team-header">
+                <p class="section-label">Tým</p>
+                <h2>Lidé za WeBe.</h2>
+            </div>
+            <div class="webe-team-grid">
+
+                <div class="webe-person">
+                    <span class="webe-person-name">Annabela Šimková</span>
+                    <a href="mailto:annabela.simkova@tuuli.cz" class="webe-person-email">annabela.simkova@tuuli.cz</a>
+                    <a href="https://www.linkedin.com/in/annabela-%C5%A1imkov%C3%A1-3693b4354/" target="_blank" rel="noopener noreferrer" class="webe-person-linkedin">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        LinkedIn
                     </a>
                 </div>
+
+                <div class="webe-person">
+                    <span class="webe-person-name">Ondřej Kulhavý</span>
+                    <a href="mailto:ondrej.kulhavy@tuuli.cz" class="webe-person-email">ondrej.kulhavy@tuuli.cz</a>
+                    <a href="https://www.linkedin.com/in/ondrejkulhavy/?locale=en" target="_blank" rel="noopener noreferrer" class="webe-person-linkedin">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        LinkedIn
+                    </a>
+                </div>
+
+                <div class="webe-person">
+                    <span class="webe-person-name">Anna Pokorná</span>
+                    <a href="mailto:anna.pokorna@tuuli.cz" class="webe-person-email">anna.pokorna@tuuli.cz</a>
+                    <span class="webe-person-linkedin grayed">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        LinkedIn
+                    </span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ── Contact ── -->
+        <section class="webe-contact" id="kontakt">
+            <p class="section-label">Chcete web?</p>
+            <h2>Pojďme to spolu udělat.</h2>
+            <p>Napište nám nebo si rovnou domluvte nezávaznou schůzku. První konzultace je zdarma.</p>
+            <a href="mailto:annabela.simkova@tuuli.cz" class="webe-contact-cta">
+                Napsat nám
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </section>
+
+    </main>
+
+    <!-- ── Footer ── -->
+    <footer class="webe-footer">
+        <div class="webe-footer-inner">
+            <div class="webe-footer-brand">
+                <strong>Tuuli Co. Družstvo</strong>
+                <p>
+                    Vznikli jsme v rámci studia na 
+                    <a href="https://ip.pef.czu.cz/" target="_blank" rel="noopener noreferrer">Tiimiakatemia Prague</a> — 
+                    inovativním vzdělávacím programu zaměřeném na týmové podnikání.
+                </p>
+            </div>
+            <div class="webe-footer-section">
+                <h4>Právní údaje</h4>
+                <ul>
+                    <li><span class="fl">IČO</span>24063045</li>
+                    <li><span class="fl">Spisová značka</span>Dr 9245</li>
+                    <li><span class="fl">Soud</span>Městský soud v Praze</li>
+                </ul>
+            </div>
+            <div class="webe-footer-section">
+                <h4>Kontakt</h4>
+                <ul>
+                    <li><span class="fl">Sídlo</span>Chomutovice 37</li>
+                    <li><span class="fl">PSČ</span>251 01 Popovičky</li>
+                    <li><span class="fl">Zapsáno</span>15. prosince 2025</li>
+                </ul>
+            </div>
+        </div>
+        <div class="webe-footer-bottom">
+            <span>© 2025 Tuuli Co. Družstvo</span>
+            <div class="webe-social">
+                <a href="https://www.instagram.com/tuuli_co/?hl=cs" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </footer>
 
     <script>
-        document.querySelectorAll('.portfolio-item').forEach(item => {
-            const container = item.querySelector('.gallery-container');
-            const slides = item.querySelectorAll('.gallery-slide');
-            const dots = item.querySelectorAll('.gallery-dot');
-            const prevBtn = item.querySelector('.gallery-nav.prev');
-            const nextBtn = item.querySelector('.gallery-nav.next');
-            let currentSlide = 0;
+        /* Gallery logic — supports multiple galleries on page */
+        document.querySelectorAll('[data-gallery]').forEach(function(gallery) {
+            var container = gallery.querySelector('.gallery-container');
+            var slides = gallery.querySelectorAll('.gallery-slide');
+            var dots = gallery.querySelectorAll('.gallery-dot');
+            var prevBtn = gallery.querySelector('.gallery-btn.prev');
+            var nextBtn = gallery.querySelector('.gallery-btn.next');
+            var current = 0;
+            var total = slides.length;
+            var autoTimer;
 
-            function goToSlide(index) {
-                if (index < 0) index = slides.length - 1;
-                if (index >= slides.length) index = 0;
-                currentSlide = index;
-                container.style.transform = `translateX(-${currentSlide * 100}%)`;
-                dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+            function goTo(idx) {
+                if (idx < 0) idx = total - 1;
+                if (idx >= total) idx = 0;
+                current = idx;
+                container.style.transform = 'translateX(-' + (current * 100) + '%)';
+                dots.forEach(function(d, i) {
+                    d.classList.toggle('active', i === current);
+                });
             }
 
-            prevBtn?.addEventListener('click', () => goToSlide(currentSlide - 1));
-            nextBtn?.addEventListener('click', () => goToSlide(currentSlide + 1));
-            dots.forEach((dot, i) => dot.addEventListener('click', () => goToSlide(i)));
+            function startAuto() {
+                autoTimer = setInterval(function() { goTo(current + 1); }, 4000);
+            }
+
+            function resetAuto() {
+                clearInterval(autoTimer);
+                startAuto();
+            }
+
+            prevBtn && prevBtn.addEventListener('click', function() { goTo(current - 1); resetAuto(); });
+            nextBtn && nextBtn.addEventListener('click', function() { goTo(current + 1); resetAuto(); });
+            dots.forEach(function(d, i) {
+                d.addEventListener('click', function() { goTo(i); resetAuto(); });
+            });
+
+            /* Pause auto-advance on hover */
+            gallery.addEventListener('mouseenter', function() { clearInterval(autoTimer); });
+            gallery.addEventListener('mouseleave', startAuto);
+
+            startAuto();
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
