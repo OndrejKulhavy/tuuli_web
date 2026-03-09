@@ -477,7 +477,7 @@
 
         .webe-steps {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem 3rem;
         }
 
@@ -496,71 +496,57 @@
             color: var(--text-3);
         }
 
-        .webe-step h3 {
+        /* ─── PROCESS TOGGLE ─── */
+        .webe-step-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0;
+            width: 100%;
+            text-align: left;
+        }
+
+        .webe-step-toggle h3 {
             font-size: 1rem;
             font-weight: 700;
             letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .webe-step-toggle-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            color: var(--text-3);
+            transition: transform var(--transition), color var(--transition);
+        }
+
+        .webe-step.open .webe-step-toggle-icon {
+            transform: rotate(45deg);
+            color: var(--text);
+        }
+
+        .webe-step-body {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.35s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .webe-step.open .webe-step-body {
+            max-height: 200px;
+            opacity: 1;
         }
 
         .webe-step p {
             font-size: 0.88rem;
             color: var(--text-2);
             line-height: 1.65;
-        }
-
-        /* ─── EXTRAS (PostHog) ─── */
-        .webe-extras {
-            max-width: var(--max-w);
-            margin: 0 auto;
-            padding: 6rem 2rem 0;
-        }
-
-        .webe-extras-header {
-            margin-bottom: 2rem;
-        }
-
-        .webe-extras-header h2 {
-            font-size: clamp(1.6rem, 3vw, 2.4rem);
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            margin-top: 0.75rem;
-            line-height: 1.1;
-        }
-
-        .webe-extra-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-card);
-            padding: 2rem 2.5rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 2rem;
-        }
-
-        .webe-extra-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .webe-extra-icon svg { width: 22px; height: 22px; }
-
-        .webe-extra-body h3 {
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-        }
-
-        .webe-extra-body p {
-            font-size: 0.88rem;
-            color: var(--text-2);
-            line-height: 1.65;
-            max-width: 56ch;
+            padding-top: 0.6rem;
         }
 
         /* ─── TEAM ─── */
@@ -914,10 +900,6 @@
                 padding: 2rem;
             }
 
-            .webe-steps {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
             .webe-team-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -1200,54 +1182,44 @@
                 <div class="webe-steps">
                     <div class="webe-step">
                         <span class="webe-step-num">01</span>
-                        <h3>Nezávazná schůzka — zdarma</h3>
-                        <p>Nejdřív se pobavíme. Bez závazků, bez formulářů. Chceme pochopit váš byznys, cíl webu a kdo na něj bude chodit.</p>
+                        <button class="webe-step-toggle" aria-expanded="false">
+                            <h3>Nezávazná schůzka — zdarma</h3>
+                            <svg class="webe-step-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                        <div class="webe-step-body">
+                            <p>Nejdřív se pobavíme. Bez závazků, bez formulářů. Chceme pochopit váš byznys, cíl webu a kdo na něj bude chodit.</p>
+                        </div>
                     </div>
                     <div class="webe-step">
                         <span class="webe-step-num">02</span>
-                        <h3>Nabídka</h3>
-                        <p>Připravíme konkrétní nabídku na míru — rozsah, časový plán a cena. Žádné překvapení na faktuře.</p>
+                        <button class="webe-step-toggle" aria-expanded="false">
+                            <h3>Sprint 1 — Design</h3>
+                            <svg class="webe-step-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                        <div class="webe-step-body">
+                            <p>Navrhujeme vizuál postavený na UX principech a cílech vašeho byznysu. Ukážeme vám návrh, zapracujeme zpětnou vazbu — dokud nebude přesně takový, jak má být.</p>
+                        </div>
                     </div>
                     <div class="webe-step">
                         <span class="webe-step-num">03</span>
-                        <h3>Záloha & start sprintu</h3>
-                        <p>Jakmile kývnete, pošleme zálohovou fakturu a rozjedeme sprint. Pracujeme v krátkých cyklech podle principů design thinking.</p>
+                        <button class="webe-step-toggle" aria-expanded="false">
+                            <h3>Sprint 2 — Vývoj</h3>
+                            <svg class="webe-step-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                        <div class="webe-step-body">
+                            <p>Píšeme čistý, rychlý kód bez zbytečných závislostí. Nastavíme hosting, doménu a web spustíme.</p>
+                        </div>
                     </div>
                     <div class="webe-step">
                         <span class="webe-step-num">04</span>
-                        <h3>Uživatelský výzkum & persony</h3>
-                        <p>Definujeme, kdo bude web navštěvovat a co od něj čeká. Tvoříme persony a mapujeme cíle majitele — web musí plnit funkci, ne jen vypadat dobře.</p>
+                        <button class="webe-step-toggle" aria-expanded="false">
+                            <h3>Předání</h3>
+                            <svg class="webe-step-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                        <div class="webe-step-body">
+                            <p>Předáme vám veškerý zdrojový kód a přístupy ke všemu — hosting, doména, analytika. Web je od teď plně váš.</p>
+                        </div>
                     </div>
-                    <div class="webe-step">
-                        <span class="webe-step-num">05</span>
-                        <h3>Design podle UX zákonů</h3>
-                        <p>Navrhujeme originální vizuál postavený na UX principech. Tento návrh vám ukážeme, zapracujeme vaši zpětnou vazbu — a to dvakrát, dokud nebude přesně takový, jak má být.</p>
-                    </div>
-                    <div class="webe-step">
-                        <span class="webe-step-num">06</span>
-                        <h3>Vývoj & spuštění</h3>
-                        <p>Píšeme čistý, rychlý kód bez zbytečných závislostí. Nastavíme hosting, doménu a předáme vám klíče.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ── Extras ── -->
-        <div class="webe-extras">
-            <div class="webe-extras-header">
-                <p class="section-label">Volitelné doplňky</p>
-                <h2>Víme, jak web měřit.</h2>
-            </div>
-            <div class="webe-extra-card">
-                <div class="webe-extra-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 3v18h18"/>
-                        <path d="M18 9l-5 5-2-2-5 5"/>
-                    </svg>
-                </div>
-                <div class="webe-extra-body">
-                    <h3>PostHog analytics</h3>
-                    <p>Nabízíme implementaci PostHog — open-source analytické platformy, která vám ukáže, jak se návštěvníci na webu chovají. Kde klikají, kde odcházejí a co funguje. GDPR-friendly, data ve vaší moci.</p>
                 </div>
             </div>
         </div>
@@ -1387,6 +1359,16 @@
             gallery.addEventListener('mouseleave', startAuto);
 
             startAuto();
+        });
+
+        /* Step toggle */
+        document.querySelectorAll('.webe-step-toggle').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var step = btn.closest('.webe-step');
+                var isOpen = step.classList.contains('open');
+                step.classList.toggle('open', !isOpen);
+                btn.setAttribute('aria-expanded', String(!isOpen));
+            });
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
