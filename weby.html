@@ -1292,15 +1292,14 @@
         (function() {
             var galleries = [];
             var sharedTimer = null;
-            var pausedCount = 0;
+            var hoveredGalleries = new Set();
 
             document.querySelectorAll('[data-gallery]').forEach(function(gallery) {
                 var container = gallery.querySelector('.gallery-container');
-                var slides = gallery.querySelectorAll('.gallery-slide');
                 var dots = gallery.querySelectorAll('.gallery-dot');
                 var prevBtn = gallery.querySelector('.gallery-btn.prev');
                 var nextBtn = gallery.querySelector('.gallery-btn.next');
-                var total = slides.length;
+                var total = gallery.querySelectorAll('.gallery-slide').length;
                 var current = 0;
 
                 function goTo(idx) {
@@ -1328,26 +1327,31 @@
                 });
 
                 gallery.addEventListener('mouseenter', function() {
-                    pausedCount++;
-                    if (pausedCount === 1) clearInterval(sharedTimer);
+                    hoveredGalleries.add(gallery);
+                    clearInterval(sharedTimer);
+                    console.log('[gallery] mouseenter', gallery.dataset.gallery, 'hovered=', hoveredGalleries.size);
                 });
                 gallery.addEventListener('mouseleave', function() {
-                    pausedCount = Math.max(0, pausedCount - 1);
-                    if (pausedCount === 0) startSharedAuto();
+                    hoveredGalleries.delete(gallery);
+                    console.log('[gallery] mouseleave', gallery.dataset.gallery, 'hovered=', hoveredGalleries.size);
+                    if (hoveredGalleries.size === 0) startSharedAuto();
                 });
             });
 
             function advanceAll() {
+                console.log('[gallery] tick, galleries=', galleries.length);
                 galleries.forEach(function(g) { g.goTo(g.getNext()); });
             }
 
             function startSharedAuto() {
+                clearInterval(sharedTimer);
                 sharedTimer = setInterval(advanceAll, 4000);
+                console.log('[gallery] timer started, id=', sharedTimer, 'hovered=', hoveredGalleries.size);
             }
 
             function resetSharedAuto() {
                 clearInterval(sharedTimer);
-                if (pausedCount === 0) startSharedAuto();
+                if (hoveredGalleries.size === 0) startSharedAuto();
             }
 
             startSharedAuto();
