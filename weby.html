@@ -1021,10 +1021,10 @@
                 <article class="webe-card" data-gallery="kostal">
                     <div class="webe-card-img webe-card-gallery">
                         <div class="gallery-container">
-                            <div class="gallery-slide"><img src="images/projects/web/kostal_1.png" alt="Ondřej Košťál — náhled 1" loading="lazy"></div>
-                            <div class="gallery-slide"><img src="images/projects/web/kostal_2.png" alt="Ondřej Košťál — náhled 2" loading="lazy"></div>
-                            <div class="gallery-slide"><img src="images/projects/web/kostal_3.png" alt="Ondřej Košťál — náhled 3" loading="lazy"></div>
-                            <div class="gallery-slide"><img src="images/projects/web/kostal_4.png" alt="Ondřej Košťál — náhled 4" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/kostal_1.webp" alt="Ondřej Košťál — náhled 1" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/kostal_2.webp" alt="Ondřej Košťál — náhled 2" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/kostal_3.webp" alt="Ondřej Košťál — náhled 3" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/kostal_4.webp" alt="Ondřej Košťál — náhled 4" loading="lazy"></div>
                         </div>
                         <div class="gallery-controls">
                             <button class="gallery-btn prev" aria-label="Předchozí">
@@ -1063,9 +1063,9 @@
                 <article class="webe-card" data-gallery="bb">
                     <div class="webe-card-img webe-card-gallery">
                         <div class="gallery-container">
-                            <div class="gallery-slide"><img src="images/projects/web/bb_1.png" alt="Brave Breasts — náhled 1" loading="lazy"></div>
-                            <div class="gallery-slide"><img src="images/projects/web/bb_2.png" alt="Brave Breasts — náhled 2" loading="lazy"></div>
-                            <div class="gallery-slide"><img src="images/projects/web/bb_3.png" alt="Brave Breasts — náhled 3" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/bb_1.webp" alt="Brave Breasts — náhled 1" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/bb_2.webp" alt="Brave Breasts — náhled 2" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/bb_3.webp" alt="Brave Breasts — náhled 3" loading="lazy"></div>
                         </div>
                         <div class="gallery-controls">
                             <button class="gallery-btn prev" aria-label="Předchozí">
@@ -1103,9 +1103,9 @@
                 <article class="webe-card" data-gallery="aura">
                     <div class="webe-card-img webe-card-gallery">
                         <div class="gallery-container">
-                            <div class="gallery-slide"><img src="images/projects/web/aura_1.png" alt="AURA kosmetika — náhled 1" loading="lazy"></div>
-                            <div class="gallery-slide"><img src="images/projects/web/aura_2.png" alt="AURA kosmetika — náhled 2" loading="lazy"></div>
-                            <div class="gallery-slide"><img src="images/projects/web/aura_3.png" alt="AURA kosmetika — náhled 3" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/aura_1.webp" alt="AURA kosmetika — náhled 1" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/aura_2.webp" alt="AURA kosmetika — náhled 2" loading="lazy"></div>
+                            <div class="gallery-slide"><img src="images/projects/web/aura_3.webp" alt="AURA kosmetika — náhled 3" loading="lazy"></div>
                         </div>
                         <div class="gallery-controls">
                             <button class="gallery-btn prev" aria-label="Předchozí">
@@ -1288,48 +1288,70 @@
     </footer>
 
     <script>
-        /* Gallery logic — supports multiple galleries on page */
-        document.querySelectorAll('[data-gallery]').forEach(function(gallery) {
-            var container = gallery.querySelector('.gallery-container');
-            var slides = gallery.querySelectorAll('.gallery-slide');
-            var dots = gallery.querySelectorAll('.gallery-dot');
-            var prevBtn = gallery.querySelector('.gallery-btn.prev');
-            var nextBtn = gallery.querySelector('.gallery-btn.next');
-            var current = 0;
-            var total = slides.length;
-            var autoTimer;
+        /* Gallery logic — all galleries advance in sync */
+        (function() {
+            var galleries = [];
+            var sharedTimer = null;
+            var pausedCount = 0;
 
-            function goTo(idx) {
-                if (idx < 0) idx = total - 1;
-                if (idx >= total) idx = 0;
-                current = idx;
-                container.style.transform = 'translateX(-' + (current * 100) + '%)';
-                dots.forEach(function(d, i) {
-                    d.classList.toggle('active', i === current);
+            document.querySelectorAll('[data-gallery]').forEach(function(gallery) {
+                var container = gallery.querySelector('.gallery-container');
+                var slides = gallery.querySelectorAll('.gallery-slide');
+                var dots = gallery.querySelectorAll('.gallery-dot');
+                var prevBtn = gallery.querySelector('.gallery-btn.prev');
+                var nextBtn = gallery.querySelector('.gallery-btn.next');
+                var total = slides.length;
+                var current = 0;
+
+                function goTo(idx) {
+                    if (idx < 0) idx = total - 1;
+                    if (idx >= total) idx = 0;
+                    current = idx;
+                    container.style.transform = 'translateX(-' + (current * 100) + '%)';
+                    dots.forEach(function(d, i) {
+                        d.classList.toggle('active', i === current);
+                    });
+                }
+
+                galleries.push({ goTo: goTo, getNext: function() { return current + 1; } });
+
+                prevBtn && prevBtn.addEventListener('click', function() {
+                    goTo(current - 1);
+                    resetSharedAuto();
                 });
-            }
+                nextBtn && nextBtn.addEventListener('click', function() {
+                    goTo(current + 1);
+                    resetSharedAuto();
+                });
+                dots.forEach(function(d, i) {
+                    d.addEventListener('click', function() { goTo(i); resetSharedAuto(); });
+                });
 
-            function startAuto() {
-                autoTimer = setInterval(function() { goTo(current + 1); }, 4000);
-            }
-
-            function resetAuto() {
-                clearInterval(autoTimer);
-                startAuto();
-            }
-
-            prevBtn && prevBtn.addEventListener('click', function() { goTo(current - 1); resetAuto(); });
-            nextBtn && nextBtn.addEventListener('click', function() { goTo(current + 1); resetAuto(); });
-            dots.forEach(function(d, i) {
-                d.addEventListener('click', function() { goTo(i); resetAuto(); });
+                gallery.addEventListener('mouseenter', function() {
+                    pausedCount++;
+                    if (pausedCount === 1) clearInterval(sharedTimer);
+                });
+                gallery.addEventListener('mouseleave', function() {
+                    pausedCount = Math.max(0, pausedCount - 1);
+                    if (pausedCount === 0) startSharedAuto();
+                });
             });
 
-            /* Pause auto-advance on hover */
-            gallery.addEventListener('mouseenter', function() { clearInterval(autoTimer); });
-            gallery.addEventListener('mouseleave', startAuto);
+            function advanceAll() {
+                galleries.forEach(function(g) { g.goTo(g.getNext()); });
+            }
 
-            startAuto();
-        });
+            function startSharedAuto() {
+                sharedTimer = setInterval(advanceAll, 4000);
+            }
+
+            function resetSharedAuto() {
+                clearInterval(sharedTimer);
+                if (pausedCount === 0) startSharedAuto();
+            }
+
+            startSharedAuto();
+        })();
 
         /* Step toggle */
         document.querySelectorAll('.webe-step-toggle').forEach(function(btn) {
