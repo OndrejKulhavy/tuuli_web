@@ -585,6 +585,16 @@
             display: block;
         }
 
+        .submit-validation-hint {
+            font-size: 0.85rem;
+            color: #c0392b;
+            display: none;
+        }
+
+        .submit-validation-hint.visible {
+            display: block;
+        }
+
         .submit-notice {
             display: flex;
             gap: 0.5rem;
@@ -1205,6 +1215,7 @@
                         <button type="submit" class="btn-primary" id="submitBtn">
                             Odeslat objednávku
                         </button>
+                        <span class="submit-validation-hint" id="submitValidationHint"></span>
                         <div class="submit-error" id="submitError">
                             Něco se pokazilo. Zkuste to prosím znovu nebo nás kontaktujte na
                              <a href="mailto:marie.machytkova@tuuli.cz">marie.machytkova@tuuli.cz</a> nebo <a href="mailto:aneta.kmetikova@tuuli.cz">aneta.kmetikova@tuuli.cz</a>
@@ -1413,6 +1424,7 @@
 
         function validateForm() {
             var valid = true;
+            var missingLabels = [];
             var name   = document.getElementById('fieldName').value.trim();
             var email  = document.getElementById('fieldEmail').value.trim();
             var street = document.getElementById('fieldStreet').value.trim();
@@ -1421,44 +1433,52 @@
 
             if (!name) {
                 showFieldError('fieldName', 'errName', true);
+                missingLabels.push('Jméno');
                 valid = false;
             }
             if (!email || !isValidEmail(email)) {
                 showFieldError('fieldEmail', 'errEmail', true);
+                missingLabels.push('E-mail');
                 valid = false;
             }
             var phone = document.getElementById('fieldPhone').value.trim();
             if (!phone) {
                 showFieldError('fieldPhone', 'errPhone', true);
+                missingLabels.push('Telefon');
                 valid = false;
             }
             if (!street) {
                 showFieldError('fieldStreet', 'errStreet', true);
+                missingLabels.push('Ulice');
                 valid = false;
             }
             if (!city) {
                 showFieldError('fieldCity', 'errCity', true);
+                missingLabels.push('Město');
                 valid = false;
             }
             if (!isValidZip(zip)) {
                 showFieldError('fieldZip', 'errZip', true);
+                missingLabels.push('PSČ');
                 valid = false;
             }
 
             /* Packeta point required */
             if (!selectedPoint) {
                 document.getElementById('errPacketa').classList.add('visible');
+                missingLabels.push('Výdejní místo');
                 valid = false;
             }
 
             if (!document.getElementById('gdprConsent').checked) {
                 document.getElementById('errGdpr').classList.add('visible');
+                missingLabels.push('Souhlas GDPR');
                 valid = false;
             } else {
                 document.getElementById('errGdpr').classList.remove('visible');
             }
 
-            return valid;
+            return { valid: valid, missingLabels: missingLabels };
         }
 
         /* ─────────────────────────────────────────────
@@ -1470,7 +1490,19 @@
             /* Hide previous submit error */
             document.getElementById('submitError').classList.remove('visible');
 
-            if (!validateForm()) return;
+            var validation = validateForm();
+            var hint = document.getElementById('submitValidationHint');
+            if (!validation.valid) {
+                var missing = validation.missingLabels;
+                if (missing.length === 1) {
+                    hint.textContent = 'Vyplňte prosím: ' + missing[0];
+                } else {
+                    hint.textContent = 'Chybí ' + missing.length + ' povinná pole: ' + missing.join(', ');
+                }
+                hint.classList.add('visible');
+                return;
+            }
+            hint.classList.remove('visible');
 
             var name    = document.getElementById('fieldName').value.trim();
             var email   = document.getElementById('fieldEmail').value.trim();
