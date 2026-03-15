@@ -516,13 +516,13 @@
         /* ═══════════════════════════════════════════
            SUBMIT AREA
            ═══════════════════════════════════════════ */
-        .gdpr-row {
+        .consent-row {
             display: flex;
             flex-direction: column;
             gap: 0.25rem;
         }
 
-        .gdpr-label {
+        .consent-label {
             display: flex;
             align-items: flex-start;
             gap: 0.6rem;
@@ -532,7 +532,7 @@
             cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='32' viewBox='0 0 24 32'%3E%3Cpath d='M2 2 L2 24 L8 18 L14 28 L18 26 L12 16 L20 16 Z' fill='%23ff8fa0' stroke='%23e8909c' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, pointer;
         }
 
-        .gdpr-label input[type="checkbox"] {
+        .consent-label input[type="checkbox"] {
             margin-top: 0.15em;
             flex-shrink: 0;
             width: 16px;
@@ -541,14 +541,14 @@
             cursor: inherit;
         }
 
-        .gdpr-label a {
+        .consent-label a {
             color: var(--text-color);
             text-decoration: underline;
             text-underline-offset: 2px;
             text-decoration-color: var(--accent-color);
         }
 
-        .gdpr-label a:hover {
+        .consent-label a:hover {
             color: var(--accent-dark);
         }
 
@@ -1203,12 +1203,12 @@
                 <div class="submit-area">
 
                     <!-- GDPR consent -->
-                    <div class="gdpr-row">
-                        <label class="gdpr-label">
-                            <input type="checkbox" id="gdprConsent" required>
+                    <div class="consent-row">
+                        <label class="consent-label">
+                            <input type="checkbox" id="consentCheckbox" required>
                             <span>Souhlasím se <a href="privacy.html" target="_blank" rel="noopener noreferrer">zpracováním osobních údajů</a> za účelem vyřízení objednávky.</span>
                         </label>
-                        <span class="field-error" id="errGdpr">Pro odeslání objednávky je nutný souhlas se zpracováním osobních údajů.</span>
+                        <span class="field-error" id="errConsent">Pro odeslání objednávky je nutný souhlas se zpracováním osobních údajů.</span>
                     </div>
 
                     <div class="submit-btn-wrap">
@@ -1470,12 +1470,12 @@
                 valid = false;
             }
 
-            if (!document.getElementById('gdprConsent').checked) {
-                document.getElementById('errGdpr').classList.add('visible');
-                missingLabels.push('Souhlas GDPR');
+            if (!document.getElementById('consentCheckbox').checked) {
+                document.getElementById('errConsent').classList.add('visible');
+                missingLabels.push('Souhlas se zpracováním údajů');
                 valid = false;
             } else {
-                document.getElementById('errGdpr').classList.remove('visible');
+                document.getElementById('errConsent').classList.remove('visible');
             }
 
             return { valid: valid, missingLabels: missingLabels };
