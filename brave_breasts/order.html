@@ -280,6 +280,19 @@
             color: var(--text-muted);
         }
 
+        .summary-product-badge {
+            display: inline-block;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-color);
+            background: var(--accent-color);
+            padding: 0.2rem 0.55rem;
+            border-radius: 3px;
+            margin-top: 0.3rem;
+        }
+
         /* ── Size / Qty controls inside summary ── */
         .summary-controls {
             display: flex;
@@ -1071,6 +1084,7 @@
                     </div>
                     <div class="summary-product-info">
                         <p class="summary-product-name">Brave Breast T-Shirt</p>
+                        <p class="summary-product-badge">Předprodej</p>
                         <p class="summary-product-meta">100&thinsp;% výdělku → Nadace Bellis</p>
                     </div>
                 </div>
@@ -1101,10 +1115,10 @@
                 <div class="summary-price-row">
                     <div>
                         <p class="summary-price-label">Celková cena</p>
-                        <p class="summary-price-breakdown" id="priceBreakdown">1 × 890 Kč</p>
+                        <p class="summary-price-breakdown" id="priceBreakdown">1 × 790 Kč</p>
                     </div>
                     <div>
-                        <span class="summary-price-total" id="priceTotal">890</span><span class="summary-price-currency">Kč</span>
+                        <span class="summary-price-total" id="priceTotal">790</span><span class="summary-price-currency">Kč</span>
                     </div>
                 </div>
             </div>
@@ -1261,7 +1275,7 @@
            CONFIGURATION — swap this URL when ready
            ───────────────────────────────────────────── */
         var WEBHOOK_URL = 'https://hook.eu1.make.com/xasecwlgdb71s1wfs5xp5n0skaaz6t8a';
-        var UNIT_PRICE  = 890;
+        var UNIT_PRICE  = 790;
 
         /* ─────────────────────────────────────────────
            PACKETA CONFIGURATION
