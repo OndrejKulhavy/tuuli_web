@@ -485,7 +485,8 @@
             letter-spacing: 0.01em;
         }
 
-        .form-field input {
+        .form-field input,
+        .form-field select {
             font-family: var(--font-body);
             font-size: 0.95rem;
             color: var(--text-color);
@@ -496,15 +497,20 @@
             transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
             outline: none;
             width: 100%;
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='32' viewBox='0 0 24 32'%3E%3Cpath d='M2 2 L2 24 L8 18 L14 28 L18 26 L12 16 L20 16 Z' fill='%23ff8fa0' stroke='%23e8909c' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, pointer;
         }
 
-        .form-field input:focus {
+        .form-field input:focus,
+        .form-field select:focus {
             border-color: var(--accent-color);
             background: var(--white);
             box-shadow: 0 0 0 3px rgba(255, 182, 193, 0.2);
         }
 
-        .form-field input.invalid {
+        .form-field input.invalid,
+        .form-field select.invalid {
             border-color: #e05252;
             box-shadow: 0 0 0 3px rgba(224, 82, 82, 0.1);
         }
@@ -1061,7 +1067,7 @@
         <a href="index.html" class="nav-logo">
             <img src="images/logo.png" alt="Brave Breasts" class="nav-logo-img">
         </a>
-        <a href="index.html" class="nav-back">← Zpět na projekt</a>
+        <a href="index.html" class="nav-back" data-i18n="navBack">← Zpět na projekt</a>
     </nav>
 
     <!-- ── Main content ── -->
@@ -1070,13 +1076,13 @@
 
             <!-- ── Page header ── -->
             <div class="page-header">
-                <h1>Dokončit objednávku</h1>
+                <h1 data-i18n="pageTitle">Dokončit objednávku</h1>
                 <p>Brave Breast T-Shirt</p>
             </div>
 
             <!-- ── Order summary card ── -->
             <div class="summary-card" id="summaryCard">
-                <p class="summary-card-title">Souhrn objednávky</p>
+                <p class="summary-card-title" data-i18n="summaryTitle">Souhrn objednávky</p>
 
                 <div class="summary-product-row">
                     <div class="summary-product-icon">
@@ -1084,15 +1090,15 @@
                     </div>
                     <div class="summary-product-info">
                         <p class="summary-product-name">Brave Breast T-Shirt</p>
-                        <p class="summary-product-badge">Předprodej</p>
-                        <p class="summary-product-meta">100&thinsp;% výdělku → Nadace Bellis</p>
+                        <p class="summary-product-badge" data-i18n="badgePreorder">Předprodej</p>
+                        <p class="summary-product-meta" data-i18n="productMeta">100&thinsp;% výdělku → Nadace Bellis</p>
                     </div>
                 </div>
 
                 <!-- Size + Qty controls -->
                 <div class="summary-controls">
                     <div class="summary-control-group">
-                        <span class="summary-control-label">Velikost</span>
+                        <span class="summary-control-label" data-i18n="labelSize">Velikost</span>
                         <div class="size-selector" id="sizeSelector" role="group" aria-label="Vyberte velikost">
                             <button class="size-btn" data-size="S" type="button">S</button>
                             <button class="size-btn selected" data-size="M" type="button">M</button>
@@ -1102,7 +1108,7 @@
                     </div>
 
                     <div class="summary-control-group">
-                        <span class="summary-control-label">Počet</span>
+                        <span class="summary-control-label" data-i18n="labelQty">Počet</span>
                         <div class="qty-stepper">
                             <button class="qty-btn" id="qtyMinus" type="button" aria-label="Snížit počet" disabled>−</button>
                             <span class="qty-value" id="qtyValue" aria-live="polite">1</span>
@@ -1114,11 +1120,11 @@
                 <!-- Price summary -->
                 <div class="summary-price-row">
                     <div>
-                        <p class="summary-price-label">Celková cena</p>
+                        <p class="summary-price-label" data-i18n="labelTotalPrice">Celková cena</p>
                         <p class="summary-price-breakdown" id="priceBreakdown">1 × 790 Kč</p>
                     </div>
                     <div>
-                        <span class="summary-price-total" id="priceTotal">790</span><span class="summary-price-currency">Kč</span>
+                        <span class="summary-price-total" id="priceTotal">790</span><span class="summary-price-currency" id="priceCurrency">Kč</span>
                     </div>
                 </div>
             </div>
@@ -1128,55 +1134,63 @@
 
                 <!-- Contact details -->
                 <div class="order-form-section">
-                    <p class="form-section-title">Kontaktní údaje</p>
+                    <p class="form-section-title" data-i18n="sectionContact">Kontaktní údaje</p>
                     <div class="form-grid">
                         <div class="form-field">
-                            <label for="fieldName">Jméno a příjmení</label>
+                            <label for="fieldCountry" data-i18n="labelCountry">Země doručení</label>
+                            <select id="fieldCountry" name="country" autocomplete="country">
+                                <!-- populated by JS -->
+                            </select>
+                            <span class="field-error" id="errCountry" data-i18n="errCountry">Vyberte prosím zemi doručení.</span>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="fieldName" data-i18n="labelName">Jméno a příjmení</label>
                             <input type="text" id="fieldName" name="name" autocomplete="name"
-                                   placeholder="Jana Nováková" required>
-                            <span class="field-error" id="errName">Zadejte prosím jméno a příjmení.</span>
+                                   placeholder="Jana Nováková" data-i18n-placeholder="placeholderName" required>
+                            <span class="field-error" id="errName" data-i18n="errName">Zadejte prosím jméno a příjmení.</span>
                         </div>
 
                         <div class="form-field">
                             <label for="fieldEmail">E-mail</label>
                             <input type="email" id="fieldEmail" name="email" autocomplete="email"
-                                   placeholder="jana@example.cz" required>
-                            <span class="field-error" id="errEmail">Zadejte platnou e-mailovou adresu.</span>
+                                   placeholder="jana@example.cz" data-i18n-placeholder="placeholderEmail" required>
+                            <span class="field-error" id="errEmail" data-i18n="errEmail">Zadejte platnou e-mailovou adresu.</span>
                         </div>
 
                         <div class="form-field">
-                            <label for="fieldPhone">Telefon</label>
+                            <label for="fieldPhone" data-i18n="labelPhone">Telefon</label>
                             <input type="tel" id="fieldPhone" name="phone" autocomplete="tel"
-                                   placeholder="+420 777 123 456" required>
-                            <span class="field-error" id="errPhone">Zadejte prosím telefonní číslo.</span>
+                                   placeholder="+420 777 123 456" data-i18n-placeholder="placeholderPhone" required>
+                            <span class="field-error" id="errPhone" data-i18n="errPhone">Zadejte prosím telefonní číslo.</span>
                         </div>
 
                         <div class="form-field">
-                            <label for="fieldStreet">Ulice a číslo popisné</label>
+                            <label for="fieldStreet" data-i18n="labelStreet">Ulice a číslo popisné</label>
                             <input type="text" id="fieldStreet" name="street" autocomplete="street-address"
-                                   placeholder="Václavské náměstí 1" required>
-                            <span class="field-error" id="errStreet">Zadejte prosím ulici a číslo popisné.</span>
+                                   placeholder="Václavské náměstí 1" data-i18n-placeholder="placeholderStreet" required>
+                            <span class="field-error" id="errStreet" data-i18n="errStreet">Zadejte prosím ulici a číslo popisné.</span>
                         </div>
 
                         <div class="form-field">
-                            <label for="fieldStreet2">Doplněk adresy <span class="label-optional">(nepovinné)</span></label>
+                            <label for="fieldStreet2" data-i18n-html="labelStreet2">Doplněk adresy <span class="label-optional">(nepovinné)</span></label>
                             <input type="text" id="fieldStreet2" name="street2" autocomplete="address-line2"
-                                   placeholder="Byt 4, 2. patro, firma…">
+                                   placeholder="Byt 4, 2. patro, firma…" data-i18n-placeholder="placeholderStreet2">
                         </div>
 
                         <div class="form-row-2">
                             <div class="form-field">
-                                <label for="fieldCity">Město</label>
+                                <label for="fieldCity" data-i18n="labelCity">Město</label>
                                 <input type="text" id="fieldCity" name="city" autocomplete="address-level2"
-                                       placeholder="Praha" required>
-                                <span class="field-error" id="errCity">Zadejte prosím město.</span>
+                                       placeholder="Praha" data-i18n-placeholder="placeholderCity" required>
+                                <span class="field-error" id="errCity" data-i18n="errCity">Zadejte prosím město.</span>
                             </div>
 
                             <div class="form-field">
-                                <label for="fieldZip">PSČ</label>
+                                <label for="fieldZip" data-i18n="labelZip">PSČ</label>
                                 <input type="text" id="fieldZip" name="zip" autocomplete="postal-code"
-                                       placeholder="110 00" maxlength="6" required>
-                                <span class="field-error" id="errZip">PSČ musí mít 5 číslic.</span>
+                                       placeholder="110 00" data-i18n-placeholder="placeholderZip" maxlength="10" required>
+                                <span class="field-error" id="errZip" data-i18n="errZip">Zadejte prosím PSČ / ZIP kód.</span>
                             </div>
                         </div>
                     </div>
@@ -1184,7 +1198,7 @@
 
                 <!-- Packeta delivery -->
                 <div class="packeta-section">
-                    <p class="form-section-title">Způsob doručení</p>
+                    <p class="form-section-title" data-i18n="sectionDelivery">Způsob doručení</p>
 
                     <!-- Selected point display (hidden until chosen) -->
                     <div class="packeta-selected" id="packetaSelected">
@@ -1198,7 +1212,7 @@
                             <p class="packeta-selected-name" id="packetaPointName"></p>
                             <p class="packeta-selected-address" id="packetaPointAddress"></p>
                         </div>
-                        <button type="button" class="packeta-change-btn" id="packetaChangeBtn">Změnit</button>
+                        <button type="button" class="packeta-change-btn" id="packetaChangeBtn" data-i18n="packetaChange">Změnit</button>
                     </div>
 
                     <!-- Pick button (shown when no point selected) -->
@@ -1207,10 +1221,10 @@
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                             <circle cx="12" cy="10" r="3"/>
                         </svg>
-                        Vybrat výdejní místo Zásilkovny
+                        <span data-i18n="packetaPick">Vybrat výdejní místo Zásilkovny</span>
                     </button>
 
-                    <span class="packeta-error" id="errPacketa">Vyberte prosím výdejní místo Zásilkovny.</span>
+                    <span class="packeta-error" id="errPacketa" data-i18n="errPacketa">Vyberte prosím výdejní místo Zásilkovny.</span>
                 </div>
 
                 <!-- Submit area -->
@@ -1220,17 +1234,17 @@
                     <div class="consent-row">
                         <label class="consent-label">
                             <input type="checkbox" id="consentCheckbox" required>
-                            <span>Souhlasím se <a href="privacy.html" target="_blank" rel="noopener noreferrer">zpracováním osobních údajů</a> za účelem vyřízení objednávky.</span>
+                            <span data-i18n-html="consentLabel">Souhlasím se <a href="privacy.html" target="_blank" rel="noopener noreferrer">zpracováním osobních údajů</a> za účelem vyřízení objednávky.</span>
                         </label>
-                        <span class="field-error" id="errConsent">Pro odeslání objednávky je nutný souhlas se zpracováním osobních údajů.</span>
+                        <span class="field-error" id="errConsent" data-i18n="errConsent">Pro odeslání objednávky je nutný souhlas se zpracováním osobních údajů.</span>
                     </div>
 
                     <div class="submit-btn-wrap">
-                        <button type="submit" class="btn-primary" id="submitBtn">
+                        <button type="submit" class="btn-primary" id="submitBtn" data-i18n="submitBtn">
                             Odeslat objednávku
                         </button>
                         <span class="submit-validation-hint" id="submitValidationHint"></span>
-                        <div class="submit-error" id="submitError">
+                        <div class="submit-error" id="submitError" data-i18n-html="submitError">
                             Něco se pokazilo. Zkuste to prosím znovu nebo nás kontaktujte na
                              <a href="mailto:marie.machytkova@tuuli.cz">marie.machytkova@tuuli.cz</a> nebo <a href="mailto:aneta.kmetikova@tuuli.cz">aneta.kmetikova@tuuli.cz</a>
                         </div>
@@ -1242,7 +1256,7 @@
                             <line x1="12" y1="8" x2="12" y2="12"/>
                             <line x1="12" y1="16" x2="12.01" y2="16"/>
                         </svg>
-                        Objednávky zpracováváme ručně. Po odeslání objednávky obdržíte fakturu s&nbsp;QR kódem pro platbu převodem.
+                        <span data-i18n="submitNotice">Objednávky zpracováváme ručně. Po odeslání objednávky obdržíte fakturu s&nbsp;QR kódem pro platbu převodem.</span>
                     </p>
                 </div>
 
@@ -1255,16 +1269,16 @@
                         <polyline points="20 6 9 17 4 12"/>
                     </svg>
                 </div>
-                <h2 class="success-heading">Objednávka přijata!</h2>
+                <h2 class="success-heading" data-i18n="successHeading">Objednávka přijata!</h2>
                 <p class="success-text" id="successText">
                     Nyní prosím uhraďte fakturu — objednávka bude zpracována po přijetí platby.
                 </p>
                 <!-- Invoice CTA — shown with delay to direct attention after the checkmark -->
                 <div class="success-invoice-cta" id="successInvoiceCta">
-                    <span class="success-invoice-label">Další krok</span>
-                    <p class="success-invoice-hint">Zkontrolujte svůj e-mail — faktura s QR kódem pro platbu vám přijde během pár minut.</p>
+                    <span class="success-invoice-label" data-i18n="successNextStep">Další krok</span>
+                    <p class="success-invoice-hint" data-i18n="successInvoiceHint">Zkontrolujte svůj e-mail — faktura s QR kódem pro platbu vám přijde během pár minut.</p>
                 </div>
-                <a href="index.html" class="success-back">← Zpět na projekt</a>
+                <a href="index.html" class="success-back" data-i18n="successBack">← Zpět na projekt</a>
             </div>
 
         </div><!-- /.order-container -->
@@ -1274,8 +1288,40 @@
         /* ─────────────────────────────────────────────
            CONFIGURATION — swap this URL when ready
            ───────────────────────────────────────────── */
-        var WEBHOOK_URL = 'https://hook.eu1.make.com/xasecwlgdb71s1wfs5xp5n0skaaz6t8a';
-        var UNIT_PRICE  = 790;
+        var WEBHOOK_URL     = 'https://hook.eu1.make.com/xasecwlgdb71s1wfs5xp5n0skaaz6t8a';
+        var UNIT_PRICE      = 790;  // CZK — CZ pre-order price
+        var UNIT_PRICE_EUR  = 33;   // EUR — all other EU orders
+
+        /* All 27 EU countries. `packeta: true` = Zásilkovna pickup points available. */
+        var SUPPORTED_COUNTRIES = [
+            { code: 'cz', label: 'Česká republika', labelEn: 'Czech Republic', currency: 'CZK', packeta: true  },
+            { code: 'sk', label: 'Slovensko',       labelEn: 'Slovakia',       currency: 'EUR', packeta: true  },
+            { code: 'at', label: 'Rakousko',         labelEn: 'Austria',        currency: 'EUR', packeta: true  },
+            { code: 'be', label: 'Belgie',           labelEn: 'Belgium',        currency: 'EUR', packeta: true  },
+            { code: 'bg', label: 'Bulharsko',        labelEn: 'Bulgaria',       currency: 'EUR', packeta: true  },
+            { code: 'cy', label: 'Kypr',             labelEn: 'Cyprus',         currency: 'EUR', packeta: false },
+            { code: 'dk', label: 'Dánsko',           labelEn: 'Denmark',        currency: 'EUR', packeta: false },
+            { code: 'ee', label: 'Estonsko',         labelEn: 'Estonia',        currency: 'EUR', packeta: false },
+            { code: 'fi', label: 'Finsko',           labelEn: 'Finland',        currency: 'EUR', packeta: false },
+            { code: 'fr', label: 'Francie',          labelEn: 'France',         currency: 'EUR', packeta: true  },
+            { code: 'de', label: 'Německo',          labelEn: 'Germany',        currency: 'EUR', packeta: true  },
+            { code: 'gr', label: 'Řecko',            labelEn: 'Greece',         currency: 'EUR', packeta: false },
+            { code: 'hr', label: 'Chorvatsko',       labelEn: 'Croatia',        currency: 'EUR', packeta: true  },
+            { code: 'hu', label: 'Maďarsko',         labelEn: 'Hungary',        currency: 'EUR', packeta: true  },
+            { code: 'ie', label: 'Irsko',            labelEn: 'Ireland',        currency: 'EUR', packeta: false },
+            { code: 'it', label: 'Itálie',           labelEn: 'Italy',          currency: 'EUR', packeta: false },
+            { code: 'lv', label: 'Lotyšsko',         labelEn: 'Latvia',         currency: 'EUR', packeta: false },
+            { code: 'lt', label: 'Litva',            labelEn: 'Lithuania',      currency: 'EUR', packeta: false },
+            { code: 'lu', label: 'Lucembursko',      labelEn: 'Luxembourg',     currency: 'EUR', packeta: false },
+            { code: 'mt', label: 'Malta',            labelEn: 'Malta',          currency: 'EUR', packeta: false },
+            { code: 'nl', label: 'Nizozemsko',       labelEn: 'Netherlands',    currency: 'EUR', packeta: true  },
+            { code: 'pl', label: 'Polsko',           labelEn: 'Poland',         currency: 'EUR', packeta: true  },
+            { code: 'pt', label: 'Portugalsko',      labelEn: 'Portugal',       currency: 'EUR', packeta: false },
+            { code: 'ro', label: 'Rumunsko',         labelEn: 'Romania',        currency: 'EUR', packeta: true  },
+            { code: 'si', label: 'Slovinsko',        labelEn: 'Slovenia',       currency: 'EUR', packeta: true  },
+            { code: 'es', label: 'Španělsko',        labelEn: 'Spain',          currency: 'EUR', packeta: false },
+            { code: 'se', label: 'Švédsko',          labelEn: 'Sweden',         currency: 'EUR', packeta: false }
+        ];
 
         /* ─────────────────────────────────────────────
            PACKETA CONFIGURATION
@@ -1285,19 +1331,180 @@
         var PACKETA_API_KEY = 'febc70c1f57a6248';
 
         /* ─────────────────────────────────────────────
+           I18N — Czech / English
+           ───────────────────────────────────────────── */
+        var currentLang = 'cs';
+
+        var I18N = {
+            cs: {
+                navBack:            '← Zpět na projekt',
+                pageTitle:          'Dokončit objednávku',
+                summaryTitle:       'Souhrn objednávky',
+                badgePreorder:      'Předprodej',
+                productMeta:        '100\u2009% výdělku → Nadace Bellis',
+                labelSize:          'Velikost',
+                labelQty:           'Počet',
+                labelTotalPrice:    'Celková cena',
+                sectionContact:     'Kontaktní údaje',
+                labelCountry:       'Země doručení',
+                errCountry:         'Vyberte prosím zemi doručení.',
+                labelName:          'Jméno a příjmení',
+                placeholderName:    'Jana Nováková',
+                errName:            'Zadejte prosím jméno a příjmení.',
+                placeholderEmail:   'jana@example.cz',
+                errEmail:           'Zadejte platnou e-mailovou adresu.',
+                labelPhone:         'Telefon',
+                placeholderPhone:   '+420 777 123 456',
+                errPhone:           'Zadejte prosím telefonní číslo.',
+                labelStreet:        'Ulice a číslo popisné',
+                placeholderStreet:  'Václavské náměstí 1',
+                errStreet:          'Zadejte prosím ulici a číslo popisné.',
+                labelStreet2:       'Doplněk adresy <span class="label-optional">(nepovinné)</span>',
+                placeholderStreet2: 'Byt 4, 2. patro, firma…',
+                labelCity:          'Město',
+                placeholderCity:    'Praha',
+                errCity:            'Zadejte prosím město.',
+                labelZip:           'PSČ',
+                placeholderZip:     '110 00',
+                errZip:             'Zadejte prosím PSČ / ZIP kód.',
+                sectionDelivery:    'Způsob doručení',
+                packetaPick:        'Vybrat výdejní místo Zásilkovny',
+                packetaChange:      'Změnit',
+                errPacketa:         'Vyberte prosím výdejní místo Zásilkovny.',
+                consentLabel:       'Souhlasím se <a href="privacy.html" target="_blank" rel="noopener noreferrer">zpracováním osobních údajů</a> za účelem vyřízení objednávky.',
+                errConsent:         'Pro odeslání objednávky je nutný souhlas se zpracováním osobních údajů.',
+                submitBtn:          'Odeslat objednávku',
+                submitBtnLoading:   'Odesílám...',
+                submitError:        'Něco se pokazilo. Zkuste to prosím znovu nebo nás kontaktujte na <a href="mailto:marie.machytkova@tuuli.cz">marie.machytkova@tuuli.cz</a> nebo <a href="mailto:aneta.kmetikova@tuuli.cz">aneta.kmetikova@tuuli.cz</a>',
+                submitNotice:       'Objednávky zpracováváme ručně. Po odeslání objednávky obdržíte fakturu s\u00a0QR kódem pro platbu převodem.',
+                successHeading:     'Objednávka přijata!',
+                successSent:        'Objednávka odeslána na <strong>{{email}}</strong>.',
+                successNextStep:    'Další krok',
+                successInvoiceHint: 'Zkontrolujte svůj e-mail — faktura s QR kódem pro platbu vám přijde během pár minut.',
+                successBack:        '← Zpět na projekt',
+                /* validateForm labels */
+                missingCountry:     'Země doručení',
+                missingName:        'Jméno',
+                missingEmail:       'E-mail',
+                missingPhone:       'Telefon',
+                missingStreet:      'Ulice',
+                missingCity:        'Město',
+                missingZip:         'PSČ',
+                missingPacketa:     'Výdejní místo',
+                missingConsent:     'Souhlas se zpracováním údajů',
+                hintSingle:         'Vyplňte prosím: ',
+                hintMulti:          'Chybí {{n}} povinná pole: '
+            },
+            en: {
+                navBack:            '← Back to project',
+                pageTitle:          'Complete your order',
+                summaryTitle:       'Order summary',
+                badgePreorder:      'Pre-order',
+                productMeta:        '100\u2009% of profits → Bellis Foundation',
+                labelSize:          'Size',
+                labelQty:           'Quantity',
+                labelTotalPrice:    'Total price',
+                sectionContact:     'Contact details',
+                labelCountry:       'Delivery country',
+                errCountry:         'Please select a delivery country.',
+                labelName:          'Full name',
+                placeholderName:    'Jane Smith',
+                errName:            'Please enter your full name.',
+                placeholderEmail:   'jane@example.com',
+                errEmail:           'Please enter a valid email address.',
+                labelPhone:         'Phone',
+                placeholderPhone:   '+49 170 1234567',
+                errPhone:           'Please enter your phone number.',
+                labelStreet:        'Street and house number',
+                placeholderStreet:  'Hauptstraße 1',
+                errStreet:          'Please enter a street address.',
+                labelStreet2:       'Address line 2 <span class="label-optional">(optional)</span>',
+                placeholderStreet2: 'Apt 4, Floor 2, Company…',
+                labelCity:          'City',
+                placeholderCity:    'Berlin',
+                errCity:            'Please enter a city.',
+                labelZip:           'ZIP / Postal code',
+                placeholderZip:     '10115',
+                errZip:             'Please enter a ZIP / postal code.',
+                sectionDelivery:    'Delivery method',
+                packetaPick:        'Choose a Zásilkovna pickup point',
+                packetaChange:      'Change',
+                errPacketa:         'Please select a Zásilkovna pickup point.',
+                consentLabel:       'I agree to the <a href="privacy.html" target="_blank" rel="noopener noreferrer">processing of personal data</a> for the purpose of fulfilling my order.',
+                errConsent:         'You must agree to the processing of personal data to submit your order.',
+                submitBtn:          'Submit order',
+                submitBtnLoading:   'Submitting...',
+                submitError:        'Something went wrong. Please try again or contact us at <a href="mailto:marie.machytkova@tuuli.cz">marie.machytkova@tuuli.cz</a> or <a href="mailto:aneta.kmetikova@tuuli.cz">aneta.kmetikova@tuuli.cz</a>',
+                submitNotice:       'We process orders manually. After submitting, you will receive an invoice with a QR code for bank transfer payment.',
+                successHeading:     'Order received!',
+                successSent:        'Order confirmation sent to <strong>{{email}}</strong>.',
+                successNextStep:    'Next step',
+                successInvoiceHint: 'Check your email — an invoice with a payment QR code will arrive within a few minutes.',
+                successBack:        '← Back to project',
+                /* validateForm labels */
+                missingCountry:     'Delivery country',
+                missingName:        'Name',
+                missingEmail:       'Email',
+                missingPhone:       'Phone',
+                missingStreet:      'Street',
+                missingCity:        'City',
+                missingZip:         'ZIP code',
+                missingPacketa:     'Pickup point',
+                missingConsent:     'Data processing consent',
+                hintSingle:         'Please fill in: ',
+                hintMulti:          '{{n}} required fields missing: '
+            }
+        };
+
+        function t(key) { return I18N[currentLang][key] || I18N.cs[key] || key; }
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = (lang === 'cs') ? 'cs' : 'en';
+            document.title = (lang === 'cs') ? 'Objednat | Brave Breasts' : 'Order | Brave Breasts';
+
+            /* Text content (data-i18n) */
+            document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                el.textContent = t(el.getAttribute('data-i18n'));
+            });
+
+            /* HTML content (data-i18n-html) — for elements with inner links/spans */
+            document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+                el.innerHTML = t(el.getAttribute('data-i18n-html'));
+            });
+
+            /* Placeholders (data-i18n-placeholder) */
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+                el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+            });
+
+            /* Update country dropdown labels */
+            var sel = document.getElementById('fieldCountry');
+            var options = sel.querySelectorAll('option');
+            options.forEach(function(opt) {
+                var c = SUPPORTED_COUNTRIES.find(function(cc) { return cc.code === opt.value; });
+                if (c) opt.textContent = (lang === 'cs') ? c.label : c.labelEn;
+            });
+
+            /* Re-apply price display (uses currency label) */
+            if (typeof updateQtyUI === 'function') updateQtyUI();
+        }
+
+        /* ─────────────────────────────────────────────
            PACKETA STATE
            ───────────────────────────────────────────── */
         var selectedPoint = null; // holds the point object returned by the widget
 
         /* Open Packeta widget */
         function openPacketaWidget() {
+            var lang = selectedCountry.code === 'cz' ? 'cs' : 'en';
             Packeta.Widget.pick(PACKETA_API_KEY, function(point) {
                 if (!point) return; // user cancelled
                 selectedPoint = point;
                 updatePacketaUI();
             }, {
-                language: 'cs',
-                country: 'cz'
+                language: lang,
+                country:  selectedCountry.code
             });
         }
 
@@ -1323,6 +1530,18 @@
             }
         }
 
+        /* Show/hide the entire Packeta section based on country support */
+        function updatePacketaVisibility() {
+            var section = document.querySelector('.packeta-section');
+            if (selectedCountry.packeta) {
+                section.style.display = '';
+            } else {
+                section.style.display = 'none';
+                /* Clear any packeta error when hidden */
+                document.getElementById('errPacketa').classList.remove('visible');
+            }
+        }
+
         document.getElementById('packetaPickBtn').addEventListener('click', openPacketaWidget);
         document.getElementById('packetaChangeBtn').addEventListener('click', function() {
             openPacketaWidget();
@@ -1331,8 +1550,9 @@
         /* ─────────────────────────────────────────────
            STATE
            ───────────────────────────────────────────── */
-        var qty          = 1;
-        var selectedSize = 'M';
+        var qty             = 1;
+        var selectedSize    = 'M';
+        var selectedCountry = SUPPORTED_COUNTRIES[0]; // default: CZ
 
         /* ─────────────────────────────────────────────
            READ localStorage (set by index.html)
@@ -1356,7 +1576,47 @@
             /* Apply initial state to DOM */
             updateSizeUI();
             updateQtyUI();
+            updatePacketaVisibility();
         })();
+
+        /* ─────────────────────────────────────────────
+           COUNTRY SELECTOR
+           ───────────────────────────────────────────── */
+        (function() {
+            var sel = document.getElementById('fieldCountry');
+            SUPPORTED_COUNTRIES.forEach(function(c) {
+                var opt = document.createElement('option');
+                opt.value       = c.code;
+                opt.textContent = c.label;
+                sel.appendChild(opt);
+            });
+        })();
+
+        document.getElementById('fieldCountry').addEventListener('change', function() {
+            var code = this.value;
+            selectedCountry = SUPPORTED_COUNTRIES.find(function(c) { return c.code === code; })
+                              || SUPPORTED_COUNTRIES[0];
+
+            /* Clear any validation error */
+            this.classList.remove('invalid');
+            document.getElementById('errCountry').classList.remove('visible');
+
+            /* Switch language: CZ → Czech, everything else → English */
+            applyLanguage(selectedCountry.code === 'cz' ? 'cs' : 'en');
+
+            /* Reset Packeta — pickup points differ per country */
+            selectedPoint = null;
+            updatePacketaUI();
+            updatePacketaVisibility();
+        });
+
+        function currentUnitPrice() {
+            return selectedCountry.currency === 'EUR' ? UNIT_PRICE_EUR : UNIT_PRICE;
+        }
+
+        function currentCurrencyLabel() {
+            return selectedCountry.currency === 'EUR' ? '€' : 'Kč';
+        }
 
         /* ─────────────────────────────────────────────
            SIZE SELECTOR
@@ -1383,9 +1643,12 @@
             document.getElementById('qtyMinus').disabled = (qty <= 1);
             document.getElementById('qtyPlus').disabled  = (qty >= 10);
 
-            var total = qty * UNIT_PRICE;
-            document.getElementById('priceBreakdown').textContent = qty + ' × ' + UNIT_PRICE + ' Kč';
-            document.getElementById('priceTotal').textContent = total;
+            var price = currentUnitPrice();
+            var label = currentCurrencyLabel();
+            var total = qty * price;
+            document.getElementById('priceBreakdown').textContent = qty + ' × ' + price + ' ' + label;
+            document.getElementById('priceTotal').textContent     = total;
+            document.getElementById('priceCurrency').textContent  = label;
         }
 
         document.getElementById('qtyMinus').addEventListener('click', function() {
@@ -1432,13 +1695,26 @@
         }
 
         function isValidZip(value) {
-            /* CZ PSČ: exactly 5 digits, optionally with a space after 3rd */
-            return /^\d{3}\s?\d{2}$/.test(value.trim());
+            if (selectedCountry.code === 'cz') {
+                /* CZ PSČ: exactly 5 digits, optionally with a space after 3rd */
+                return /^\d{3}\s?\d{2}$/.test(value.trim());
+            }
+            /* Other countries: just require something non-empty */
+            return value.trim().length > 0;
         }
 
         function validateForm() {
             var valid = true;
             var missingLabels = [];
+
+            /* Country — should always be set, but guard anyway */
+            if (!selectedCountry) {
+                document.getElementById('fieldCountry').classList.add('invalid');
+                document.getElementById('errCountry').classList.add('visible');
+                missingLabels.push(t('missingCountry'));
+                valid = false;
+            }
+
             var name   = document.getElementById('fieldName').value.trim();
             var email  = document.getElementById('fieldEmail').value.trim();
             var street = document.getElementById('fieldStreet').value.trim();
@@ -1447,46 +1723,46 @@
 
             if (!name) {
                 showFieldError('fieldName', 'errName', true);
-                missingLabels.push('Jméno');
+                missingLabels.push(t('missingName'));
                 valid = false;
             }
             if (!email || !isValidEmail(email)) {
                 showFieldError('fieldEmail', 'errEmail', true);
-                missingLabels.push('E-mail');
+                missingLabels.push(t('missingEmail'));
                 valid = false;
             }
             var phone = document.getElementById('fieldPhone').value.trim();
             if (!phone) {
                 showFieldError('fieldPhone', 'errPhone', true);
-                missingLabels.push('Telefon');
+                missingLabels.push(t('missingPhone'));
                 valid = false;
             }
             if (!street) {
                 showFieldError('fieldStreet', 'errStreet', true);
-                missingLabels.push('Ulice');
+                missingLabels.push(t('missingStreet'));
                 valid = false;
             }
             if (!city) {
                 showFieldError('fieldCity', 'errCity', true);
-                missingLabels.push('Město');
+                missingLabels.push(t('missingCity'));
                 valid = false;
             }
             if (!isValidZip(zip)) {
                 showFieldError('fieldZip', 'errZip', true);
-                missingLabels.push('PSČ');
+                missingLabels.push(t('missingZip'));
                 valid = false;
             }
 
-            /* Packeta point required */
-            if (!selectedPoint) {
+            /* Packeta point required only for countries with pickup support */
+            if (selectedCountry.packeta && !selectedPoint) {
                 document.getElementById('errPacketa').classList.add('visible');
-                missingLabels.push('Výdejní místo');
+                missingLabels.push(t('missingPacketa'));
                 valid = false;
             }
 
             if (!document.getElementById('consentCheckbox').checked) {
                 document.getElementById('errConsent').classList.add('visible');
-                missingLabels.push('Souhlas se zpracováním údajů');
+                missingLabels.push(t('missingConsent'));
                 valid = false;
             } else {
                 document.getElementById('errConsent').classList.remove('visible');
@@ -1509,9 +1785,9 @@
             if (!validation.valid) {
                 var missing = validation.missingLabels;
                 if (missing.length === 1) {
-                    hint.textContent = 'Vyplňte prosím: ' + missing[0];
+                    hint.textContent = t('hintSingle') + missing[0];
                 } else {
-                    hint.textContent = 'Chybí ' + missing.length + ' povinná pole: ' + missing.join(', ');
+                    hint.textContent = t('hintMulti').replace('{{n}}', missing.length) + missing.join(', ');
                 }
                 hint.classList.add('visible');
                 return;
@@ -1526,7 +1802,8 @@
             var city    = document.getElementById('fieldCity').value.trim();
             var zip     = document.getElementById('fieldZip').value.trim();
 
-            var total  = qty * UNIT_PRICE;
+            var unitPrice = currentUnitPrice();
+            var total     = qty * unitPrice;
 
             var payload = {
                 name:       name,
@@ -1536,13 +1813,14 @@
                 street2:    street2,
                 city:       city,
                 zip:        zip,
+                country:    selectedCountry.code.toUpperCase(),
                 size:       selectedSize,
                 qty:        qty,
-                unitPrice:  UNIT_PRICE,
+                unitPrice:  unitPrice,
                 totalPrice: total,
-                currency:   'CZK',
+                currency:   selectedCountry.currency,
                 timestamp:  new Date().toISOString(),
-                deliveryMethod: 'packeta_pickup',
+                deliveryMethod: selectedCountry.packeta ? 'packeta_pickup' : 'address_delivery',
                 packeta: selectedPoint ? {
                     pointId:      String(selectedPoint.id || ''),
                     pointName:    selectedPoint.name || '',
@@ -1556,7 +1834,7 @@
             /* Loading state */
             var btn = document.getElementById('submitBtn');
             btn.disabled = true;
-            btn.textContent = 'Odesílám...';
+            btn.textContent = t('submitBtnLoading');
 
             fetch(WEBHOOK_URL, {
                 method: 'POST',
@@ -1574,7 +1852,7 @@
 
                 var successText = document.getElementById('successText');
                 successText.innerHTML =
-                    'Objednávka odeslána na <strong>' + escapeHtml(email) + '</strong>.';
+                    t('successSent').replace('{{email}}', escapeHtml(email));
 
                 /* Clean up localStorage */
                 try { localStorage.removeItem('braveBreastsOrder'); } catch(e) {}
@@ -1584,7 +1862,7 @@
             .catch(function() {
                 /* Error */
                 btn.disabled = false;
-                btn.textContent = 'Odeslat objednávku';
+                btn.textContent = t('submitBtn');
                 document.getElementById('submitError').classList.add('visible');
             });
         });
